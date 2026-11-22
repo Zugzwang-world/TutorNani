@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tutor Grandma · Tech pitch</title>
+<meta name="description" content="A soft toy that talks and teaches in grandma's voice: the concept, the software and the hardware.">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6efe3; --surface:#fffaf2; --ink:#1f1b16; --muted:#655c50; --line:#e0d4c1;
+  --accent:#b0560e; --signal:#1d6b73;
+  --accent-tint:color-mix(in srgb, var(--accent) 14%, var(--surface));
+  --signal-tint:color-mix(in srgb, var(--signal) 12%, var(--surface));
+  --plush:color-mix(in srgb, var(--accent) 24%, var(--surface));
+  --tummy:color-mix(in srgb, var(--accent) 7%, var(--surface));
+  --font-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f141a; --surface:#151c24; --ink:#e5e9ed; --muted:#9ba7b3; --line:#2b3540;
+    --accent:#f0a259; --signal:#5cc2c9; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f141a; --surface:#151c24; --ink:#e5e9ed; --muted:#9ba7b3; --line:#2b3540;
+  --accent:#f0a259; --signal:#5cc2c9; color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-snap-type:y proximity}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--font-body);overflow-x:hidden}
+a{color:var(--signal);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,label:focus-within{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;letter-spacing:-.015em}
+p{margin:0}
+
+/* ---------- deck frame ---------- */
+.s{min-height:100vh;min-height:100svh;display:grid;align-content:center;scroll-snap-align:start;
+  padding:clamp(56px,9vh,96px) clamp(44px,6vw,104px) clamp(56px,9vh,96px) clamp(16px,6vw,96px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4.5vw,72px);align-items:center}
+.wrap.stack{grid-template-columns:minmax(0,1fr)}
+.eyebrow{font:500 12.5px/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
+.eyebrow b{color:var(--accent);font-weight:600;margin-right:8px}
+h1{font-weight:700;font-size:clamp(54px,9vw,128px);line-height:.92}
+h2{font-weight:700;font-size:clamp(34px,4.6vw,62px);line-height:1.02}
+.body{font-size:clamp(17px,1.45vw,21px);line-height:1.5;color:var(--muted);max-width:46ch;margin-top:20px}
+.body.wide{max-width:64ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{font:500 13px/1 var(--font-mono);padding:8px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);white-space:nowrap}
+.chip.a{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));background:var(--accent-tint)}
+.chip.t{border-color:color-mix(in srgb,var(--signal) 45%,var(--line));background:var(--signal-tint)}
+.tag{display:inline-block;font:600 10.5px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 6px;border-radius:4px;border:1px solid currentColor;vertical-align:2px;white-space:nowrap}
+.note{font:400 13px/1.45 var(--font-mono);color:var(--muted);margin-top:12px}
+figure{margin:0;min-width:0}
+svg{display:block;width:100%;height:auto;overflow:visible}
+
+/* rail + corner */
+.rail{position:fixed;right:clamp(8px,1.6vw,26px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:5}
+.rail button{all:unset;cursor:pointer;width:8px;height:8px;border-radius:50%;background:var(--muted);opacity:.35;transition:opacity .3s, transform .3s}
+.rail button:hover{opacity:.7}
+.rail button[aria-current="true"]{opacity:1;background:var(--accent);transform:scale(1.5)}
+.corner{position:fixed;left:clamp(12px,2vw,28px);bottom:clamp(10px,2vh,22px);font:500 12.5px/1 var(--font-mono);color:var(--muted);z-index:5;letter-spacing:.06em;background:color-mix(in srgb,var(--paper) 80%,transparent);padding:6px 8px;border-radius:6px}
+.corner b{color:var(--accent);font-weight:600}
+
+/* ---------- SVG vocabulary ---------- */
+.pS{fill:var(--plush);stroke:var(--accent);stroke-width:2.5}
+.pT{fill:var(--tummy);stroke:var(--accent);stroke-width:2}
+.pC{fill:var(--accent);opacity:.28}
+.pE{fill:var(--ink)}
+.pG{fill:none;stroke:var(--ink);stroke-width:2}
+.pM{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round}
+.box-a{fill:var(--accent-tint);stroke:var(--accent);stroke-width:2.5}
+.box-t{fill:var(--signal-tint);stroke:var(--signal);stroke-width:2.5}
+.box-n{fill:var(--surface);stroke:var(--muted);stroke-width:2}
+.part{fill:var(--surface);stroke:var(--ink);stroke-width:2}
+.partf{fill:var(--ink)}
+.chipf{fill:var(--signal-tint);stroke:var(--ink);stroke-width:1.5}
+.ln{fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round}
+.ln.d{stroke-dasharray:5 7}
+.ln.a{stroke:var(--accent)}
+.ln.t{stroke:var(--signal)}
+.dot-a{fill:var(--accent)}
+.dot-t{fill:var(--signal)}
+.ring{fill:none;stroke:var(--accent);stroke-width:2.5;opacity:.35;transform-box:fill-box;transform-origin:center}
+.ring.t{stroke:var(--signal)}
+.tx{fill:var(--ink);font:600 17px var(--font-body)}
+.tx.sm{font-size:15px;font-weight:500}
+.tx.lg{font:700 20px var(--font-display)}
+.tx.a{fill:var(--accent)} .tx.t{fill:var(--signal)}
+.mo{fill:var(--muted);font:500 14px var(--font-mono)}
+.mo.t{fill:var(--signal)} .mo.a{fill:var(--accent)} .mo.k{fill:var(--ink)}
+.emo{font-size:40px}
+.glowR{fill:var(--accent);opacity:.22}
+.ghost{fill:none;stroke:var(--signal);stroke-width:2;stroke-dasharray:4 5}
+.ghostT{fill:var(--signal);font:500 13px var(--font-mono)}
+.pouch{fill:var(--accent-tint);stroke:var(--accent);stroke-width:2;stroke-dasharray:7 5}
+.wave{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;transform-box:fill-box;transform-origin:left center}
+.pk{opacity:0}
+.fill-paper{fill:var(--paper)}
+.fill-surf{fill:var(--surface);stroke:var(--line);stroke-width:2}
+
+/* ---------- 1 · title ---------- */
+.title-wrap{grid-template-columns:minmax(0,6fr) minmax(0,6fr)}
+.sub{font-size:clamp(18px,1.7vw,24px);line-height:1.45;color:var(--ink);max-width:34ch;margin-top:24px}
+
+/* ---------- 3 · numbers ---------- */
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:30px;max-width:620px}
+.num{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px}
+.num b{display:block;font:700 clamp(28px,3vw,40px)/1 var(--font-display);color:var(--ink);font-variant-numeric:tabular-nums}
+.num span{display:block;font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+.num.target{border:2px dashed var(--accent);background:transparent}
+.num.target b{color:var(--accent)}
+.num .tag{color:var(--accent);margin-top:8px}
+
+/* ---------- 4 · chat ---------- */
+.chatdemo{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:clamp(18px,3vw,40px);align-items:center}
+.phone{background:var(--surface);border:2.5px solid var(--ink);border-radius:34px;padding:12px;box-shadow:0 18px 40px -24px rgba(0,0,0,.35);min-height:440px;display:flex;flex-direction:column}
+.ph-head{border-bottom:1px solid var(--line);padding:6px 8px 10px;margin-bottom:10px}
+.ph-head b{display:block;font:700 16px/1.2 var(--font-display)}
+.ph-sub{position:relative;display:block;font:500 12.5px/1.4 var(--font-mono);color:var(--muted);height:18px}
+.ph-sub span{position:absolute;left:0;top:0;white-space:nowrap;transition:opacity .3s}
+.ph-sub .typing{color:var(--signal);opacity:0}
+.ph-body{display:flex;flex-direction:column;gap:10px;padding:0 4px}
+.msg{max-width:88%;padding:9px 12px;border-radius:16px;font-size:14.5px;line-height:1.4}
+.msg small{display:block;font:600 11px/1.3 var(--font-mono);letter-spacing:.04em;color:var(--muted);margin-bottom:3px}
+.msg.me{align-self:flex-end;background:var(--accent-tint);border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-bottom-right-radius:5px}
+.msg.ag{align-self:flex-start;background:var(--signal-tint);border:1px solid color-mix(in srgb,var(--signal) 35%,var(--line));border-bottom-left-radius:5px}
+.side{display:grid;gap:18px;min-width:0}
+.file{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.fh{font:600 13px/1 var(--font-mono);padding:11px 14px;border-bottom:1px solid var(--line);color:var(--signal);display:flex;justify-content:space-between;gap:8px}
+.fh span{color:var(--muted);font-weight:500}
+.fl{font:400 13.5px/1.5 var(--font-mono);padding:5px 14px;color:var(--muted);overflow-wrap:anywhere}
+.fl.new{color:var(--ink);background:var(--accent-tint);border-left:3px solid var(--accent);position:relative}
+.toysay{display:flex;align-items:center;gap:12px}
+.toysay svg{width:74px;flex:none}
+.bub{position:relative;font:600 17px/1.3 var(--font-body);background:var(--accent-tint);border:1.5px solid var(--accent);padding:10px 14px;border-radius:16px 16px 16px 4px}
+.agents{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.agent{display:flex;gap:8px;align-items:center;font:500 13.5px/1 var(--font-body);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 12px 7px 9px;white-space:nowrap}
+.agent code{font:500 12px/1 var(--font-mono);color:var(--signal)}
+
+/* ---------- 5 · parts ---------- */
+.toggle{display:inline-flex;margin-top:22px;border:1px solid var(--line);border-radius:999px;background:var(--surface);padding:4px;position:relative;cursor:pointer;user-select:none}
+.toggle input{position:absolute;opacity:0;pointer-events:none}
+.toggle span{font:600 13px/1 var(--font-mono);padding:9px 14px;border-radius:999px;color:var(--muted);transition:opacity .3s}
+.toggle .c1{background:var(--accent);color:var(--surface)}
+.s5.ghosts .toggle .c1{background:transparent;color:var(--muted)}
+.s5.ghosts .toggle .c2{background:var(--signal);color:var(--surface)}
+.cut .ghost-g{opacity:0;transition:opacity .5s ease}
+.s5.ghosts .cut .ghost-g{opacity:1}
+.parts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:clamp(26px,4vh,44px)}
+.pc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px}
+.pc svg{width:64px;height:48px;margin-bottom:4px}
+.pc h3{font:700 15.5px/1.25 var(--font-display);letter-spacing:0}
+.pc p{font-size:14px;line-height:1.4;color:var(--muted)}
+.pc .rs{margin-top:auto;padding-top:6px;font:600 14px/1 var(--font-mono);color:var(--accent)}
+
+/* ---------- 8 · stack ---------- */
+.layers{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.layer{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--signal);border-radius:12px;padding:14px 18px}
+.layer.toy{border-left-color:var(--accent)}
+.layer b{font:600 12.5px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--signal)}
+.layer.toy b{color:var(--accent)}
+.layer span{font-size:15.5px;line-height:1.4}
+.layer code{font:500 13px var(--font-mono);background:var(--signal-tint);padding:1px 5px;border-radius:4px}
+.swap{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
+.swap i{font-style:normal;color:var(--accent);display:inline-block}
+
+/* ---------- 9 · add-ons ---------- */
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,26px);margin-top:clamp(22px,3.5vh,36px)}
+.col h3{font:700 22px/1 var(--font-display);display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:12px}
+.meter{display:inline-flex;gap:5px}
+.meter i{width:10px;height:10px;border-radius:50%;border:2px solid var(--accent)}
+.meter i.f{background:var(--accent)}
+.ad{display:grid;grid-template-columns:34px minmax(0,1fr);gap:4px 10px;background:var(--surface);border:1px dashed color-mix(in srgb,var(--signal) 55%,var(--line));border-radius:14px;padding:11px 13px;margin-bottom:10px}
+.ad .ic{font-size:22px;line-height:1.2;grid-row:span 3}
+.ad h4{margin:0;font:600 15px/1.3 var(--font-body)}
+.ad p{font-size:13.5px;line-height:1.38;color:var(--ink)}
+.ad p.nd{font:400 12px/1.4 var(--font-mono);color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:10px;font-size:13.5px;color:var(--muted)}
+.legend b{color:var(--ink);font-weight:600}
+
+/* ---------- 10 · safe ---------- */
+.safe{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:12px;max-width:48ch}
+.safe li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;font-size:clamp(16px,1.3vw,19px);line-height:1.45;color:var(--muted)}
+.safe li::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--signal);margin-top:7px}
+.ladder{display:grid;gap:0;max-width:440px;margin-left:auto;margin-right:auto;width:100%}
+.rung{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:center;background:var(--surface);border:2px solid var(--accent);border-radius:16px;padding:16px 18px;transition:opacity .5s}
+.rung b{font:700 22px/1 var(--font-display);color:var(--accent);text-align:center}
+.rung span{font:600 18px/1.3 var(--font-body)}
+.rung small{display:block;font:400 13px/1.3 var(--font-mono);color:var(--muted);margin-top:3px}
+.rung.web{border-color:var(--signal)} .rung.web b{color:var(--signal)}
+.down{height:30px;display:grid;place-items:center;color:var(--muted);font:600 16px/1 var(--font-mono)}
+
+/* ---------- 11 · close ---------- */
+.close{text-align:center;justify-items:center}
+.close .wrap{justify-items:center}
+.close h2{font-size:clamp(38px,5.6vw,80px);max-width:16ch}
+.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:34px;max-width:880px;width:100%}
+.lk{display:block;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;text-decoration:none;color:var(--ink);text-align:left;transition:transform .25s}
+.lk:hover{transform:translateY(-3px)}
+.lk b{display:block;font:700 18px/1.2 var(--font-display)}
+.lk span{display:block;font:500 12.5px/1.4 var(--font-mono);color:var(--signal);margin-top:6px;overflow-wrap:anywhere}
+.beta{margin-top:28px;font:600 12px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .parts{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  .wrap,.title-wrap{grid-template-columns:minmax(0,1fr)}
+  .chatdemo{grid-template-columns:minmax(0,1fr)}
+  .phone{min-height:0;max-width:340px;width:100%;margin:0 auto}
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .links{grid-template-columns:minmax(0,1fr)}
+  .parts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .s{align-content:start}
+}
+@media (max-width:520px){
+  .s{padding-left:16px;padding-right:34px}
+  .nums{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .num{padding:11px 9px 10px}
+  .num span{font-size:12px}
+  .layer{grid-template-columns:minmax(0,1fr);gap:4px;padding:12px 14px}
+  .parts{gap:10px}
+  .pc{padding:12px}
+  .corner{left:auto;right:4px;bottom:10px;padding:4px 5px;font-size:11.5px}
+  .corner .of{display:none}
+}
+
+/* ---------- motion: hidden starts live only here ---------- */
+@keyframes ring{from{transform:scale(.55);opacity:.85}to{transform:scale(1.9);opacity:0}}
+@keyframes travel{0%{transform:translate(0,0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translate(var(--dx,0px),var(--dy,0px));opacity:0}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes wavey{0%{opacity:0;transform:scale(.7)}40%{opacity:1}100%{opacity:0;transform:scale(1.25)}}
+@keyframes glow{0%,100%{opacity:.12}50%{opacity:.4}}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+
+@media screen and (prefers-reduced-motion: no-preference){
+  html{scroll-behavior:smooth}
+  .js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .js .rvx{opacity:0;transform:translateX(-28px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .in .rv,.js .in .rvx{opacity:1;transform:none}
+  .d1{transition-delay:.12s!important}.d2{transition-delay:.24s!important}.d3{transition-delay:.36s!important}
+  .d4{transition-delay:.48s!important}.d5{transition-delay:.6s!important}.d6{transition-delay:.72s!important}
+  .d7{transition-delay:.84s!important}.d8{transition-delay:.96s!important}.d9{transition-delay:1.08s!important}
+  .d10{transition-delay:1.2s!important}.d11{transition-delay:1.32s!important}.d12{transition-delay:1.44s!important}
+
+  /* stepper: [data-i] gets .on (i <= step) and .now (i == step) */
+  .js [data-i]{transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+  .js [data-i]:not(.on){opacity:0}
+  .js .sq [data-i]:not(.on){opacity:0;transform:translateY(6px)}
+  .js .ar{transform-box:fill-box;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+  .js .ar.l{transform-origin:left center}.js .ar.r{transform-origin:right center}
+  .js .sq [data-i]:not(.on) .ar{transform:scaleX(0)}
+  .js .pk.now{animation:travel 1.15s ease-in-out both}
+  .js .pk.now.late{animation-delay:.45s}
+  .js .ring.now{animation:ring 1.2s ease-out both}
+  .js .glowR{opacity:0;transition:opacity .4s}
+  .js .glowR.on{opacity:.3}
+  .js .fl.new:not(.on){transform:translateX(-12px)}
+  .js .msg:not(.on){transform:translateY(10px) scale(.97)}
+  .js .ph-sub .typing.now{opacity:1}
+  .js .ph-sub .typing:not(.now){opacity:0}
+  .js .ph-sub .typing.now ~ .norm{opacity:0}
+  .js .toysay.now .plushmini{animation:beat .6s ease-in-out 2}
+  .js .mango.on{animation:beat .7s ease-in-out 1;transform-box:fill-box;transform-origin:center}
+
+  /* always-on gentle loops, only while the section is in view */
+  .in .ring.loop{animation:ring 2.7s ease-out infinite}
+  .in .ring.loop.b{animation-delay:.9s}.in .ring.loop.c{animation-delay:1.8s}
+  .in .trav{animation:travel 2.6s ease-in-out infinite}
+  .in .trav.b{animation-delay:.85s}.in .trav.c{animation-delay:1.7s}
+  .in .bob{animation:bob 3.6s ease-in-out infinite}
+  .in .orbit{animation:spin 6s linear infinite;transform-box:view-box;transform-origin:240px 215px}
+  .in .wave.loop{animation:wavey 1.8s ease-out infinite}
+  .in .wave.loop.b{animation-delay:.3s}.in .wave.loop.c{animation-delay:.6s}
+  .in .station{animation:beat 6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+  .in .station.b{animation-delay:2s}.in .station.c{animation-delay:4s}
+  .in .swap i{animation:nudge 1.6s ease-in-out infinite}
+  .js .s6 .lab{transition:opacity .35s}
+  .js .s6 .lab:not(.now){opacity:.14}
+  .js .s6 .spk.now{animation:beat .5s ease-in-out 2;transform-box:fill-box;transform-origin:center}
+  .js .s6 .wave.now{animation:wavey 1s ease-out 1 both}
+  .js .ladder [data-i]{transition:opacity .5s}
+  .js .ladder .rung:not(.on){opacity:.28}
+  .js .ladder .down:not(.on){opacity:.2}
+  .js .ladder .rung.now{animation:beat .6s ease-in-out 1}
+  .pc{transition:transform .3s,opacity .7s ease}
+  .pc:hover{transform:translateY(-4px)}
+}
+
+/* ---------- print: one landscape page per section, final states ---------- */
+@page{size:A4 landscape;margin:10mm}
+@media print{
+  html{scroll-snap-type:none}
+  .rail,.corner{display:none}
+  .s{min-height:0;height:auto;break-after:page;page-break-after:always;break-inside:avoid;border:0;padding:8mm 10mm}
+  .pk{display:none}
+  body{background:var(--paper);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="plush" viewBox="0 0 200 240">
+      <ellipse class="pS" cx="72" cy="225" rx="23" ry="12"/>
+      <ellipse class="pS" cx="128" cy="225" rx="23" ry="12"/>
+      <ellipse class="pS" cx="100" cy="174" rx="64" ry="55"/>
+      <ellipse class="pT" cx="100" cy="184" rx="34" ry="30"/>
+      <ellipse class="pS" cx="41" cy="168" rx="15" ry="25" transform="rotate(28 41 168)"/>
+      <ellipse class="pS" cx="159" cy="168" rx="15" ry="25" transform="rotate(-28 159 168)"/>
+      <circle class="pS" cx="100" cy="28" r="15"/>
+      <circle class="pS" cx="55" cy="46" r="22"/><circle class="pT" cx="55" cy="46" r="11"/>
+      <circle class="pS" cx="145" cy="46" r="22"/><circle class="pT" cx="145" cy="46" r="11"/>
+      <circle class="pS" cx="100" cy="90" r="58"/>
+      <circle class="pC" cx="70" cy="106" r="9"/><circle class="pC" cx="130" cy="106" r="9"/>
+      <circle class="pE" cx="80" cy="86" r="4.5"/><circle class="pE" cx="120" cy="86" r="4.5"/>
+      <circle class="pG" cx="80" cy="86" r="12.5"/><circle class="pG" cx="120" cy="86" r="12.5"/><path class="pG" d="M92.5 86h15"/>
+      <ellipse class="pE" cx="100" cy="102" rx="6" ry="4.5"/>
+      <path class="pM" d="M91 112q9 8 18 0"/>
+    </symbol>
+    <symbol id="phone" viewBox="0 0 120 200">
+      <rect class="part" x="4" y="4" width="112" height="192" rx="18"/>
+      <rect class="fill-paper" x="13" y="22" width="94" height="158" rx="8"/>
+      <rect class="box-t" style="stroke-width:1.5" x="20" y="34" width="62" height="20" rx="10"/>
+      <rect class="box-a" style="stroke-width:1.5" x="40" y="64" width="60" height="20" rx="10"/>
+      <rect class="box-t" style="stroke-width:1.5" x="20" y="94" width="70" height="20" rx="10"/>
+      <rect class="box-a" style="stroke-width:1.5" x="52" y="124" width="48" height="20" rx="10"/>
+      <rect class="partf" x="48" y="10" width="24" height="5" rx="2.5"/>
+    </symbol>
+    <marker id="mA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="dot-a"/></marker>
+    <marker id="mT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="dot-t"/></marker>
+    <marker id="mN" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker>
+  </defs>
+</svg>
+
+<nav class="rail" aria-label="Sections"></nav>
+<div class="corner" aria-live="polite"><b id="cn">01</b><span class="of"> / <span id="ct">11</span></span></div>
+
+<main>
+
+<!-- 1 · Title -->
+<section class="s s1" id="s1" data-title="Title">
+  <div class="wrap title-wrap">
+    <div>
+      <p class="eyebrow rv">Tech overview · beta</p>
+      <h1 class="rv d1">Tutor Grandma</h1>
+      <p class="sub rv d2">A soft toy that talks and teaches in grandma's voice. No screen for the child. Parents guide it by chatting with its agents.</p>
+      <div class="chips rv d3"><span class="chip a">ESP32-S3</span><span class="chip t">ElevenLabs</span><span class="chip t">Supabase</span><span class="chip t">Vercel</span></div>
+    </div>
+    <figure class="rv d2" aria-label="The plush toy with sound rings pulsing from its tummy, linked to the wall and the parents' chat">
+      <svg viewBox="0 0 600 440" role="img" aria-label="Toy, wall and parents' chat linked together">
+        <line class="ln d" x1="430" y1="92" x2="545" y2="252"/>
+        <line class="ln d" x1="410" y1="360" x2="430" y2="92"/>
+        <line class="ln d" x1="410" y1="360" x2="545" y2="252"/>
+        <circle class="dot-a trav" cx="430" cy="92" r="6" style="--dx:115px;--dy:160px"/>
+        <circle class="dot-t trav b" cx="410" cy="360" r="6" style="--dx:20px;--dy:-268px"/>
+        <circle class="dot-t trav c" cx="410" cy="360" r="6" style="--dx:135px;--dy:-108px"/>
+        <g class="bob"><use href="#plush" x="20" y="74" width="236" height="283"/></g>
+        <circle class="ring loop" cx="138" cy="291" r="44"/>
+        <circle class="ring loop b" cx="138" cy="291" r="44"/>
+        <circle class="ring loop c" cx="138" cy="291" r="44"/>
+        <circle class="box-a" cx="430" cy="92" r="38"/>
+        <use href="#plush" x="408" y="62" width="44" height="54"/>
+        <text class="tx" x="430" y="152" text-anchor="middle">Toy</text>
+        <circle class="box-n" cx="545" cy="252" r="38"/>
+        <text class="emo" x="545" y="266" text-anchor="middle" style="font-size:32px">🥭</text>
+        <text class="tx" x="545" y="312" text-anchor="middle">Wall</text>
+        <circle class="box-t" cx="410" cy="360" r="38"/>
+        <use href="#phone" x="394" y="334" width="32" height="52"/>
+        <text class="tx" x="410" y="420" text-anchor="middle">Parents' chat</text>
+      </svg>
+    </figure>
+  </div>
+</section>
+
+<!-- 2 · How it fits together -->
+<section class="s s2" id="s2" data-title="How it fits together" data-steps="4">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow rv"><b>02</b>How it fits together</p>
+      <h2 class="rv d1">Three pieces, one loop</h2>
+      <p class="body rv d2">The toy hears the child and answers in Nani's voice. The cloud thinks, guided by five agent files. The wall shows what Nani talks about. Parents shape it all from one group chat.</p>
+    </div>
+    <figure class="rv d2">
+      <svg viewBox="0 0 600 430" role="img" aria-label="System map: toy and cloud exchange voice; the cloud cues the wall; the parents' chat updates the five files">
+        <!-- links -->
+        <line class="ln a" x1="132" y1="196" x2="198" y2="196" marker-end="url(#mA)"/>
+        <line class="ln t" x1="198" y1="240" x2="132" y2="240" marker-end="url(#mT)"/>
+        <line class="ln t" x1="402" y1="104" x2="468" y2="104" marker-end="url(#mT)"/>
+        <line class="ln t" x1="484" y1="300" x2="402" y2="300" marker-end="url(#mT)" marker-start="url(#mT)"/>
+        <!-- toy -->
+        <rect class="box-a" x="10" y="140" width="122" height="150" rx="18"/>
+        <use href="#plush" x="31" y="150" width="80" height="96"/>
+        <text class="tx a" x="71" y="276" text-anchor="middle">Toy</text>
+        <circle class="ring pk" data-i="2" cx="71" cy="215" r="60"/>
+        <!-- cloud -->
+        <rect class="box-t" x="200" y="34" width="200" height="370" rx="22"/>
+        <text class="tx lg t" x="300" y="68" text-anchor="middle">Cloud</text>
+        <rect class="fill-surf" x="210" y="84" width="56" height="34" rx="17"/>
+        <rect class="fill-surf" x="272" y="84" width="56" height="34" rx="17"/>
+        <rect class="fill-surf" x="334" y="84" width="56" height="34" rx="17"/>
+        <text class="tx sm" x="238" y="106" text-anchor="middle">Hear</text>
+        <text class="tx sm" x="300" y="106" text-anchor="middle">Think</text>
+        <text class="tx sm" x="362" y="106" text-anchor="middle">Speak</text>
+        <text class="mo t" x="300" y="152" text-anchor="middle">five files</text>
+        <rect class="fill-surf" x="215" y="164" width="170" height="32" rx="8"/>
+        <rect class="fill-surf" x="215" y="202" width="170" height="32" rx="8"/>
+        <rect class="glowR" data-i="4" x="215" y="202" width="170" height="32" rx="8"/>
+        <rect class="fill-surf" x="215" y="240" width="170" height="32" rx="8"/>
+        <rect class="fill-surf" x="215" y="278" width="170" height="32" rx="8"/>
+        <rect class="fill-surf" x="215" y="316" width="170" height="32" rx="8"/>
+        <text class="mo k" x="230" y="185">persona.md</text>
+        <text class="mo k" x="230" y="223">heartbeat.md</text>
+        <text class="mo k" x="230" y="261">parent.md</text>
+        <text class="mo k" x="230" y="299">planner.md</text>
+        <text class="mo k" x="230" y="337">brain.md</text>
+        <text class="mo" x="300" y="384" text-anchor="middle">one agent per file</text>
+        <!-- wall -->
+        <rect class="box-n" x="470" y="40" width="120" height="118" rx="14"/>
+        <text class="emo mango" data-i="2" x="530" y="116" text-anchor="middle">🥭</text>
+        <text class="tx" x="530" y="182" text-anchor="middle">Wall</text>
+        <!-- parents' chat -->
+        <use href="#phone" x="486" y="226" width="88" height="146"/>
+        <text class="tx" x="530" y="398" text-anchor="middle">Parents' chat</text>
+        <!-- packets -->
+        <circle class="dot-a pk" data-i="1" cx="132" cy="196" r="7" style="--dx:66px;--dy:0px"/>
+        <circle class="dot-t pk" data-i="2" cx="198" cy="240" r="7" style="--dx:-66px;--dy:0px"/>
+        <circle class="dot-t pk" data-i="2" cx="402" cy="104" r="7" style="--dx:66px;--dy:0px"/>
+        <rect class="box-a pk" data-i="3" x="470" y="290" width="26" height="18" rx="9" style="--dx:-80px;--dy:-80px"/>
+      </svg>
+    </figure>
+  </div>
+</section>
+
+<!-- 3 · The core -->
+<section class="s s3" id="s3" data-title="The core">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow rv"><b>03</b>The core</p>
+      <h2 class="rv d1">The core: Nani's loop</h2>
+      <p class="body rv d2">Hear, think, speak: in grandma's voice, in the language of home, with English as the goal. Everything else on this page is optional.</p>
+      <div class="nums rv d3">
+        <div class="num"><b>≈ 0 s</b><span>Reaction sound</span></div>
+        <div class="num"><b>2.3 s</b><span>First sentence (median, beta)</span></div>
+        <div class="num target"><b>≈ 1 s</b><span>First word</span><span class="tag">Target</span></div>
+      </div>
+    </div>
+    <figure class="rv d2">
+      <svg viewBox="0 0 480 430" role="img" aria-label="Loop of three stations around Nani: Hear, Think, Speak">
+        <circle class="ln d" cx="240" cy="215" r="140"/>
+        <g class="orbit"><circle class="dot-a" cx="240" cy="75" r="9"/></g>
+        <use href="#plush" x="190" y="158" width="100" height="120"/>
+        <text class="tx lg a" x="240" y="304" text-anchor="middle">Nani</text>
+        <g class="station"><circle class="box-t" cx="240" cy="75" r="44"/></g>
+        <text class="tx" x="240" y="81" text-anchor="middle">Hear</text>
+        <text class="mo" x="240" y="141" text-anchor="middle">speech to text</text>
+        <g class="station b"><circle class="box-t" cx="361" cy="285" r="44"/></g>
+        <text class="tx" x="361" y="291" text-anchor="middle">Think</text>
+        <text class="mo" x="361" y="352" text-anchor="middle">the brain</text>
+        <text class="mo" x="361" y="370" text-anchor="middle">+ five files</text>
+        <g class="station c"><circle class="box-a" cx="119" cy="285" r="44"/></g>
+        <text class="tx" x="119" y="291" text-anchor="middle">Speak</text>
+        <text class="mo" x="119" y="352" text-anchor="middle">grandma's voice</text>
+        <path class="wave loop" d="M64 268q-9 17 0 34"/>
+        <path class="wave loop b" d="M52 260q-13 25 0 50"/>
+        <path class="wave loop c" d="M40 252q-17 33 0 66"/>
+      </svg>
+    </figure>
+  </div>
+</section>
+
+<!-- 4 · Parents guide by chatting -->
+<section class="s s4" id="s4" data-title="Parents guide by chatting" data-steps="6">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow rv"><b>04</b>Parents guide by chatting</p>
+      <h2 class="rv d1">Parents guide it like a group chat</h2>
+      <p class="body rv d2">Each of Nani's five files has its own agent. A parent says it once; the right agent updates its file; Nani follows on her next turn and reports back.</p>
+      <div class="agents rv d3">
+        <span class="agent">👵 Nani <code>persona.md</code></span>
+        <span class="agent">⏰ Routine <code>heartbeat.md</code></span>
+        <span class="agent">🏠 House rules <code>parent.md</code></span>
+        <span class="agent">📚 Lessons <code>planner.md</code></span>
+        <span class="agent">📔 Memory <code>brain.md</code></span>
+      </div>
+    </div>
+    <div class="chatdemo rv d2">
+      <div class="phone" aria-label="Parents' group chat">
+        <div class="ph-head"><b>Nani's family</b><span class="ph-sub"><span class="typing" data-i="2">⏰ Routine is typing…</span><span class="norm">5 agents · parents</span></span></div>
+        <div class="ph-body">
+          <div class="msg me" data-i="1"><small>Parent</small>Remind him to drink water every 2 hours</div>
+          <div class="msg ag" data-i="3"><small>⏰ Routine</small>Done! Every 2 hours from 10 to 6 💧</div>
+          <div class="msg ag" data-i="6"><small>⏰ Routine</small>He said "Pee liya abhi!" 💧</div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="file">
+          <div class="fh">heartbeat.md <span>⏰ Routine</span></div>
+          <div class="fl">on wake · say · Namaste beta!</div>
+          <div class="fl">at bedtime · story · one short story</div>
+          <div class="fl new" data-i="4">every 2 hours · say · Paani pi lo! Paani piya?</div>
+        </div>
+        <div class="toysay" data-i="5">
+          <svg class="plushmini" viewBox="0 0 200 240" aria-hidden="true"><use href="#plush"/></svg>
+          <span class="bub">Paani piya?</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · Inside the toy -->
+<section class="s s5" id="s5" data-title="Inside the toy">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow rv"><b>05</b>Inside the toy</p>
+      <h2 class="rv d1">Inside the toy: five core parts</h2>
+      <p class="body rv d2">A Wi-Fi board, a microphone, an amplifier and speaker, and a power bank, in a zipped pouch inside almost any plush. About ₹3,500–4,000 per toy.</p>
+      <label class="toggle rv d3"><input type="checkbox" id="gx" aria-label="Show add-on spots"><span class="c1">Core</span><span class="c2">Core + add-ons</span></label>
+    </div>
+    <figure class="cut rv d2">
+      <svg viewBox="0 0 600 520" role="img" aria-label="Cutaway plush: microphone near the face, speaker in the tummy, ESP32-S3 board and power bank in the back pouch, talk trigger on a paw">
+        <!-- plush -->
+        <ellipse class="pS" cx="250" cy="490" rx="36" ry="17"/>
+        <ellipse class="pS" cx="350" cy="490" rx="36" ry="17"/>
+        <ellipse class="pS" cx="300" cy="370" rx="120" ry="112"/>
+        <ellipse class="pS" cx="184" cy="362" rx="26" ry="44" transform="rotate(28 184 362)"/>
+        <ellipse class="pS" cx="416" cy="362" rx="26" ry="44" transform="rotate(-28 416 362)"/>
+        <circle class="pS" cx="300" cy="42" r="26"/>
+        <circle class="pS" cx="215" cy="74" r="36"/><circle class="pT" cx="215" cy="74" r="18"/>
+        <circle class="pS" cx="385" cy="74" r="36"/><circle class="pT" cx="385" cy="74" r="18"/>
+        <circle class="pS" cx="300" cy="160" r="100"/>
+        <circle class="pC" cx="250" cy="186" r="14"/><circle class="pC" cx="350" cy="186" r="14"/>
+        <circle class="pE" cx="267" cy="150" r="7"/><circle class="pE" cx="333" cy="150" r="7"/>
+        <circle class="pG" cx="267" cy="150" r="20"/><circle class="pG" cx="333" cy="150" r="20"/><path class="pG" d="M287 150h26"/>
+        <ellipse class="pE" cx="300" cy="176" rx="9" ry="6.5"/>
+        <path class="pM" d="M284 194q16 13 32 0"/>
+        <!-- core: mic -->
+        <rect class="part" x="284" y="216" width="32" height="24" rx="4"/>
+        <circle class="partf" cx="300" cy="228" r="6"/>
+        <!-- core: speaker -->
+        <circle class="part" cx="300" cy="320" r="36"/><circle class="part" cx="300" cy="320" r="22"/><circle class="partf" cx="300" cy="320" r="7"/>
+        <!-- core: back pouch with board + power bank -->
+        <rect class="pouch" x="214" y="378" width="172" height="86" rx="16"/>
+        <rect class="part" x="226" y="394" width="78" height="56" rx="5"/>
+        <rect class="chipf" x="250" y="408" width="30" height="28" rx="3"/>
+        <path class="ln" style="stroke:var(--ink)" d="M234 394v-6M244 394v-6M254 394v-6M264 394v-6M274 394v-6M284 394v-6M294 394v-6M234 456v-6M244 456v-6M254 456v-6M264 456v-6M274 456v-6M284 456v-6M294 456v-6"/>
+        <rect class="part" x="314" y="398" width="60" height="48" rx="9"/>
+        <rect class="dot-t" x="322" y="408" width="12" height="28" rx="2"/><rect class="dot-t" x="338" y="408" width="12" height="28" rx="2"/><rect class="dot-t" x="354" y="408" width="12" height="28" rx="2" opacity=".35"/>
+        <!-- core: talk trigger -->
+        <circle class="ring loop" cx="172" cy="392" r="14" style="opacity:.5"/>
+        <circle class="dot-a" cx="172" cy="392" r="9"/>
+
+        <!-- core labels -->
+        <g class="rv d3"><path class="ln" d="M282 228H150"/><text class="tx" x="142" y="226" text-anchor="end">microphone</text><text class="mo" x="142" y="246" text-anchor="end">near the face</text></g>
+        <g class="rv d4"><path class="ln" d="M336 320H452"/><text class="tx" x="460" y="318">speaker</text><text class="mo" x="460" y="338">in the tummy</text></g>
+        <g class="rv d5"><path class="ln" d="M386 430H452"/><text class="tx" x="460" y="428">ESP32-S3 +</text><text class="tx" x="460" y="448">power bank</text><text class="mo" x="460" y="468">back pouch</text></g>
+        <g class="rv d6"><path class="ln" d="M164 402L154 414"/><text class="tx" x="152" y="434" text-anchor="end">talk trigger</text><text class="mo" x="152" y="454" text-anchor="end">a press anywhere:</text><text class="mo" x="152" y="472" text-anchor="end">paw, ear or tummy</text></g>
+
+        <!-- add-on ghosts -->
+        <g class="ghost-g">
+          <circle class="ghost" cx="267" cy="150" r="29"/><circle class="ghost" cx="333" cy="150" r="29"/>
+          <path class="ln d" d="M238 140H150"/><text class="tx t" x="142" y="138" text-anchor="end">glowing eyes</text><text class="ghostT" x="142" y="156" text-anchor="end">ADD-ON</text>
+          <circle class="ghost" cx="385" cy="74" r="44"/>
+          <path class="ln d" d="M429 74H452"/><text class="tx t" x="460" y="72">touch spots</text><text class="ghostT" x="460" y="90">ADD-ON</text>
+          <rect class="ghost" x="350" y="262" width="22" height="22" rx="4"/>
+          <path class="ln d" d="M372 273H452"/><text class="tx t" x="460" y="266">motion sensor</text><text class="ghostT" x="460" y="284">ADD-ON</text>
+          <rect class="ghost" x="420" y="374" width="34" height="26" rx="5"/>
+          <text class="tx t" x="460" y="378">card reader</text><text class="ghostT" x="460" y="396">ADD-ON</text>
+        </g>
+      </svg>
+    </figure>
+  </div>
+  <div class="wrap stack" style="margin-top:0">
+    <div class="parts">
+      <article class="pc rv d2">
+        <svg viewBox="0 0 64 48" aria-hidden="true"><rect class="part" x="6" y="9" width="52" height="30" rx="3"/><rect class="chipf" x="24" y="15" width="16" height="18" rx="2"/><path class="ln" style="stroke:var(--ink)" d="M12 9V4M19 9V4M26 9V4M33 9V4M40 9V4M47 9V4M54 9V4M12 39v5M19 39v5M26 39v5M33 39v5M40 39v5M47 39v5M54 39v5"/></svg>
+        <h3>ESP32-S3 DevKitC-1 N16R8</h3><p>Wi-Fi brain, 16 MB flash, 8 MB PSRAM</p><span class="rs">≈ ₹839</span>
+      </article>
+      <article class="pc rv d3">
+        <svg viewBox="0 0 64 48" aria-hidden="true"><rect class="part" x="14" y="8" width="36" height="32" rx="4"/><circle class="part" cx="32" cy="24" r="10"/><circle class="partf" cx="32" cy="24" r="3.5"/></svg>
+        <h3>INMP441 I2S microphone</h3><p>Hears at 16 kHz</p><span class="rs">≈ ₹115–140</span>
+      </article>
+      <article class="pc rv d4">
+        <svg viewBox="0 0 64 48" aria-hidden="true"><rect class="part" x="6" y="11" width="52" height="26" rx="3"/><rect class="chipf" x="14" y="17" width="14" height="14" rx="2"/><rect class="box-a" style="stroke-width:1.5" x="38" y="15" width="14" height="18" rx="2"/><path class="ln" style="stroke:var(--ink)" d="M42 20v8M48 20v8"/></svg>
+        <h3>MAX98357A amplifier</h3><p>Drives the speaker</p><span class="rs">≈ ₹194</span>
+      </article>
+      <article class="pc rv d5">
+        <svg viewBox="0 0 64 48" aria-hidden="true"><circle class="part" cx="32" cy="24" r="21"/><circle class="part" cx="32" cy="24" r="13"/><circle class="partf" cx="32" cy="24" r="4.5"/></svg>
+        <h3>40 mm, 4 Ω, 3 W speaker</h3><p>Grandma's voice</p><span class="rs">≈ ₹80–200</span>
+      </article>
+      <article class="pc rv d6">
+        <svg viewBox="0 0 64 48" aria-hidden="true"><rect class="part" x="8" y="8" width="44" height="32" rx="8"/><rect class="partf" x="52" y="19" width="5" height="10" rx="1.5"/><rect class="dot-t" x="15" y="15" width="8" height="18" rx="1.5"/><rect class="dot-t" x="26" y="15" width="8" height="18" rx="1.5"/><rect class="dot-t" x="37" y="15" width="8" height="18" rx="1.5" opacity=".35"/></svg>
+        <h3>USB power bank, 5,000–10,000 mAh</h3><p>A day of play</p><span class="rs">≈ ₹800–1,200</span>
+      </article>
+    </div>
+    <p class="note">Prices are approximate listings. All five sit in a zipped pouch at the back.</p>
+  </div>
+</section>
+
+<!-- 6 · Wiring -->
+<section class="s s6" id="s6" data-title="Wiring" data-steps="2">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow rv"><b>06</b>Wiring</p>
+      <h2 class="rv d1">Two audio lanes, one board</h2>
+      <p class="body rv d2">Microphone in on one I2S bus, speaker out on another. The mic is off while Nani speaks, so the toy never hears itself and needs no echo cancellation.</p>
+      <p class="note rv d3">Pins proposed; checked against the firmware before flashing.</p>
+    </div>
+    <figure class="rv d2">
+      <svg viewBox="0 0 520 500" role="img" aria-label="Wiring: INMP441 to I2S0 on GPIO 5, 4, 6; ESP32-S3; I2S1 on GPIO 15, 16, 7 to MAX98357A and speaker; power bank 5 V to board and amp with a capacitor">
+        <!-- power -->
+        <text class="mo k" x="45" y="182" text-anchor="middle">power bank</text>
+        <rect class="part" x="10" y="192" width="70" height="108" rx="12"/>
+        <rect class="dot-t" x="22" y="206" width="46" height="16" rx="3"/><rect class="dot-t" x="22" y="228" width="46" height="16" rx="3"/><rect class="dot-t" x="22" y="250" width="46" height="16" rx="3" opacity=".35"/>
+        <text class="mo k" x="45" y="290" text-anchor="middle">5 V</text>
+        <path class="ln a" d="M80 222H110"/>
+        <path class="ln a" d="M45 300V365H150"/>
+        <path class="ln" style="stroke:var(--ink)" d="M104 352v26M114 352v26"/>
+        <text class="mo" x="109" y="398" text-anchor="middle">capacitor</text>
+        <!-- mic -->
+        <rect class="part" x="150" y="20" width="100" height="56" rx="6"/>
+        <circle class="part" cx="200" cy="48" r="15"/><circle class="partf" cx="200" cy="48" r="5"/>
+        <text class="tx" x="266" y="44">INMP441 mic</text>
+        <text class="mo" x="266" y="64">16 kHz in</text>
+        <text class="mo a lab" data-i="2" x="138" y="54" text-anchor="end">mic off</text>
+        <!-- mic → board -->
+        <path class="ln t" d="M200 76V158"/>
+        <text class="mo t" x="214" y="110" style="font-weight:600">I2S0</text>
+        <text class="mo" x="214" y="130">GPIO 5 · 4 · 6</text>
+        <!-- board -->
+        <rect class="part" x="110" y="160" width="180" height="100" rx="8"/>
+        <rect class="chipf" x="150" y="180" width="100" height="60" rx="5"/>
+        <text class="mo k" x="200" y="215" text-anchor="middle" style="font-weight:600">ESP32-S3</text>
+        <path class="ln" style="stroke:var(--ink)" d="M122 160v-7M138 160v-7M154 160v-7M246 160v-7M262 160v-7M278 160v-7M122 260v7M138 260v7M154 260v7M246 260v7M262 260v7M278 260v7"/>
+        <!-- board → amp -->
+        <path class="ln a" d="M200 268V340"/>
+        <text class="mo a" x="214" y="296" style="font-weight:600">I2S1</text>
+        <text class="mo" x="214" y="316">GPIO 15 · 16 · 7</text>
+        <!-- amp -->
+        <rect class="part" x="150" y="340" width="100" height="50" rx="6"/>
+        <rect class="chipf" x="164" y="352" width="26" height="26" rx="3"/>
+        <rect class="box-a" style="stroke-width:1.5" x="212" y="350" width="26" height="30" rx="3"/>
+        <text class="tx" x="266" y="362">MAX98357A</text>
+        <text class="mo" x="266" y="382">amplifier</text>
+        <path class="ln a" d="M200 390V424"/>
+        <!-- speaker -->
+        <g class="spk" data-i="2" style="opacity:1"><circle class="part" cx="200" cy="456" r="31"/><circle class="part" cx="200" cy="456" r="19"/><circle class="partf" cx="200" cy="456" r="6"/></g>
+        <text class="tx" x="250" y="462">speaker</text>
+        <path class="wave pk" data-i="2" d="M158 440q-9 16 0 32" style="transform-origin:right center"/>
+        <path class="wave pk" data-i="2" d="M146 432q-13 24 0 48" style="transform-origin:right center"/>
+        <!-- state labels -->
+        <g class="lab" data-i="1"><rect class="box-t" x="372" y="96" width="132" height="40" rx="20"/><text class="tx t" x="438" y="122" text-anchor="middle">listening</text></g>
+        <g class="lab" data-i="2"><rect class="box-a" x="372" y="282" width="132" height="40" rx="20"/><text class="tx a" x="438" y="308" text-anchor="middle">speaking</text></g>
+        <!-- packets -->
+        <circle class="dot-t pk" data-i="1" cx="200" cy="80" r="7" style="--dx:0px;--dy:76px"/>
+        <circle class="dot-t pk late" data-i="1" cx="200" cy="80" r="7" style="--dx:0px;--dy:76px"/>
+        <circle class="dot-a pk" data-i="2" cx="200" cy="270" r="7" style="--dx:0px;--dy:150px"/>
+        <circle class="dot-a pk late" data-i="2" cx="200" cy="270" r="7" style="--dx:0px;--dy:150px"/>
+      </svg>
+    </figure>
+  </div>
+</section>
+
+<!-- 7 · Toy and cloud -->
+<section class="s s7" id="s7" data-title="Toy and cloud" data-steps="6">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow rv"><b>07</b>Toy and cloud</p>
+      <h2 class="rv d1">One small contract between toy and cloud</h2>
+      <p class="body rv d2">The toy sends what the child said; Nani's sentences stream back one by one, each with its wall cue. No AI keys on the toy. The web toy already speaks this contract; real hardware speaks it directly or through a thin relay.</p>
+      <p class="note rv d3">POST /api/turn → NDJSON stream: heard · say · fallback · done. Channels toy:aarav and wall:aarav.</p>
+    </div>
+    <figure class="sq rv d2">
+      <svg viewBox="0 0 560 470" role="img" aria-label="Sequence: toy sends audio; cloud returns heard, say 0 with audio and cue (wall shows a mango), say 1, done with timings; toy:aarav events arrive at the toy">
+        <rect class="box-n" style="stroke-dasharray:5 6" x="4" y="14" width="92" height="34" rx="17"/>
+        <text class="mo t" x="50" y="36" text-anchor="middle">toy:aarav</text>
+        <rect class="box-a" x="122" y="14" width="96" height="34" rx="10"/><text class="tx a" x="170" y="37" text-anchor="middle">Toy</text>
+        <rect class="box-t" x="312" y="14" width="96" height="34" rx="10"/><text class="tx t" x="360" y="37" text-anchor="middle">Cloud</text>
+        <rect class="box-n" x="452" y="14" width="96" height="34" rx="10"/><text class="tx" x="500" y="37" text-anchor="middle">Wall</text>
+        <path class="ln d" d="M50 52V455M170 52V455M360 52V455M500 52V455"/>
+        <g data-i="1"><line class="ln a ar l" x1="172" y1="100" x2="356" y2="100" marker-end="url(#mA)"/><text class="mo a" x="265" y="91" text-anchor="middle">audio</text></g>
+        <g data-i="2"><line class="ln t ar r" x1="358" y1="150" x2="174" y2="150" marker-end="url(#mT)"/><text class="mo t" x="265" y="141" text-anchor="middle">heard</text></g>
+        <g data-i="3"><line class="ln t ar r" x1="358" y1="200" x2="174" y2="200" marker-end="url(#mT)"/><text class="mo t" x="265" y="191" text-anchor="middle">say 0 · audio + cue</text>
+          <line class="ln t ar l" x1="362" y1="200" x2="496" y2="200" marker-end="url(#mT)"/><text class="mo t" x="430" y="191" text-anchor="middle">cue</text>
+          <rect class="box-n" x="472" y="212" width="56" height="50" rx="10"/><text class="emo mango" x="500" y="250" text-anchor="middle" style="font-size:30px">🥭</text></g>
+        <g data-i="4"><line class="ln t ar r" x1="358" y1="290" x2="174" y2="290" marker-end="url(#mT)"/><text class="mo t" x="265" y="281" text-anchor="middle">say 1</text></g>
+        <g data-i="5"><line class="ln t ar r" x1="358" y1="340" x2="174" y2="340" marker-end="url(#mT)"/><text class="mo t" x="265" y="331" text-anchor="middle">done · timings</text></g>
+        <g data-i="6">
+          <line class="ln t ar l" x1="52" y1="388" x2="166" y2="388" marker-end="url(#mT)"/><text class="mo k" x="108" y="380" text-anchor="middle">reminder</text>
+          <line class="ln t ar l" x1="52" y1="418" x2="166" y2="418" marker-end="url(#mT)"/><text class="mo k" x="108" y="410" text-anchor="middle">call</text>
+          <line class="ln t ar l" x1="52" y1="448" x2="166" y2="448" marker-end="url(#mT)"/><text class="mo k" x="108" y="440" text-anchor="middle">clock</text>
+        </g>
+      </svg>
+    </figure>
+  </div>
+</section>
+
+<!-- 8 · Software stack -->
+<section class="s s8" id="s8" data-title="Software stack">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow rv"><b>08</b>Software stack</p>
+      <h2 class="rv d1">Built on proven services</h2>
+      <p class="body rv d2">Each layer is swappable by config. The brain moves from Kimi to Claude Haiku with one value.</p>
+    </div>
+    <ol class="layers">
+      <li class="layer toy rvx d1"><b>Toy</b><span>ElatoAI firmware fork (open source, MIT), or the web toy</span></li>
+      <li class="layer rvx d2"><b>Edge</b><span>Next.js on Vercel, functions in Mumbai <code>bom1</code></span></li>
+      <li class="layer rvx d3"><b>Voice</b><span>ElevenLabs Scribe v3 (hearing) · Eleven v4 Turbo (live voice) · Eleven v4 (pre-made lines) · sound effects · music</span></li>
+      <li class="layer rvx d4"><b>Brain</b><span class="swap"><code>kimi-k2.6</code> now <i>→</i> <code>claude-haiku-5-5</code></span></li>
+      <li class="layer rvx d5"><b>Memory</b><span>Supabase (Postgres, Realtime, Storage), Mumbai</span></li>
+      <li class="layer rvx d6"><b>Screens</b><span>Parents' group chat · the wall · the web toy</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 9 · Add-ons -->
+<section class="s s9" id="s9" data-title="Add-ons">
+  <div class="wrap stack">
+    <div>
+      <p class="eyebrow rv"><b>09</b>Add-ons · all optional</p>
+      <h2 class="rv d1">Build outward from the core</h2>
+      <p class="body wide rv d2">Each add-on gives Nani a new skill. Graded by how hard it is to add.</p>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <h3 class="rv d2">Easy <span class="meter" aria-label="difficulty 1 of 3"><i class="f"></i><i></i><i></i></span></h3>
+        <div class="ad rv d3"><span class="ic">🐾</span><h4>Talk button</h4><p>Squeeze a paw (or an ear) to talk</p><p class="nd">Tactile switch in a rigid puck</p></div>
+        <div class="ad rv d3"><span class="ic">💡</span><h4>Glowing eyes or heart</h4><p>Sees Nani listening, thinking, speaking</p><p class="nd">2 × WS2812B LEDs</p></div>
+        <div class="ad rv d4"><span class="ic">✋</span><h4>Touch spots</h4><p>Pat her head for a song</p><p class="nd">The ESP32-S3's built-in touch pins and conductive thread</p></div>
+        <div class="ad rv d4"><span class="ic">💓</span><h4>Heartbeat buzz</h4><p>A gentle buzz with praise or a reminder</p><p class="nd">Small vibration motor</p></div>
+      </div>
+      <div class="col">
+        <h3 class="rv d5">Medium <span class="meter" aria-label="difficulty 2 of 3"><i class="f"></i><i class="f"></i><i></i></span></h3>
+        <div class="ad rv d6"><span class="ic">🏠</span><h4>Projector home base</h4><p>The wall shows what Nani talks about</p><p class="nd">Android projector in a little house, kiosk browser on the wall page</p></div>
+        <div class="ad rv d6"><span class="ic">🃏</span><h4>Picture cards</h4><p>Tap the mango card, and the mango game starts</p><p class="nd">NFC reader (RC522 or PN532) and cards</p></div>
+        <div class="ad rv d7"><span class="ic">🤸</span><h4>Motion sense</h4><p>Pick her up to wake her; shake for a song</p><p class="nd">6-axis motion sensor (MPU-6050)</p></div>
+        <div class="ad rv d7"><span class="ic">🔋</span><h4>Battery care</h4><p>Parents hear "time to charge Nani" from Routine</p><p class="nd">Battery level reading and a heartbeat.md job</p></div>
+      </div>
+      <div class="col">
+        <h3 class="rv d8">Hard <span class="meter" aria-label="difficulty 3 of 3"><i class="f"></i><i class="f"></i><i class="f"></i></span></h3>
+        <div class="ad rv d9"><span class="ic">🗣️</span><h4>"Nani!" wake word</h4><p>Talk without pressing anything</p><p class="nd">On-device wake-word model (Espressif ESP-SR)</p></div>
+        <div class="ad rv d9"><span class="ic">💬</span><h4>Talk over each other</h4><p>Interrupt Nani naturally</p><p class="nd">Echo cancellation and dual mics (ESP32-S3-BOX-3 class)</p></div>
+        <div class="ad rv d10"><span class="ic">🎀</span><h4>Moving parts</h4><p>Nani nods or wiggles her ears as she talks</p><p class="nd">Micro-servos, plus power and noise design</p></div>
+        <div class="ad rv d10"><span class="ic">📷</span><h4>Show and tell</h4><p>Show a toy, and Nani names it in English</p><p class="nd">Camera on the ESP32-S3, a vision model, privacy design</p></div>
+      </div>
+    </div>
+    <div class="legend rv d11">
+      <span><b>Easy:</b> an off-the-shelf part and a little firmware.</span>
+      <span><b>Medium:</b> a new part plus firmware and cloud changes.</span>
+      <span><b>Hard:</b> a new pipeline, research or safety design.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · Safe and never stuck -->
+<section class="s s10" id="s10" data-title="Safe and never stuck" data-steps="4">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow rv"><b>10</b>Safe and never stuck</p>
+      <h2 class="rv d1">Safe, and never stuck</h2>
+      <ul class="safe">
+        <li class="rv d2">Power bank with a protected cell, never a bare battery. Zip at the back; no loose small parts.</li>
+        <li class="rv d3">Keys stay in the cloud; the toy holds none.</li>
+        <li class="rv d4">If a toy fails: spare toy → ESP32-S3-BOX-3 → a phone in the plush → the web toy.</li>
+      </ul>
+    </div>
+    <div class="ladder rv d2" aria-label="Fallback ladder">
+      <div class="rung" data-i="1"><b>1</b><span>Spare toy<small>same pouch, swap in seconds</small></span></div>
+      <div class="down" data-i="2">↓</div>
+      <div class="rung" data-i="2"><b>2</b><span>ESP32-S3-BOX-3<small>ready-made board, same contract</small></span></div>
+      <div class="down" data-i="3">↓</div>
+      <div class="rung" data-i="3"><b>3</b><span>A phone in the plush<small>the web toy, hidden in the pouch</small></span></div>
+      <div class="down" data-i="4">↓</div>
+      <div class="rung web" data-i="4"><b>4</b><span>The web toy<small>any browser</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · Close -->
+<section class="s s11 close" id="s11" data-title="Close">
+  <div class="wrap stack">
+    <figure class="rv" style="width:min(220px,50vw)">
+      <svg viewBox="0 0 240 260" aria-hidden="true">
+        <circle class="ring loop" cx="120" cy="190" r="40"/><circle class="ring loop b" cx="120" cy="190" r="40"/><circle class="ring loop c" cx="120" cy="190" r="40"/>
+        <g class="bob"><use href="#plush" x="20" y="10" width="200" height="240"/></g>
+      </svg>
+    </figure>
+    <h2 class="rv d1">Grandma's voice. Play-school learning. No screen.</h2>
+    <div class="links">
+      <a class="lk rv d2" href="https://tutor-nani.vercel.app/"><b>Parents' chat</b><span>tutor-nani.vercel.app/</span></a>
+      <a class="lk rv d3" href="https://tutor-nani.vercel.app/toy"><b>Web toy</b><span>tutor-nani.vercel.app/toy</span></a>
+      <a class="lk rv d4" href="https://tutor-nani.vercel.app/home-base"><b>Wall</b><span>tutor-nani.vercel.app/home-base</span></a>
+    </div>
+    <p class="beta rv d5">Beta</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('.s'));
+  var rail=document.querySelector('.rail'), cn=document.getElementById('cn');
+  document.getElementById('ct').textContent=String(secs.length).padStart(2,'0');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)');
+  var idx=0, timer=null, cur=null;
+
+  secs.forEach(function(s,i){
+    var b=document.createElement('button');
+    b.setAttribute('aria-label',(i+1)+' · '+(s.dataset.title||''));
+    b.addEventListener('click',function(){go(i)});
+    rail.appendChild(b);
+  });
+  var dots=[].slice.call(rail.children);
+
+  function setStep(sec,n){
+    sec.querySelectorAll('[data-i]').forEach(function(el){
+      var i=+el.dataset.i;
+      el.classList.toggle('on',i<=n);
+      el.classList.toggle('now',i===n);
+    });
+  }
+  function startStepper(sec){
+    clearInterval(timer); timer=null;
+    if(cur && cur!==sec){ setStep(cur,0); cur._s=0; }
+    cur=sec;
+    var n=+sec.dataset.steps||0;
+    if(!n) return;
+    if(reduce.matches){ setStep(sec,99); return; }
+    sec._s=0; setStep(sec,0);
+    var hold=n===2?0:1;
+    timer=setInterval(function(){
+      var s=sec._s+1;
+      if(s>n+hold){ s=n===2?1:0; }
+      sec._s=s; setStep(sec,s);
+    },n===2?1500:1250);
+    setTimeout(function(){ if(cur===sec && sec._s===0){ sec._s=1; setStep(sec,1);} },350);
+  }
+  function setCurrent(i){
+    idx=i;
+    cn.textContent=String(i+1).padStart(2,'0');
+    dots.forEach(function(d,j){ d.setAttribute('aria-current',j===i?'true':'false'); });
+    startStepper(secs[i]);
+  }
+
+  // reveal
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); else e.target.classList.remove('in'); });
+  },{rootMargin:'0px 0px -12% 0px',threshold:0});
+  // current section = the one crossing the middle of the viewport
+  var io2=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ var i=secs.indexOf(e.target); if(i!==idx || !cur) setCurrent(i);} });
+  },{rootMargin:'-50% 0px -50% 0px',threshold:0});
+  secs.forEach(function(s){ io.observe(s); io2.observe(s); });
+
+  function go(i){
+    i=Math.max(0,Math.min(secs.length-1,i));
+    secs[i].scrollIntoView({behavior:reduce.matches?'auto':'smooth',block:'start'});
+    setCurrent(i);
+  }
+  function step(dir){
+    var r=secs[idx].getBoundingClientRect(), vh=innerHeight, b=reduce.matches?'auto':'smooth';
+    if(dir>0 && r.top<=24 && r.bottom>vh+24){ scrollBy({top:Math.min(vh*.85,r.bottom-vh),behavior:b}); return; }
+    if(dir<0 && r.top<-24 && r.bottom>0){ scrollBy({top:-Math.min(vh*.85,-r.top),behavior:b}); return; }
+    go(idx+dir);
+  }
+  addEventListener('keydown',function(e){
+    if(e.altKey||e.ctrlKey||e.metaKey) return;
+    var k=e.key, t=e.target;
+    if(t && t.closest && t.closest('input,textarea,select,[contenteditable]')) return;
+    var dir=0;
+    if(k==='ArrowDown'||k==='PageDown'||k==='ArrowRight'||(k===' '&&!e.shiftKey)) dir=1;
+    else if(k==='ArrowUp'||k==='PageUp'||k==='ArrowLeft'||(k===' '&&e.shiftKey)) dir=-1;
+    else if(k==='Home'){ e.preventDefault(); go(0); return; }
+    else if(k==='End'){ e.preventDefault(); go(secs.length-1); return; }
+    if(!dir) return;
+    if(k===' ' && t && t.closest && t.closest('a,button,label')) return;
+    e.preventDefault(); step(dir);
+  });
+  var gx=document.getElementById('gx'), s5=document.getElementById('s5');
+  gx.addEventListener('change',function(){ s5.classList.toggle('ghosts',gx.checked); });
+  setCurrent(0);
+})();
+</script>
+</body>
+</html>

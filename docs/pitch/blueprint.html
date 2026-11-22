@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grandma Plush Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: a spec sheet. Sticky contents rail on the left, one reading column on the right.
+     Part A (hardware) opens with a marigold band, Part B (software) with a teal band. */
+  --paper:#f2f4f5;
+  --surface:#ffffff;
+  --ink:#16202a;
+  --muted:#56616c;
+  --line:#d3d9de;
+  --accent:#b0560e;
+  --signal:#1d6b73;
+  --accent-tint:color-mix(in srgb, var(--accent) 13%, var(--surface));
+  --signal-tint:color-mix(in srgb, var(--signal) 11%, var(--surface));
+  --head-tint:color-mix(in srgb, var(--line) 40%, var(--surface));
+  --font-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f141a; --surface:#151c24; --ink:#e5e9ed; --muted:#9ba7b3; --line:#2b3540;
+    --accent:#f0a259; --signal:#5cc2c9; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f141a; --surface:#151c24; --ink:#e5e9ed; --muted:#9ba7b3; --line:#2b3540;
+  --accent:#f0a259; --signal:#5cc2c9; color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.62 var(--font-body)}
+a{color:var(--signal);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+
+.shell{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:210px minmax(0,1fr);gap:52px}
+.rail{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding:44px 0 24px}
+.rail-title{font:600 11px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.rail-group{margin:0 0 18px}
+.rail-part{font:600 12.5px/1.3 var(--font-body);margin:0 0 6px;color:var(--ink)}
+.rail-part .k{font-family:var(--font-mono);color:var(--accent);margin-right:6px}
+.rail-group.b .rail-part .k{color:var(--signal)}
+.rail a{display:block;font-size:13.5px;line-height:1.35;color:var(--muted);text-decoration:none;padding:4px 0 4px 10px;border-left:2px solid var(--line)}
+.rail a:hover{color:var(--ink);border-left-color:var(--accent)}
+.rail a .n{font-family:var(--font-mono);font-size:11.5px;margin-right:6px;color:var(--muted)}
+
+main{min-width:0;padding:44px 0 96px}
+.eyebrow{font:500 12px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
+h1{font-weight:700;font-size:clamp(34px,5.4vw,52px);line-height:1.02;letter-spacing:-.015em}
+h2{font-weight:700;font-size:30px;line-height:1.1;letter-spacing:-.01em}
+h3{font-weight:700;font-size:22px;line-height:1.2}
+h4{font:600 15px/1.3 var(--font-body);margin:0 0 6px}
+p,li{max-width:70ch}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 12px;padding-left:20px}
+li{margin:0 0 6px}
+b,strong{font-weight:600}
+
+.lede{font-size:18px;line-height:1.55;color:var(--ink);margin:18px 0 18px;max-width:64ch}
+.meta{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:600;margin-right:4px}
+
+.glance{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:34px 0 8px}
+.g{border-top:3px solid var(--ink);padding-top:12px}
+.g.toy{border-top-color:var(--accent)}
+.g.base{border-top-color:var(--signal)}
+.g-k{font:700 18px/1.2 var(--font-display);margin:0 0 6px}
+.g p{font-size:15px}
+.g-n{font:500 13px/1.4 var(--font-mono);color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+
+.sec{margin-top:44px;padding-top:30px;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin:0 0 14px}
+.sec-head .n{font:600 13px/1 var(--font-mono);color:var(--accent);min-width:28px}
+.part-b-scope .sec-head .n{color:var(--signal)}
+.intro{color:var(--muted);margin-bottom:16px}
+
+.part{margin-top:72px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:end;padding:0 0 18px;border-bottom:3px solid var(--accent)}
+.part.b{border-bottom-color:var(--signal)}
+.part .letter{font:700 84px/.78 var(--font-display);color:var(--accent)}
+.part.b .letter{color:var(--signal)}
+.part p{margin:8px 0 0;color:var(--muted)}
+
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface);margin:14px 0 10px}
+table{width:100%;border-collapse:collapse;font-size:14.5px;line-height:1.45}
+th{text-align:left;font:600 11px/1.3 var(--font-body);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);background:var(--head-tint);padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.k{font-weight:600;white-space:nowrap}
+tr.total td{font-weight:600;background:var(--accent-tint)}
+.note{font-size:13.5px;color:var(--muted)}
+
+code{font-family:var(--font-mono);font-size:.86em;background:var(--signal-tint);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+.tag{display:inline-block;font:600 10.5px/1 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;padding:3px 6px;border-radius:4px;border:1px solid currentColor;vertical-align:1px;white-space:nowrap}
+.tag.verify{color:var(--accent)}
+.tag.hw{color:var(--accent)}
+.tag.sw{color:var(--signal)}
+
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;margin:10px 0}
+.cols ul{margin:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.panel h4{margin-bottom:8px}
+
+ol.steps{list-style:none;padding:0;margin:10px 0 12px;counter-reset:st}
+ol.steps li{counter-increment:st;position:relative;padding-left:40px;margin:0 0 10px}
+ol.steps li::before{content:counter(st, decimal-leading-zero);position:absolute;left:0;top:1px;font:600 12.5px/1.6 var(--font-mono);color:var(--accent)}
+.part-b-scope ol.steps li::before{color:var(--signal)}
+
+.spec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+.spec .panel p{font-size:14.5px;margin-bottom:8px}
+.spec .panel p:last-child,.spec .panel ul:last-child{margin-bottom:0}
+.spec .panel ul{font-size:14.5px}
+
+figure{margin:18px 0 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 16px 14px;overflow-x:auto}
+figure svg{display:block;width:100%;min-width:660px;height:auto;color:var(--ink)}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:10px;max-width:72ch}
+
+.d-box{fill:var(--surface);stroke:currentColor;stroke-width:1.4}
+.d-acc{fill:var(--accent-tint);stroke:var(--accent);stroke-width:1.6}
+.d-sig{fill:var(--signal-tint);stroke:var(--signal);stroke-width:1.6}
+.d-ln{stroke:currentColor;stroke-width:1.4;fill:none}
+.d-lead{stroke:var(--muted);stroke-width:1;fill:none}
+.d-wire{stroke:var(--signal);stroke-width:2;fill:none;stroke-dasharray:5 4}
+.d-soft{fill:var(--paper);stroke:var(--muted);stroke-width:1.2}
+.d-dash{fill:none;stroke:var(--signal);stroke-width:1.6;stroke-dasharray:6 4}
+.d-led{fill:var(--accent)}
+.d-t{fill:currentColor;font-family:var(--font-body);font-size:13px}
+.d-b{font-weight:600}
+.d-s{fill:var(--muted);font-size:11.5px}
+.d-m{font-family:var(--font-mono);font-size:11.5px}
+.d-ta{fill:var(--accent)}
+.d-tg{fill:var(--signal)}
+.seg{fill:var(--signal-tint);stroke:var(--signal);stroke-width:1.2}
+.seg-hot{fill:var(--accent-tint);stroke:var(--accent);stroke-width:1.6}
+.mark-hot{stroke:var(--accent);stroke-width:2}
+.mark-sig{stroke:var(--signal);stroke-width:2}
+
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:8px;vertical-align:-1px;border:1px solid rgba(0,0,0,.25)}
+
+.callout{border-left:3px solid var(--accent);background:var(--accent-tint);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.callout p{margin:0}
+.callout.sig{border-left-color:var(--signal);background:var(--signal-tint)}
+
+.sources ul{columns:2;column-gap:32px;padding-left:18px}
+.sources li{break-inside:avoid;font-size:14.5px}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+
+@media (max-width:980px){
+  .shell{grid-template-columns:1fr;gap:0}
+  .rail{position:static;max-height:none;overflow:visible;padding:28px 0 0;border-bottom:1px solid var(--line)}
+  .rail-group{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+  .rail-part{width:100%}
+  .rail a{border-left:0;padding:2px 0}
+  main{padding-top:28px}
+}
+@media (max-width:720px){
+  .glance,.cols,.spec{grid-template-columns:1fr}
+  .sources ul{columns:1}
+  .part .letter{font-size:64px}
+  h2{font-size:26px}
+}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<nav class="rail" aria-label="Contents">
+  <p class="rail-title">Contents</p>
+  <div class="rail-group">
+    <p class="rail-part">Start</p>
+    <a href="#overview">How it fits together</a>
+  </div>
+  <div class="rail-group">
+    <p class="rail-part"><span class="k">A</span>Hardware</p>
+    <a href="#h1"><span class="n">H1</span>Toy parts</a>
+    <a href="#h2"><span class="n">H2</span>Where parts sit</a>
+    <a href="#h3"><span class="n">H3</span>Wiring</a>
+    <a href="#h4"><span class="n">H4</span>Assembly</a>
+    <a href="#h5"><span class="n">H5</span>Sound, power, safety</a>
+    <a href="#h6"><span class="n">H6</span>Projector home base</a>
+    <a href="#h7"><span class="n">H7</span>Network kit</a>
+    <a href="#h8"><span class="n">H8</span>What to buy</a>
+  </div>
+  <div class="rail-group b">
+    <p class="rail-part"><span class="k">B</span>Software</p>
+    <a href="#s1"><span class="n">S1</span>Software map</a>
+    <a href="#s2"><span class="n">S2</span>Toy firmware</a>
+    <a href="#s3"><span class="n">S3</span>Toy and relay messages</a>
+    <a href="#s4"><span class="n">S4</span>One turn, timed</a>
+    <a href="#s5"><span class="n">S5</span>Inside the relay</a>
+    <a href="#s6"><span class="n">S6</span>Projector page</a>
+    <a href="#s7"><span class="n">S7</span>Memory hand-off</a>
+    <a href="#s8"><span class="n">S8</span>Configuration</a>
+    <a href="#s9"><span class="n">S9</span>When things fail</a>
+  </div>
+  <div class="rail-group">
+    <p class="rail-part">Plan</p>
+    <a href="#build">Build order</a>
+    <a href="#not-using">Not using</a>
+    <a href="#verify">Check before relying</a>
+    <a href="#sources">Sources</a>
+  </div>
+</nav>
+
+<main>
+  <header>
+    <p class="eyebrow">Product blueprint · v0.1 · 16 Nov 2026</p>
+    <h1>Grandma Plush Blueprint</h1>
+    <p class="lede">A soft toy that listens while its paw is squeezed and answers in grandma's cloned voice. A projector home base that shows the animals she talks about. The cloud software that joins them. This page lists every part, how each one is set up, what we build, and where hardware meets software.</p>
+    <div class="meta">
+      <span><b>Part A</b>Hardware, owned by the hardware team</span>
+      <span><b>Part B</b>Software, built with Claude Code</span>
+      <span><span class="tag verify">Verify</span> means not yet confirmed on real hardware or in official docs</span>
+    </div>
+  </header>
+
+  <section class="glance" aria-label="At a glance">
+    <div class="g toy">
+      <p class="g-k">The toy</p>
+      <p>ESP32-S3 board, I2S microphone and amplifier, 3 W speaker, paw button, LED eyes and a USB power bank. Squeeze the paw to talk, let go to hear grandma.</p>
+      <p class="g-n">≈ ₹3,500–4,000 per toy</p>
+    </div>
+    <div class="g base">
+      <p class="g-k">The home base</p>
+      <p>A Portronics Beem 440 projector inside a small house. It runs one web page full-screen and plays an animal clip on the wall when the cloud gives the cue.</p>
+      <p class="g-n">≈ ₹6,799 + kiosk licence</p>
+    </div>
+    <div class="g">
+      <p class="g-k">The cloud</p>
+      <p>A relay on Fly.io joins Scribe (hearing), Claude Haiku 5.5 (thinking) and Eleven v4 Turbo (grandma's voice). Supabase keeps the memory and pushes live events.</p>
+      <p class="g-n">Target: first word ≈ 1 s after release</p>
+    </div>
+  </section>
+
+  <section class="sec" id="overview">
+    <div class="sec-head"><span class="n">00</span><h3>How it fits together</h3></div>
+    <p>The toy talks to one thing only: our relay. The relay calls the three AI services and writes everything to Supabase. The projector and the parent website listen to Supabase. Neither of them ever talks to the toy directly, so each piece can fail without taking the others down.</p>
+    <figure>
+      <svg viewBox="0 0 960 400" role="img" aria-label="System diagram: the plush toy streams voice to the relay on Fly.io and gets grandma's voice back. The relay calls Scribe, Claude Haiku 5.5 and Eleven v4 Turbo, and reads and writes Supabase. Supabase sends animal cues to the projector home base and live updates to the parent website.">
+        <defs>
+          <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+        </defs>
+        <!-- toy -->
+        <rect class="d-acc" x="20" y="55" width="200" height="110" rx="10"/>
+        <text class="d-t d-b" x="120" y="92" text-anchor="middle">Plush toy</text>
+        <text class="d-t d-s" x="120" y="114" text-anchor="middle">ESP32-S3 · mic · speaker</text>
+        <text class="d-t d-s" x="120" y="132" text-anchor="middle">paw button · LED eyes</text>
+        <!-- relay -->
+        <rect class="d-sig" x="360" y="10" width="220" height="200" rx="10"/>
+        <text class="d-t d-b" x="470" y="92" text-anchor="middle">Relay</text>
+        <text class="d-t d-s" x="470" y="114" text-anchor="middle">Node + TypeScript on Fly.io</text>
+        <text class="d-t d-s" x="470" y="132" text-anchor="middle">one session per toy</text>
+        <text class="d-t d-s" x="470" y="150" text-anchor="middle">game referee · safety list</text>
+        <!-- services -->
+        <rect class="d-box" x="700" y="10" width="240" height="56" rx="8"/>
+        <text class="d-t d-b" x="820" y="33" text-anchor="middle">ElevenLabs Scribe realtime</text>
+        <text class="d-t d-s" x="820" y="52" text-anchor="middle">hears: speech to text</text>
+        <rect class="d-acc" x="700" y="82" width="240" height="56" rx="8"/>
+        <text class="d-t d-b" x="820" y="105" text-anchor="middle">Claude Haiku 5.5</text>
+        <text class="d-t d-s" x="820" y="124" text-anchor="middle">thinks: grandma's reply + tools</text>
+        <rect class="d-box" x="700" y="154" width="240" height="56" rx="8"/>
+        <text class="d-t d-b" x="820" y="177" text-anchor="middle">Eleven v4 Turbo</text>
+        <text class="d-t d-s" x="820" y="196" text-anchor="middle">speaks: grandma's cloned voice</text>
+        <!-- toy <-> relay -->
+        <line class="d-ln" x1="222" y1="88" x2="356" y2="88" marker-end="url(#ar1)"/>
+        <text class="d-t d-s" x="289" y="80" text-anchor="middle">voice in (Opus, WSS)</text>
+        <line class="d-ln" x1="358" y1="132" x2="224" y2="132" marker-end="url(#ar1)"/>
+        <text class="d-t d-s" x="289" y="150" text-anchor="middle">grandma's voice out</text>
+        <!-- relay <-> services -->
+        <line class="d-ln" x1="584" y1="38" x2="696" y2="38" marker-start="url(#ar1)" marker-end="url(#ar1)"/>
+        <text class="d-t d-s" x="640" y="30" text-anchor="middle">audio, text</text>
+        <line class="d-ln" x1="584" y1="110" x2="696" y2="110" marker-start="url(#ar1)" marker-end="url(#ar1)"/>
+        <text class="d-t d-s" x="640" y="102" text-anchor="middle">text, reply</text>
+        <line class="d-ln" x1="584" y1="182" x2="696" y2="182" marker-start="url(#ar1)" marker-end="url(#ar1)"/>
+        <text class="d-t d-s" x="640" y="174" text-anchor="middle">sentence, audio</text>
+        <!-- relay <-> supabase -->
+        <line class="d-ln" x1="470" y1="214" x2="470" y2="286" marker-start="url(#ar1)" marker-end="url(#ar1)"/>
+        <text class="d-t d-s" x="480" y="246">writes turns, timings</text>
+        <text class="d-t d-s" x="480" y="262">reads session brief</text>
+        <!-- supabase -->
+        <rect class="d-sig" x="360" y="290" width="220" height="100" rx="10"/>
+        <text class="d-t d-b" x="470" y="324" text-anchor="middle">Supabase</text>
+        <text class="d-t d-s" x="470" y="346" text-anchor="middle">child memory · session brief</text>
+        <text class="d-t d-s" x="470" y="364" text-anchor="middle">Realtime channels</text>
+        <!-- home base -->
+        <rect class="d-box" x="20" y="290" width="200" height="100" rx="10"/>
+        <text class="d-t d-b" x="120" y="324" text-anchor="middle">Projector home base</text>
+        <text class="d-t d-s" x="120" y="346" text-anchor="middle">Beem 440 · one web page</text>
+        <text class="d-t d-s" x="120" y="364" text-anchor="middle">plays clips on cue</text>
+        <line class="d-ln" x1="358" y1="340" x2="224" y2="340" marker-end="url(#ar1)"/>
+        <text class="d-t d-s" x="289" y="332" text-anchor="middle">show_animal cue</text>
+        <text class="d-t d-s" x="289" y="358" text-anchor="middle">Realtime broadcast</text>
+        <!-- parent site -->
+        <rect class="d-box" x="700" y="290" width="240" height="100" rx="10"/>
+        <text class="d-t d-b" x="820" y="324" text-anchor="middle">Parent website</text>
+        <text class="d-t d-s" x="820" y="346" text-anchor="middle">phone browser · Next.js</text>
+        <text class="d-t d-s" x="820" y="364" text-anchor="middle">has its own spec</text>
+        <line class="d-ln" x1="584" y1="340" x2="696" y2="340" marker-start="url(#ar1)" marker-end="url(#ar1)"/>
+        <text class="d-t d-s" x="640" y="332" text-anchor="middle">guidance in</text>
+        <text class="d-t d-s" x="640" y="358" text-anchor="middle">updates out</text>
+      </svg>
+      <figcaption>Every arrow is a network connection. The toy holds no AI keys and knows nothing about the projector; the relay is the only place where hearing, thinking and speaking meet.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== PART A ===================== -->
+  <div class="part" id="hardware">
+    <span class="letter" aria-hidden="true">A</span>
+    <div>
+      <p class="eyebrow">Part A</p>
+      <h2>Hardware</h2>
+      <p>Three toys, one home base, one network kit. Parts come from Robu.in, Robocraze, Amazon.in and Lamington Road.</p>
+    </div>
+  </div>
+
+  <section class="sec" id="h1">
+    <div class="sec-head"><span class="n">H1</span><h3>The toy: parts list</h3></div>
+    <p class="intro">One kit per toy. Prices are approximate November 2026 listings.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Part</th><th>Model</th><th>Job</th><th class="num">Qty</th><th class="num">≈ ₹ each</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Main board</td><td><a href="https://robu.in/product/esp32-s3-devkit-esp32-s3-wroom-1-n16r8/">ESP32-S3 DevKitC-1, WROOM-1 N16R8</a> (16 MB flash, 8 MB PSRAM)</td><td>Wi-Fi, audio in and out, button, LEDs</td><td class="num">1</td><td class="num">839</td></tr>
+          <tr><td class="k">Microphone</td><td><a href="https://robu.in/product/inmp441-mems-high-precision-omnidirectional-microphone-module-i2s/">INMP441 I2S MEMS module</a></td><td>Hears the child at 16 kHz</td><td class="num">1</td><td class="num">115–140</td></tr>
+          <tr><td class="k">Amplifier</td><td><a href="https://robu.in/product/smartelex-i2s-audio-breakout-max98357a/">MAX98357A I2S class-D breakout</a></td><td>Drives the speaker</td><td class="num">1</td><td class="num">194</td></tr>
+          <tr><td class="k">Speaker</td><td>40 mm, 4 Ω, 3 W; an enclosed "box" speaker if you can find one</td><td>Grandma's voice; enclosed stays clear inside stuffing</td><td class="num">1</td><td class="num">80–200</td></tr>
+          <tr><td class="k">Paw button</td><td>12 mm tactile switch with a large cap, or 16 mm momentary button</td><td>Push-to-talk</td><td class="num">1</td><td class="num">20–60</td></tr>
+          <tr><td class="k">Eyes</td><td>WS2812B addressable LEDs, 5 or 8 mm</td><td>Show listening, thinking, speaking</td><td class="num">2</td><td class="num">15–30</td></tr>
+          <tr><td class="k">Power</td><td>Slim 5,000–10,000 mAh USB power bank that does not switch off at low current</td><td>A full day of use</td><td class="num">1</td><td class="num">800–1,200</td></tr>
+          <tr><td class="k">Capacitor</td><td>470–1,000 µF, 10 V electrolytic</td><td>Across the amp's power pins; stops resets on loud peaks</td><td class="num">1</td><td class="num">10</td></tr>
+          <tr><td class="k">Build bits</td><td>Perfboard, female headers, silicone wire, JST-PH plugs, heat-shrink, short right-angle USB-C cable</td><td>Sturdy wiring with a swappable board</td><td class="num">1 set</td><td class="num">≈ 300</td></tr>
+          <tr><td class="k">Housing</td><td>ABS box about 100 × 60 × 25 mm, plus a cotton or felt pouch with a zip</td><td>Keeps electronics out of the stuffing</td><td class="num">1</td><td class="num">100–200</td></tr>
+          <tr><td class="k">Plush</td><td>30–40 cm soft toy with a zip or an easy-to-open back seam</td><td>The body</td><td class="num">1</td><td class="num">500–1,200</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Buy 4 kits: development, show, spare, breakage. Speaker, button, LED, power bank and plush prices are estimates <span class="tag verify">Verify</span></p>
+  </section>
+
+  <section class="sec" id="h2">
+    <div class="sec-head"><span class="n">H2</span><h3>Where each part sits</h3></div>
+    <figure>
+      <svg viewBox="0 0 760 400" role="img" aria-label="Placement inside the plush: LED eyes in the head, microphone near the mouth, speaker in the tummy, button in the right paw, and a zipped pouch at the back holding the board and power bank, with wires running from the pouch to each part.">
+        <!-- body shapes -->
+        <circle class="d-soft" cx="322" cy="58" r="26"/>
+        <circle class="d-soft" cx="438" cy="58" r="26"/>
+        <circle class="d-soft" cx="380" cy="115" r="78"/>
+        <ellipse class="d-soft" cx="272" cy="235" rx="34" ry="20"/>
+        <ellipse class="d-soft" cx="488" cy="235" rx="34" ry="20"/>
+        <ellipse class="d-soft" cx="340" cy="358" rx="34" ry="16"/>
+        <ellipse class="d-soft" cx="420" cy="358" rx="34" ry="16"/>
+        <rect class="d-soft" x="295" y="185" width="170" height="170" rx="80"/>
+        <!-- parts -->
+        <circle class="d-led" cx="352" cy="105" r="7"/>
+        <circle class="d-led" cx="408" cy="105" r="7"/>
+        <rect class="d-sig" x="372" y="140" width="16" height="10" rx="2"/>
+        <circle class="d-box" cx="380" cy="255" r="30"/>
+        <circle class="d-ln" cx="380" cy="255" r="12"/>
+        <circle class="d-acc" cx="510" cy="235" r="11"/>
+        <rect class="d-dash" x="335" y="298" width="90" height="42" rx="8"/>
+        <!-- wires -->
+        <polyline class="d-wire" points="342,298 342,150 372,145"/>
+        <polyline class="d-wire" points="342,150 346,113"/>
+        <line class="d-wire" x1="380" y1="298" x2="380" y2="286"/>
+        <polyline class="d-wire" points="425,312 470,312 500,244"/>
+        <!-- left labels -->
+        <line class="d-lead" x1="240" y1="104" x2="343" y2="105"/>
+        <text class="d-t d-b" x="232" y="100" text-anchor="end">LED eyes</text>
+        <text class="d-t d-s" x="232" y="116" text-anchor="end">WS2812B, show the state</text>
+        <line class="d-lead" x1="240" y1="150" x2="371" y2="145"/>
+        <text class="d-t d-b" x="232" y="146" text-anchor="end">Microphone</text>
+        <text class="d-t d-s" x="232" y="162" text-anchor="end">INMP441 behind a 5–8 mm hole</text>
+        <line class="d-lead" x1="240" y1="255" x2="349" y2="255"/>
+        <text class="d-t d-b" x="232" y="251" text-anchor="end">Speaker</text>
+        <text class="d-t d-s" x="232" y="267" text-anchor="end">only thin fabric in front</text>
+        <line class="d-lead" x1="240" y1="320" x2="334" y2="320"/>
+        <text class="d-t d-b" x="232" y="316" text-anchor="end">Back pouch</text>
+        <text class="d-t d-s" x="232" y="332" text-anchor="end">board + power bank, zipped</text>
+        <!-- right labels -->
+        <line class="d-lead" x1="522" y1="235" x2="536" y2="235"/>
+        <text class="d-t d-b" x="540" y="231">Paw button</text>
+        <text class="d-t d-s" x="540" y="247">tactile switch in a rigid disc</text>
+        <line class="d-lead" x1="426" y1="330" x2="536" y2="330"/>
+        <text class="d-t d-b" x="540" y="326">Zip on the back seam</text>
+        <text class="d-t d-s" x="540" y="342">power bank reachable, never on the face</text>
+      </svg>
+      <figcaption>Front view, simplified. The pouch is drawn on the front for clarity but sits against the back seam. Dashed teal lines are the wire runs from the pouch.</figcaption>
+    </figure>
+    <ul>
+      <li><b>Microphone</b> in the face, sound hole facing out behind a small opening, at least 10 cm from the speaker, with foam behind it so stuffing cannot rub the port.</li>
+      <li><b>Speaker</b> in the tummy, cone 5–10 mm behind the outer fabric. Only thin fabric or felt in front. If the fleece is thick, cut a 30–40 mm hole behind a felt patch.</li>
+      <li><b>Board and power bank</b> in the zipped pouch, the power bank's USB port facing the zip.</li>
+      <li><b>Paw button</b> inside a rigid disc (a bottle cap or a printed puck) so a squeeze anywhere on the paw presses it. Run the cable up the arm with slack.</li>
+      <li><b>LED eyes</b> behind the existing eye buttons, frosted cabochons, or a felt heart on the chest.</li>
+    </ul>
+  </section>
+
+  <section class="sec" id="h3">
+    <div class="sec-head"><span class="n">H3</span><h3>Wiring</h3></div>
+    <figure>
+      <svg viewBox="0 0 920 350" role="img" aria-label="Wiring: the INMP441 microphone connects to the ESP32-S3 on I2S0 using GPIO 5, 4 and 6. The paw button connects to GPIO 2. The MAX98357A amplifier connects on I2S1 using GPIO 15, 16 and 7 and drives the speaker. The LED eyes take data from GPIO 21. A USB power bank feeds the board over USB-C.">
+        <!-- board -->
+        <rect class="d-sig" x="360" y="40" width="180" height="230" rx="10"/>
+        <text class="d-t d-b" x="450" y="74" text-anchor="middle">ESP32-S3</text>
+        <text class="d-t d-s" x="450" y="94" text-anchor="middle">DevKitC-1 · N16R8</text>
+        <text class="d-t d-s" x="450" y="112" text-anchor="middle">16 MB flash · 8 MB PSRAM</text>
+        <text class="d-t d-s" x="450" y="130" text-anchor="middle">Wi-Fi 2.4 GHz only</text>
+        <text class="d-t d-s" x="450" y="214" text-anchor="middle">keep free: GPIO 0, 3, 45, 46,</text>
+        <text class="d-t d-s" x="450" y="230" text-anchor="middle">19, 20 (USB), 35–37 (PSRAM)</text>
+        <!-- mic -->
+        <rect class="d-box" x="20" y="55" width="200" height="86" rx="8"/>
+        <text class="d-t d-b" x="120" y="84" text-anchor="middle">INMP441 microphone</text>
+        <text class="d-t d-s" x="120" y="104" text-anchor="middle">VDD to 3V3 only, never 5 V</text>
+        <text class="d-t d-s" x="120" y="122" text-anchor="middle">L/R to GND (left channel)</text>
+        <line class="d-ln" x1="220" y1="98" x2="360" y2="98"/>
+        <text class="d-t d-m" x="290" y="90" text-anchor="middle">SCK 5 · WS 4 · SD 6</text>
+        <text class="d-t d-s" x="290" y="114" text-anchor="middle">I2S0, mic in</text>
+        <!-- button -->
+        <rect class="d-acc" x="20" y="190" width="200" height="64" rx="8"/>
+        <text class="d-t d-b" x="120" y="217" text-anchor="middle">Paw button</text>
+        <text class="d-t d-s" x="120" y="236" text-anchor="middle">other leg to GND</text>
+        <line class="d-ln" x1="220" y1="222" x2="360" y2="222"/>
+        <text class="d-t d-m" x="290" y="214" text-anchor="middle">GPIO 2</text>
+        <text class="d-t d-s" x="290" y="238" text-anchor="middle">pull-up, press = LOW</text>
+        <!-- amp -->
+        <rect class="d-box" x="710" y="30" width="200" height="86" rx="8"/>
+        <text class="d-t d-b" x="810" y="59" text-anchor="middle">MAX98357A amp</text>
+        <text class="d-t d-s" x="810" y="79" text-anchor="middle">VIN to 5 V rail + capacitor</text>
+        <text class="d-t d-s" x="810" y="97" text-anchor="middle">GAIN to GND = 12 dB</text>
+        <line class="d-ln" x1="540" y1="73" x2="710" y2="73"/>
+        <text class="d-t d-m" x="625" y="65" text-anchor="middle">BCLK 15 · LRC 16 · DIN 7</text>
+        <text class="d-t d-s" x="625" y="89" text-anchor="middle">I2S1, speaker out</text>
+        <!-- speaker -->
+        <rect class="d-box" x="710" y="140" width="200" height="44" rx="8"/>
+        <text class="d-t d-b" x="810" y="167" text-anchor="middle">Speaker 4 Ω, 3 W</text>
+        <line class="d-ln" x1="810" y1="116" x2="810" y2="140"/>
+        <text class="d-t d-s" x="818" y="132">OUT+ and OUT−, never GND</text>
+        <!-- leds -->
+        <rect class="d-acc" x="710" y="206" width="200" height="64" rx="8"/>
+        <text class="d-t d-b" x="810" y="233" text-anchor="middle">2 × WS2812B eyes</text>
+        <text class="d-t d-s" x="810" y="252" text-anchor="middle">5 V power, chained</text>
+        <line class="d-ln" x1="540" y1="238" x2="710" y2="238"/>
+        <text class="d-t d-m" x="625" y="230" text-anchor="middle">GPIO 21 via 330 Ω</text>
+        <text class="d-t d-s" x="625" y="254" text-anchor="middle">LED data</text>
+        <!-- power -->
+        <rect class="d-box" x="360" y="296" width="180" height="44" rx="8"/>
+        <text class="d-t d-b" x="450" y="323" text-anchor="middle">USB power bank, 5 V</text>
+        <line class="d-ln" x1="450" y1="270" x2="450" y2="296"/>
+        <text class="d-t d-s" x="458" y="288">USB-C</text>
+      </svg>
+      <figcaption>Two separate I2S buses: one for the microphone, one for the amplifier. Pin numbers are our proposal and must be copied into the firmware's pin settings before flashing.</figcaption>
+    </figure>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Module pin</th><th>ESP32-S3</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>INMP441 VDD / GND / L/R</td><td><code>3V3</code> / <code>GND</code> / <code>GND</code></td><td>3.3 V only. L/R to GND selects the left channel</td></tr>
+          <tr><td>INMP441 SCK / WS / SD</td><td><code>GPIO 5</code> / <code>GPIO 4</code> / <code>GPIO 6</code></td><td>I2S0: bit clock, word select, data in</td></tr>
+          <tr><td>MAX98357A VIN / GND</td><td><code>5V</code> / <code>GND</code></td><td>470–1,000 µF across VIN and GND; share the ground with the mic</td></tr>
+          <tr><td>MAX98357A BCLK / LRC / DIN</td><td><code>GPIO 15</code> / <code>GPIO 16</code> / <code>GPIO 7</code></td><td>I2S1: bit clock, word select, data out</td></tr>
+          <tr><td>MAX98357A GAIN</td><td>to <code>GND</code></td><td>12 dB. Floating gives 9 dB; 100 kΩ to GND gives 15 dB</td></tr>
+          <tr><td>MAX98357A SD</td><td>unconnected, or a spare GPIO</td><td>Optional: drive it to mute the amp between turns and cut hiss</td></tr>
+          <tr><td>Paw button</td><td><code>GPIO 2</code> and <code>GND</code></td><td>Internal pull-up, debounce 20–30 ms in firmware</td></tr>
+          <tr><td>WS2812B data in</td><td><code>GPIO 21</code> through 330 Ω</td><td>Eye 1 to eye 2 in a chain, powered from 5 V. On-board RGB LED is GPIO 48 (38 on some boards)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Pin map is proposed. Check it against ElatoAI's default pin settings before the first flash <span class="tag verify">Verify</span></p>
+  </section>
+
+  <section class="sec" id="h4">
+    <div class="sec-head"><span class="n">H4</span><h3>Assembly, in order</h3></div>
+    <ol class="steps">
+      <li><b>Bench first.</b> Wire everything on a breadboard, flash the test firmware, and check mic, speaker and button. Solder only after that works.</li>
+      <li><b>Perfboard.</b> Solder onto perfboard with female headers so the ESP32 can be pulled out and swapped.</li>
+      <li><b>Tray.</b> Fix the perfboard inside the ABS box and cut a slot for the USB-C lead. Glue the speaker to its own small baffle facing outward, so it pushes air through the fabric and not into stuffing.</li>
+      <li><b>Strain relief.</b> Anchor every wire where it leaves the box with a cable tie or hot glue. Squeezed paws are the most common cause of broken wires.</li>
+      <li><b>Open the toy.</b> Unpick 10–12 cm of the back seam, or use the zip. Remove stuffing from the torso to make a cavity.</li>
+      <li><b>Pouch.</b> Sew in a cotton or felt pouch with a zip or Velcro flap. The box and power bank go inside.</li>
+      <li><b>Place the parts</b> as in H2: speaker in the tummy, mic in the face, button puck in the paw, LEDs at the eyes.</li>
+      <li><b>Re-stuff</b> around the speaker and mic, never in front of them.</li>
+      <li><b>Shake test.</b> Close the toy and shake it while it talks. Add foam or glue wherever something buzzes or rattles.</li>
+      <li><b>Final test.</b> Zipped, on battery, in a noisy room, for 30 minutes. Then feel the toy for warmth.</li>
+    </ol>
+  </section>
+
+  <section class="sec" id="h5">
+    <div class="sec-head"><span class="n">H5</span><h3>Sound, power and safety</h3></div>
+    <div class="cols">
+      <div class="panel">
+        <h4>Sound</h4>
+        <ul>
+          <li><b>Half-duplex push-to-talk.</b> The mic is off while grandma speaks, so the toy never hears itself and needs no echo cancellation.</li>
+          <li>Capture 16 kHz mono.</li>
+          <li><b>Mic level.</b> The INMP441 sends 24-bit samples in a 32-bit slot. Shift right by 11–14 bits, not 16, so a soft child's voice stays loud enough. Test with a real 5–8-year-old at 30–50 cm.</li>
+          <li><b>Output.</b> Amp gain 12 dB, software volume around 70–80 %, so speech stays clean through fabric in a loud room.</li>
+          <li>Rattles come from loose wires touching the speaker cone and from the box resonating. Foam-tape everything.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>Power and safety</h4>
+        <ul>
+          <li><b>Power bank, not a bare LiPo.</b> It has its own protected cell, charger and 5 V regulator.</li>
+          <li>Leave it idle for 30 minutes to check it does not switch itself off at low current.</li>
+          <li><b>Budget.</b> Board and mic draw about 120–200 mA while streaming, with amp bursts of a few hundred mA. A 5,000–10,000 mAh bank covers a full day. These figures are calculated from the Espressif datasheet; measure them.</li>
+          <li>Leave an air gap in the box and never wrap the board in foam. It runs warm, not hot.</li>
+          <li>No loose small parts: sew LED covers in place. Zip on the back, never the face. Charge outside the toy.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="h6">
+    <div class="sec-head"><span class="n">H6</span><h3>The projector home base</h3></div>
+    <p>The home base is a small decorated house with a projector inside. The projector shows one web page full-screen all the time. When grandma mentions an animal, the page plays that animal's clip, with sound, on the wall. It is mains-powered and independent of the toy.</p>
+    <div class="spec">
+      <div class="panel">
+        <h4>Projector</h4>
+        <p><a href="https://www.amazon.in/Portronics-Projector-Resolution-Rotatable-Streaming/dp/B0CQG7XMXC">Portronics Beem 440</a> (POR 2106): Android 11, 720p native, 3 W speaker, rotatable stand, 850 g, ≈ ₹6,799 on Amazon.in.</p>
+        <p>It is rated at "1800 lumens", which is not an ANSI figure. Treat it as a dim-room projector: a 60–80 cm image from 1–1.5 m away. <span class="tag verify">Verify</span></p>
+      </div>
+      <div class="panel">
+        <h4>Kiosk app</h4>
+        <p><a href="https://www.fully-kiosk.com/docs/en/features/all">Fully Kiosk Browser</a> with the Plus licence (€8.90 or US$10.99 plus tax, one-time, per device). Sideload the APK if the Play Store is missing.</p>
+        <p>It locks the projector to our page and keeps it awake.</p>
+      </div>
+    </div>
+    <h4>Kiosk settings checklist</h4>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Start URL</td><td>Our home base page for this toy, for example <code>/home-base/toy-01</code></td></tr>
+          <tr><td class="k">Autoplay videos</td><td>On</td></tr>
+          <tr><td class="k">Keep screen on</td><td>On; screensaver off</td></tr>
+          <tr><td class="k">Reload</td><td>On network reconnect</td></tr>
+          <tr><td class="k">Android auto-update</td><td>Off, so no pop-ups appear over the page</td></tr>
+          <tr><td class="k">First boot</td><td>One tap on the page to unlock sound. If unmuted autoplay is still blocked, the page plays the clip muted and the toy makes the animal sound <span class="tag verify">Verify</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cols">
+      <div>
+        <h4>The house</h4>
+        <ul>
+          <li>Cardboard or MDF, painted, with a window for the lens and a vent for the fan.</li>
+          <li>The projector sits on its rotatable stand inside; the toy sits on the porch or beside it.</li>
+          <li>Extension board and HDMI cable stored in the house for the fallback.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Fallbacks</h4>
+        <ul>
+          <li><b>Laptop</b> running Chrome full-screen with <code>--kiosk --autoplay-policy=no-user-gesture-required</code>, on the same URL, output over HDMI to the projector or a TV.</li>
+          <li><b>Spare projector:</b> Magcubic HY300 Pro, ≈ ₹5,098, only if the delivery date works. Android version varies by batch.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="h7">
+    <div class="sec-head"><span class="n">H7</span><h3>Network kit</h3></div>
+    <ul>
+      <li><b>Our own 4G/5G hotspot</b>, set to 2.4 GHz, WPA2, with a simple network name. The ESP32-S3 has no 5 GHz radio, and public Wi-Fi often has login pages the toy cannot pass.</li>
+      <li><b>A second phone on another operator</b> as backup. Both network names and passwords are stored in the toy.</li>
+      <li>The toy and the projector both join the hotspot. Wi-Fi power-save is turned off in the toy's firmware.</li>
+    </ul>
+  </section>
+
+  <section class="sec" id="h8">
+    <div class="sec-head"><span class="n">H8</span><h3>What to buy</h3></div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">≈ ₹</th></tr></thead>
+        <tbody>
+          <tr><td>Toy kits from H1</td><td class="num">4</td><td class="num">15,500</td></tr>
+          <tr><td><a href="https://aws.robu.in/product/esp32-s3-box-3-the-next-generation-aiot-kit/">ESP32-S3-BOX-3</a>, the fallback toy</td><td class="num">1</td><td class="num">5,699</td></tr>
+          <tr><td>Portronics Beem 440 projector</td><td class="num">1</td><td class="num">6,799</td></tr>
+          <tr><td>Fully Kiosk Plus licence</td><td class="num">1–2</td><td class="num">900–1,000 each</td></tr>
+          <tr><td>Hotspot device, or a spare phone with a data pack</td><td class="num">1</td><td class="num">1,500–3,000</td></tr>
+          <tr><td>House materials, HDMI cable, extension board</td><td class="num">1 set</td><td class="num">≈ 1,000</td></tr>
+          <tr class="total"><td>Total</td><td class="num"></td><td class="num">31,000–37,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h4>Fallback toy: ESP32-S3-BOX-3</h4>
+        <p>Two microphones, a speaker and echo cancellation in one box, with no wiring. It is bigger, so it needs a bigger plush. It runs different firmware (pipecat-esp32 or xiaozhi), so the relay would need a second connection type.</p>
+      </div>
+      <div class="panel">
+        <h4>Last resort: a phone in the plush</h4>
+        <p>An old Android phone inside the toy, running the ElevenLabs voice agent in the browser, with a Bluetooth selfie remote as the paw button.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PART B ===================== -->
+  <div class="part b" id="software">
+    <span class="letter" aria-hidden="true">B</span>
+    <div>
+      <p class="eyebrow">Part B</p>
+      <h2>Software</h2>
+      <p>What runs on the toy, what runs in the cloud, the messages between them, and every setting we depend on.</p>
+    </div>
+  </div>
+
+  <div class="part-b-scope">
+  <section class="sec" id="s1">
+    <div class="sec-head"><span class="n">S1</span><h3>Software map</h3></div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Component</th><th>Runs on</th><th>Built with</th><th>Job</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Toy firmware</td><td>ESP32-S3 in the toy</td><td>Arduino on PlatformIO; fork of ElatoAI (MIT licence)</td><td>Record, stream, play, button, LEDs</td></tr>
+          <tr><td class="k">Relay</td><td>Fly.io, always on</td><td>Node + TypeScript</td><td>One session per toy. Joins hearing, thinking and voice. Runs the game referee and the safety word list. Logs every timing</td></tr>
+          <tr><td class="k">Hearing</td><td>ElevenLabs</td><td>Scribe realtime, manual commit</td><td>Child's speech to text</td></tr>
+          <tr><td class="k">Thinking</td><td>Anthropic API</td><td>Claude Haiku 5.5, <code>claude-haiku-5-5</code></td><td>Grandma's reply and tool calls</td></tr>
+          <tr><td class="k">Voice</td><td>ElevenLabs</td><td>Eleven v4 Turbo, <code>eleven_v4_turbo</code>, with grandma's clone</td><td>Text to grandma's voice</td></tr>
+          <tr><td class="k">Memory and events</td><td>Supabase</td><td>Postgres + Realtime</td><td>Child memory, session brief, live events to screens</td></tr>
+          <tr><td class="k">Background agents</td><td>Fly.io, a worker inside the relay app</td><td>Node + Claude Sonnet 5.5, <code>claude-sonnet-5-5</code></td><td>Memory Keeper, Planner, safety notes, parent digest</td></tr>
+          <tr><td class="k">Home base page</td><td>Vercel, shown by the projector</td><td>Next.js page inside Fully Kiosk</td><td>Plays animal clips on cue</td></tr>
+          <tr><td class="k">Parent website</td><td>Vercel, phone browser</td><td>Next.js</td><td>Guidance, tonight's summary, knowledge map</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">This page covers the toy, the relay, the three AI services and the home base page. Memory, background agents and the parent website have their own spec.</p>
+  </section>
+
+  <section class="sec" id="s2">
+    <div class="sec-head"><span class="n">S2</span><h3>Toy firmware</h3></div>
+    <div class="spec">
+      <div class="panel">
+        <h4>Starting point</h4>
+        <p><a href="https://github.com/akdeb/ElatoAI">ElatoAI</a> <code>firmware-arduino</code>, PlatformIO environment <code>esp32-s3-devkitc-1</code>. It already does I2S microphone capture, Opus encode and decode, a secure WebSocket, a button, an RGB LED, a Wi-Fi setup page and factory reset.</p>
+      </div>
+      <div class="panel">
+        <h4>First wiring test</h4>
+        <p>Before ElatoAI, flash a ready-made <a href="https://github.com/78/xiaozhi-esp32">xiaozhi-esp32</a> breadboard firmware from its releases page. It confirms the mic and speaker wiring in minutes. Then switch to the ElatoAI fork.</p>
+      </div>
+    </div>
+    <h4>What we change</h4>
+    <ul>
+      <li>Point it at our relay's <code>wss://</code> address with a per-toy token. No AI keys on the toy, ever.</li>
+      <li>Send <code>ptt_start</code> on press and <code>ptt_end</code> on release, with 20–30 ms debounce.</li>
+      <li>Open the connection at power-on and keep it open with pings. A cold connect takes 3–4 seconds, too slow to do on each press.</li>
+      <li>16 kHz mono capture, Opus in 20 ms frames, Wi-Fi power-save off.</li>
+      <li>Playback buffer of 80–150 ms; larger only if audio stutters.</li>
+      <li>Store 5–6 short grandma sounds ("Hmm!", "Achha!") and one "Grandma is having a nap, press my paw again" clip in flash. Play a "Hmm!" the instant the paw is released; play the nap clip on network errors.</li>
+      <li>If the paw is pressed while grandma is talking, stop playback at once on the toy and send <code>ptt_start</code>.</li>
+      <li>Time release-to-first-sound on the toy's own clock and send it to the relay each turn.</li>
+      <li>Store two Wi-Fi networks; reconnect with back-off from 250 ms to 4 s.</li>
+      <li>Audio rate: ElatoAI plays 24 kHz by default. Either keep 24 kHz end to end or change the playback rate to 16 kHz. Resample in one place only.</li>
+    </ul>
+    <h4>Button and eyes</h4>
+    <div class="tw">
+      <table>
+        <thead><tr><th>State</th><th>Trigger</th><th>Mic</th><th>Speaker</th><th>Eyes</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Connecting</td><td>Power on</td><td>Off</td><td>Off</td><td><span class="dot" style="background:#3b82f6"></span>Blue blink</td></tr>
+          <tr><td class="k">Idle</td><td>Connected</td><td>Off</td><td>Off</td><td><span class="dot" style="background:#f4f4f2"></span>Soft white breathing</td></tr>
+          <tr><td class="k">Listening</td><td>Paw held</td><td>Streaming</td><td>Muted</td><td><span class="dot" style="background:#22a55a"></span>Solid green</td></tr>
+          <tr><td class="k">Thinking</td><td>Paw released</td><td>Off</td><td>"Hmm!" clip</td><td><span class="dot" style="background:#f0a020"></span>Amber pulse</td></tr>
+          <tr><td class="k">Speaking</td><td>First audio arrives</td><td>Off</td><td>Playing</td><td><span class="dot" style="background:#8b5cf6"></span>Purple, follows loudness</td></tr>
+          <tr><td class="k">Offline</td><td>No connection for 5 s</td><td>Off</td><td>Nap clip</td><td><span class="dot" style="background:#e5484d"></span>Slow red blink, reconnecting</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec" id="s3">
+    <div class="sec-head"><span class="n">S3</span><h3>Messages between toy and relay</h3></div>
+    <p class="intro">Our own small protocol, version 0. ElatoAI already uses binary Opus frames plus JSON control messages; we keep that shape and use these names.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Direction</th><th>Message</th><th>Contents</th><th>When</th></tr></thead>
+        <tbody>
+          <tr><td>Toy → relay</td><td><code>hello</code></td><td>Toy id, token, firmware version</td><td>On connect</td></tr>
+          <tr><td>Toy → relay</td><td><code>ptt_start</code></td><td>Nothing</td><td>Paw pressed</td></tr>
+          <tr><td>Toy → relay</td><td>audio frames</td><td>Binary Opus, 20 ms, 16 kHz mono</td><td>While the paw is held</td></tr>
+          <tr><td>Toy → relay</td><td><code>ptt_end</code></td><td>Release time on the toy's clock</td><td>Paw released</td></tr>
+          <tr><td>Relay → toy</td><td>audio frames</td><td>Binary Opus</td><td>Grandma speaking</td></tr>
+          <tr><td>Relay → toy</td><td><code>state</code></td><td><code>idle</code>, <code>thinking</code> or <code>speaking</code></td><td>Drives the eyes</td></tr>
+          <tr><td>Relay → toy</td><td><code>play_local</code></td><td>Clip id, for example <code>hmm_3</code></td><td>Cue a stored clip</td></tr>
+          <tr><td>Relay → toy</td><td><code>stop</code></td><td>Nothing</td><td>Relay cancels speech</td></tr>
+          <tr><td>Toy → relay</td><td><code>playback_started</code></td><td>Toy-clock time</td><td>First sample played</td></tr>
+          <tr><td>Toy → relay</td><td><code>latency</code></td><td>Release to first sound, in ms</td><td>Every turn</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec" id="s4">
+    <div class="sec-head"><span class="n">S4</span><h3>One turn, start to finish</h3></div>
+    <ol class="steps">
+      <li>The child presses the paw. The eyes turn green, the toy sends <code>ptt_start</code> and starts streaming.</li>
+      <li>The relay opens a Scribe stream loaded with this round's hint words and forwards the audio.</li>
+      <li>The child lets go. The toy plays a stored "Hmm!" at once and sends <code>ptt_end</code>.</li>
+      <li>The relay commits the Scribe stream and gets the final text.</li>
+      <li>The safety word list and the game referee run, in a few milliseconds.</li>
+      <li>Claude Haiku 5.5 starts grandma's reply from the cached persona and session brief.</li>
+      <li>Each finished sentence goes straight to Eleven v4 Turbo and is flushed, so speech starts before the reply is complete.</li>
+      <li>Audio streams back. The toy buffers 80–150 ms and plays it; the eyes turn purple.</li>
+      <li>If Claude called <code>show_animal</code>, the projector gets its cue as that sentence starts playing.</li>
+      <li>Each step's timing is written to Supabase; the toy reports release-to-first-sound from its own clock.</li>
+    </ol>
+    <figure>
+      <svg viewBox="0 0 980 196" role="img" aria-label="Estimated latency from paw release to first word: uplink 175 ms, transcript 200 ms, Claude first word 450 ms, first sentence 70 ms, voice 115 ms, downlink 175 ms, playback buffer 90 ms. Total about 1.3 seconds. The stored Hmm sound plays at about 0.04 seconds.">
+        <!-- segments, scale 0.6143 px per ms, origin x=60 -->
+        <rect class="seg" x="60" y="70" width="107.5" height="34"/>
+        <rect class="seg" x="167.5" y="70" width="122.9" height="34"/>
+        <rect class="seg-hot" x="290.4" y="70" width="276.4" height="34"/>
+        <rect class="seg" x="566.8" y="70" width="43" height="34"/>
+        <rect class="seg" x="609.8" y="70" width="70.6" height="34"/>
+        <rect class="seg" x="680.4" y="70" width="107.5" height="34"/>
+        <rect class="seg" x="787.9" y="70" width="55.3" height="34"/>
+        <!-- markers -->
+        <line class="mark-sig" x1="81.5" y1="40" x2="81.5" y2="104"/>
+        <text class="d-t d-s" x="86" y="36">"Hmm!" plays ≈ 0.04 s</text>
+        <line class="mark-hot" x1="843.2" y1="40" x2="843.2" y2="104"/>
+        <text class="d-t d-b d-ta" x="838" y="36" text-anchor="end">first word ≈ 1.3 s</text>
+        <!-- labels row A -->
+        <text class="d-t d-s" x="113.8" y="122" text-anchor="middle">Uplink 175</text>
+        <text class="d-t d-b d-ta" x="428.6" y="122" text-anchor="middle">Claude first word 450</text>
+        <text class="d-t d-s" x="645.1" y="122" text-anchor="middle">Voice 115</text>
+        <text class="d-t d-s" x="815.6" y="122" text-anchor="middle">Buffer 90</text>
+        <!-- labels row B -->
+        <text class="d-t d-s" x="229" y="138" text-anchor="middle">Transcript 200</text>
+        <text class="d-t d-s" x="588.3" y="138" text-anchor="middle">Sentence 70</text>
+        <text class="d-t d-s" x="734.2" y="138" text-anchor="middle">Downlink 175</text>
+        <!-- axis -->
+        <line class="d-ln" x1="60" y1="156" x2="920" y2="156"/>
+        <line class="d-ln" x1="60" y1="156" x2="60" y2="162"/>
+        <line class="d-ln" x1="182.9" y1="156" x2="182.9" y2="162"/>
+        <line class="d-ln" x1="305.7" y1="156" x2="305.7" y2="162"/>
+        <line class="d-ln" x1="428.6" y1="156" x2="428.6" y2="162"/>
+        <line class="d-ln" x1="551.4" y1="156" x2="551.4" y2="162"/>
+        <line class="d-ln" x1="674.3" y1="156" x2="674.3" y2="162"/>
+        <line class="d-ln" x1="797.1" y1="156" x2="797.1" y2="162"/>
+        <line class="d-ln" x1="920" y1="156" x2="920" y2="162"/>
+        <text class="d-t d-s" x="60" y="178" text-anchor="middle">0</text>
+        <text class="d-t d-s" x="182.9" y="178" text-anchor="middle">0.2 s</text>
+        <text class="d-t d-s" x="305.7" y="178" text-anchor="middle">0.4 s</text>
+        <text class="d-t d-s" x="428.6" y="178" text-anchor="middle">0.6 s</text>
+        <text class="d-t d-s" x="551.4" y="178" text-anchor="middle">0.8 s</text>
+        <text class="d-t d-s" x="674.3" y="178" text-anchor="middle">1.0 s</text>
+        <text class="d-t d-s" x="797.1" y="178" text-anchor="middle">1.2 s</text>
+        <text class="d-t d-s" x="920" y="178" text-anchor="middle">1.4 s</text>
+      </svg>
+      <figcaption>Estimated time from paw release to grandma's first word over a phone hotspot, relay in US-East. Bars are drawn to scale in milliseconds, using the middle of each range from the voice-pipeline research. The Claude hop (marigold) is unconfirmed and is the first thing we measure. The child hears the stored "Hmm!" almost instantly, so the wait feels short.</figcaption>
+    </figure>
+  </section>
+
+  <section class="sec" id="s5">
+    <div class="sec-head"><span class="n">S5</span><h3>Inside the relay</h3></div>
+    <div class="spec">
+      <div class="panel">
+        <h4>Hearing</h4>
+        <ul>
+          <li>Scribe realtime over WebSocket, <code>commit_strategy: manual</code>, committed on <code>ptt_end</code>.</li>
+          <li>A fresh stream on each press, loaded with that round's hint words: at most 50, each up to 20 characters.</li>
+          <li>Language set to <code>en</code>, never auto-detect: short child utterances get misdetected.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>Before Claude</h4>
+        <ul>
+          <li>Safety word list in English, Hindi and Hinglish. A hit skips Claude and plays a gentle pre-made reply.</li>
+          <li>Game referee: first letter, category, and close matches such as "jiraf" for giraffe. The verdict goes into Claude's turn, so Claude never has to judge.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>Claude</h4>
+        <ul>
+          <li>Anthropic's own Messages API. Its OpenAI-compatible endpoint drops prompt caching.</li>
+          <li><code>claude-haiku-5-5</code>, thinking off or effort low <span class="tag verify">Verify</span></li>
+          <li>Two cached blocks: grandma's persona, then the session brief. Warm the cache when a session starts.</li>
+          <li>About 150 tokens, 1–2 sentences. Tools: <code>show_animal</code>, <code>alert_parent</code>.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>Voice</h4>
+        <ul>
+          <li><code>wss://api.elevenlabs.io/v1/text-to-dialogue/stream-input?model_id=eleven_v4_turbo&amp;output_format=pcm_16000</code></li>
+          <li>First message registers grandma's voice id, stability 0.5.</li>
+          <li>Flush after every sentence: first audio in about 140 ms instead of about 355 ms.</li>
+          <li><code>keep_alive</code> every 15 s, because the socket closes after 20 s idle. To cut grandma off, close and reopen it (about 90 ms).</li>
+          <li>v4 Turbo is refused on the older text-to-speech WebSocket. Use text-to-dialogue.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>"Roar like a lion"</h4>
+        <ul>
+          <li>Skip speech-to-text for imitation turns.</li>
+          <li>Measure loudness on 20 ms frames. At least 300 ms above the noise floor plus 12 dB counts as a roar.</li>
+          <li>Play a pre-made reaction at once, then tell Claude "the child roared for 1.4 s, loudly".</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>Guards and hosting</h4>
+        <ul>
+          <li>Fixed game lines, praise and the "Hmm!" sounds are pre-made with <code>eleven_v4</code> and cached.</li>
+          <li>No first word after 1.2 s: play "Let me think…". After 4 s: a safe pre-made line and move on.</li>
+          <li>Fly.io has no connection time limit; Vercel functions close WebSockets at their maximum duration.</li>
+          <li>Pick the region by pinging <code>api.elevenlabs.io</code> and <code>api.anthropic.com</code> from Mumbai, Singapore and US-East. Default US-East.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="s6">
+    <div class="sec-head"><span class="n">S6</span><h3>The projector page</h3></div>
+    <ul>
+      <li><b>Page:</b> a Next.js route on Vercel, <code>/home-base/[toyId]</code>, opened full-screen by Fully Kiosk.</li>
+      <li><b>On load:</b> fetch the clip list, preload every MP4, then subscribe to the Supabase Realtime channel <code>room:&lt;toyId&gt;</code>.</li>
+      <li><b>Cue:</b> <code>show_animal {name, delay_ms}</code>. The relay broadcasts it when the sentence that names the animal starts going to the toy. The page waits <code>delay_ms</code>, about 250 ms (toy buffer plus downlink), then plays, so the picture lands with grandma's words.</li>
+      <li><b>Idle:</b> a calm scene. When a clip ends, the page returns to it.</li>
+      <li><b>Speed meter:</b> an optional corner number fed by <code>metrics:&lt;toyId&gt;</code>, showing release-to-first-word for each turn.</li>
+      <li><b>Blocked sound:</b> play the clip muted and let the toy make the animal sound.</li>
+    </ul>
+    <div class="callout sig"><p>The projector never talks to the toy. If the projector is off, the game still works with sound only.</p></div>
+  </section>
+
+  <section class="sec" id="s7">
+    <div class="sec-head"><span class="n">S7</span><h3>Where the toy meets memory</h3></div>
+    <ul>
+      <li><b>Session start:</b> the relay loads the latest session brief from Supabase: who the child is, today's plan, the parents' guidance and the hint words.</li>
+      <li><b>Every turn:</b> the relay writes the turn, the game verdict, safety flags and each step's timing, plus an agent event for the live screens.</li>
+      <li><b>Guidance changes mid-session:</b> the Planner writes a new brief; the relay swaps it in at the next turn and grandma says a one-line confirmation.</li>
+      <li><b>Session end:</b> the relay marks the session ended. That queues the Memory Keeper, then the Planner writes tomorrow's brief.</li>
+    </ul>
+  </section>
+
+  <section class="sec" id="s8">
+    <div class="sec-head"><span class="n">S8</span><h3>Configuration</h3></div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Where</th><th>Setting</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Anthropic</td><td>Live model</td><td><code>claude-haiku-5-5</code></td></tr>
+          <tr><td class="k">Anthropic</td><td>Background model</td><td><code>claude-sonnet-5-5</code></td></tr>
+          <tr><td class="k">Anthropic</td><td>Prompt caching</td><td>Persona block and brief block; warm at session start</td></tr>
+          <tr><td class="k">ElevenLabs</td><td>Grandma's voice</td><td>Instant Voice Clone from 1–2 minutes of clean audio, retrained for v4 <span class="tag verify">Verify</span></td></tr>
+          <tr><td class="k">ElevenLabs</td><td>Live voice model</td><td><code>eleven_v4_turbo</code> on the text-to-dialogue WebSocket</td></tr>
+          <tr><td class="k">ElevenLabs</td><td>Pre-made audio model</td><td><code>eleven_v4</code></td></tr>
+          <tr><td class="k">ElevenLabs</td><td>Speech-to-text</td><td>Scribe realtime, manual commit, language <code>en</code></td></tr>
+          <tr><td class="k">ElevenLabs</td><td>Audio format</td><td><code>pcm_16000</code>, or <code>pcm_24000</code> to match the firmware</td></tr>
+          <tr><td class="k">Fly.io</td><td>App</td><td>Relay plus background worker; each toy pinned to one machine</td></tr>
+          <tr><td class="k">Supabase</td><td>Realtime channels</td><td><code>room:&lt;toyId&gt;</code> for cues, <code>metrics:&lt;toyId&gt;</code> for timings</td></tr>
+          <tr><td class="k">Vercel</td><td>Pages</td><td>Home base page and parent website</td></tr>
+          <tr><td class="k">Toy</td><td>Stored settings</td><td>Relay URL, toy id and token, two Wi-Fi networks</td></tr>
+          <tr><td class="k">Projector</td><td>Fully Kiosk</td><td>Start URL, autoplay, screen on, reload on reconnect</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><p>API keys live only on the relay and in Vercel. Never on the toy, never on the projector.</p></div>
+  </section>
+
+  <section class="sec" id="s9">
+    <div class="sec-head"><span class="n">S9</span><h3>When things fail</h3></div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>What fails</th><th>First fix</th><th>Then</th></tr></thead>
+        <tbody>
+          <tr><td class="k">The hand-built toy</td><td>Spare toy, already flashed and charged</td><td>ESP32-S3-BOX-3, then a phone in the plush</td></tr>
+          <tr><td class="k">Our relay pipeline</td><td>Restart; session state reloads from Supabase</td><td>ElevenAgents voice agent with our Claude as its custom LLM, configured in advance</td></tr>
+          <tr><td class="k">Claude is slow</td><td>Thinking off, cached prompt, short replies</td><td>Pre-made game lines</td></tr>
+          <tr><td class="k">Speech-to-text misses the child</td><td>Hint words, close-match referee, "Did you say…?"</td><td>Deepgram, only if it tested better on children's recordings</td></tr>
+          <tr><td class="k">Hotspot</td><td>Second phone on another operator</td><td>None needed beyond that</td></tr>
+          <tr><td class="k">Projector</td><td>Reload the page</td><td>Laptop and TV on the same URL</td></tr>
+          <tr><td class="k">Battery</td><td>Swap the power bank</td><td>None needed beyond that</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  </div>
+
+  <!-- ===================== PLAN ===================== -->
+  <section class="sec" id="build">
+    <div class="sec-head"><span class="n">C</span><h3>Build order</h3></div>
+    <p class="intro">Two lanes running side by side. A step starts when the one above it is done.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th class="num">#</th><th>Hardware team <span class="tag hw">HW</span></th><th>Software, Claude Code <span class="tag sw">SW</span></th><th>Done when</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td>Order 4 toy kits, BOX-3, Beem 440, hotspot</td><td>Repo, accounts and keys; clone grandma's voice</td><td>Parts on the way; voice clone ready</td></tr>
+          <tr><td class="num">2</td><td>Breadboard one toy; flash the xiaozhi test firmware</td><td>Speed tests: Claude's first word, Scribe on 20 children's clips, v4 Turbo first audio, region pings</td><td>Mic and speaker work; numbers logged; go or no-go on the pipeline</td></tr>
+          <tr><td class="num">3</td><td>Flash the ElatoAI fork</td><td>Relay v0: hearing, Claude, voice, "Hmm!", timings</td><td>Grandma answers in about 1 s on the breadboard</td></tr>
+          <tr><td class="num">4</td><td>Set up Fully Kiosk; build the house</td><td>Game referee, side trips, <code>show_animal</code>, projector page, roar detection</td><td>The lion appears on the wall on cue; a roar is recognised</td></tr>
+          <tr><td class="num">5</td><td>Build 3 toys into plush; tune the sound</td><td>Brief loading, turn logging, hand-off to memory</td><td>Works zipped up, on battery, in a noisy room</td></tr>
+          <tr><td class="num">6</td><td>Charge, label and pack the spares</td><td>Speed meter on the projector; fallback voice agent configured</td><td>Live number on screen; every fallback tried once</td></tr>
+          <tr><td class="num">7</td><td colspan="2">30-minute endurance test with both lanes together, then freeze version 1.0</td><td>Five clean runs in a row</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec" id="not-using">
+    <div class="sec-head"><span class="n">D</span><h3>Not using, and why</h3></div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Not using</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Raspberry Pi inside the toy</td><td>About 30 s to boot, more power, SD cards corrupt when power dips, bulky USB audio</td></tr>
+          <tr><td class="k">Projector inside the toy</td><td>Heat inside stuffing, battery drain, and a hugged toy cannot stay aimed at a wall</td></tr>
+          <tr><td class="k">ReSpeaker Lite, M5Stack Atom Echo</td><td>Not available in India in time; the Atom Echo is too quiet</td></tr>
+          <tr><td class="k">Wake word, full-duplex echo cancellation</td><td>Push-to-talk removes both problems</td></tr>
+          <tr><td class="k">Pipecat or LiveKit on the toy</td><td>Would mean switching to different firmware</td></tr>
+          <tr><td class="k">ElevenAgents as the main path</td><td>No way to end the child's turn on paw release, and an extra hop to Claude. Kept as the fallback</td></tr>
+          <tr><td class="k">Speech-to-speech models</td><td>Claude cannot be the brain, and grandma's voice cannot be used</td></tr>
+          <tr><td class="k">Vercel for the relay</td><td>Functions close WebSockets at their maximum duration</td></tr>
+          <tr><td class="k">Anthropic's OpenAI-compatible endpoint</td><td>No prompt caching, so slower replies</td></tr>
+          <tr><td class="k">Raspberry Pi with a pocket projector</td><td>Dim image and extra build risk</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec" id="verify">
+    <div class="sec-head"><span class="n">E</span><h3>Check before relying on it</h3></div>
+    <ul>
+      <li>Our pin map against ElatoAI's default pin settings.</li>
+      <li>Claude Haiku 5.5 with thinking off: the real time to its first word from our relay.</li>
+      <li>v4 Turbo on the text-to-dialogue WebSocket. The official reference still says v3 only; a third-party test says v4 Turbo works.</li>
+      <li>Whether Scribe v3 Live supports manual commit; if not, use Scribe v2 Realtime.</li>
+      <li>Grandma's clone shows as ready for v4.</li>
+      <li>Beem 440: real brightness, Play Store access, and unmuted autoplay inside Fully Kiosk.</li>
+      <li>The chosen power bank does not switch itself off at low current.</li>
+      <li>Every price marked as an estimate, and delivery dates before ordering.</li>
+    </ul>
+  </section>
+
+  <section class="sec sources" id="sources">
+    <div class="sec-head"><span class="n">F</span><h3>Sources</h3></div>
+    <ul>
+      <li><a href="https://github.com/akdeb/ElatoAI">ElatoAI</a>: firmware and relay we start from</li>
+      <li><a href="https://cookbook.openai.com/examples/voice_solutions/running_realtime_api_speech_on_esp32_arduino_edge_runtime_elatoai">ElatoAI on ESP32, step by step</a></li>
+      <li><a href="https://www.youtube.com/watch?v=7LKTIuEW-hg">ElatoAI with a cloned ElevenLabs voice (video)</a></li>
+      <li><a href="https://github.com/78/xiaozhi-esp32">xiaozhi-esp32</a>: ready-made test firmware</li>
+      <li><a href="https://medium.com/@phamtuanbinh1504/how-to-make-an-ai-teddy-bear-that-can-talk-and-feel-a9ac67edb555">Retrofitting an ESP32 into a teddy bear</a></li>
+      <li><a href="https://elevenlabs.io/docs/overview/models">ElevenLabs models</a></li>
+      <li><a href="https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime">ElevenLabs realtime speech-to-text</a></li>
+      <li><a href="https://elevenlabs.io/docs/api-reference/text-to-dialogue/ttd-websocket">ElevenLabs text-to-dialogue WebSocket</a></li>
+      <li><a href="https://micdrop.dev/blog/eleven-v4-turbo-voice-agent">Eleven v4 Turbo in a real-time agent (Micdrop)</a></li>
+      <li><a href="https://platform.claude.com/docs/en/models/haiku-5-5/overview">Claude Haiku 5.5 overview</a></li>
+      <li><a href="https://www.fully-kiosk.com/docs/en/features/all">Fully Kiosk Browser features</a></li>
+      <li><a href="https://developer.chrome.com/blog/autoplay">Chrome autoplay policy</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    Built from research reports R1 (hardware) and R2 (voice pipeline), November 2026. Prices and stock change quickly; check both before ordering.
+  </footer>
+</main>
+</div>
+</body>
+</html>

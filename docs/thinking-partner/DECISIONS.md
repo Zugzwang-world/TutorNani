@@ -1,0 +1,54 @@
+# Decisions
+
+One line each: date · decision · why.
+
+- 2026-11-16 · Project name Tutor Grandma; repo Zugzwang-world/TutorNani, public.
+- 2026-11-16 · Ages 5 to 8. One game for the demo, designed with the founder. Parental guidance, not control.
+- 2026-11-16 · ElevenLabs is the voice core: Scribe, Eleven v4 Turbo, Eleven v4, grandma's clone.
+- 2026-11-16 · Sarvam deferred to the buildathon day; ElevenLabs is the only voice layer until then, Indian languages included · founder's change of plan, one voice vendor until then.
+- 2026-11-16 · Live brain: Claude Haiku 5.5, thinking off, low effort. Fillers cover every wait. (From the buildathon on; Kimi until then, below.)
+- 2026-11-16 · One agent per child, with files persona, brain, planner, heartbeat, parent. Memory is demo-level: "Yesterday you..." and "What did we do today?".
+- 2026-11-16 · Supabase light: Realtime plus one table. No Fly.io, no region tests. Relay host decided in the product session.
+- 2026-11-16 · Prototype: no security, compliance or production checks. No GitHub Actions or branch protection. Reviews only on the demo-critical path.
+- 2026-11-16 · Roster: Coordinator Opus 5.5 xhigh; advisor Opus 5.5; builder, expert and reviewer Opus 5.5 xhigh; scout Haiku 5.5 xhigh.
+- 2026-11-16 · Supabase lives in its own org (new, so Free plan), Tutor Grandma: project Tutor Nani, Mumbai · keeps it apart from hrizzup-staging in the founder's other org, which is off limits.
+- 2026-11-16 · Use Supabase's new publishable and secret keys (NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY, SUPABASE_SECRET_KEY), not the legacy anon and service_role keys · current Supabase default.
+- 2026-11-16 · Live brain runs on Kimi until buildathon day, then Claude Haiku 5.5 · founder's call.
+- 2026-11-16 · Kimi model: kimi-k2.6, thinking off · fastest of four measured from the founder's Mac, median first word over 6 warm runs: k2.6 690 ms, k3.1-pro 1,148 ms, k3.1-pro-highspeed 1,428 ms, k3 2,127 ms. Highspeed with thinking on gave no words within 60 tokens. k2.6 is deprecated (expected late Dec 2026); the fallback is kimi-k3.1-pro-highspeed.
+- 2026-11-16 · Provider and model live in content/demo.config.json under `brain`. Moving to Claude means changing `provider` to "anthropic" · one line.
+- 2026-11-16 · KIMI_API_KEY is stored like the other keys (.env.local and Vercel). /preflight checks Kimi and ElevenLabs and skips Anthropic while the provider is kimi · founder's call.
+- 2026-11-16 · Buildathon is 22 November, before kimi-k2.6 retires, so keep kimi-k2.6 · founder's answer.
+- 2026-11-16 · /preflight makes one tiny Supabase read. It runs at the start of every step, which keeps the Free project from pausing · founder's call.
+- 2026-11-16 · The ElevenLabs key is unrestricted: jingles, songs and sound effects are allowed · founder's call.
+- 2026-11-16 · Software first: the whole product runs end to end without the toy. Hardware joins later as an outside layer through one contract, the toy-to-relay message format, which only the Coordinator changes · the demo can't depend on hardware timing.
+- 2026-11-16 · After planning, the thinking partner works in two chats, software and hardware · keeps each context lean.
+- 2026-11-16 · The Grandma Plush Blueprint page is out of date and will be replaced by the plan · founder's call.
+- 2026-11-17 · Overnight beta: Nani's voice is "Dulari Didi – Gentle Old Aunty" from the shared library (wSMP2ehaozb5I36yi8vg). Test voices: Muskaan, Amit Bhawani, Bholu (child) · the account had no grandma voice; plan C9.
+- 2026-11-17 · Kimi k2.6 temperature is not sent (the API fixes it at 0.6 with thinking off; other values error) · overrides the plan's "about 0.7".
+- 2026-11-17 · Speech-to-text model is scribe_v3, live voice eleven_v4_turbo, pre-made lines eleven_v4, sound effects eleven_text_to_sound_v3, music music_v2_5 · newest per LOOKUPS.md.
+- 2026-11-17 · Added a demo_state table (clock offset, wall timings switch) and a meta column on turns · a freshly loaded /toy needs the presenter clock, and job fires need a key.
+- 2026-11-17 · Shared layer adds brain.ts, eleven.ts, broadcast.ts, clock.ts, demo-state.ts, seed.ts beyond the plan's list · stops five builders writing five Kimi and ElevenLabs clients.
+- 2026-11-17 · Seed lives in content/seed.json; the chat broadcast channel is chat:aarav (event "working") · one source for the seed and /api/reset.
+- 2026-11-17 · Vercel functions run in bom1 (Mumbai) via apps/web/vercel.json · Supabase is in ap-south-1 and the demo is in India; iad1 added about 200 ms per database hop.
+- 2026-11-17 · Nani writes Hindi in Roman letters (Hinglish), not Devanagari · C8 test, 10 lines in Nani's voice on eleven_v4_turbo with language_code hi: transcribed back almost identically (word overlap 0.81 Roman vs 0.80 Devanagari). Roman reads naturally in the parent chat and mixes cleanly with English and markers; persona.md examples stay as they are.
+- 2026-11-17 · Non-★ tasks run at high effort even under 8% · usage rose 4%→5% in the first 37 min; at that pace the night would pass 10%.
+- 2026-11-17 · Wave 2 is leaner: G4 and P1 run as one builder task (they share the clock), and non-★ M tasks (G4+P1, G5) use Sonnet 5.5 at high effort · usage was 6% at 44 min; Opus builders cost about 1% each.
+- 2026-11-17 · persona.md: [[call mumma]]/[[call papa]] starts the call at once, so Nani offers in words first and uses the marker only after Aarav says yes · the call needs a clear yes (C11); seed.json updated, reset applies it.
+- 2026-11-17 · No parallel 'backup' brain requests: Kimi throttles bursts (4 parallel → one waited 9 s, and the next sequential requests stalled 7–11 s); self-test stalls rose 3 → 13 of 51 with them. Single request, first-token timeout 7 s. The self-test now waits for Nani's audio before the next line, like a real child.
+- 2026-11-17 · Kimi stalls are handled by cancel-and-retry: no first token by 2.5 s (turn) or 4 s (sorter) → cancel and send ONE fresh request; never two in flight · k2.6 stalls ~10% of requests for 7–10 s; K3 models can't turn thinking off (no answer within 150 tokens), so they are out.
+- 2026-11-17 · G4 (routine clock) and P1 (presenter) ran as one task; G5 and the wall, filler and other polish used Sonnet at high effort · usage pacing.
+- 2026-11-17 · Speech-to-text tags audio events: a roar reaches Nani as a sound, while room noise, music or silence stays "not heard" · a child's roar was getting "Nani didn't hear you".
+- 2026-11-17 · A call cue is dropped unless Aarav's words contain a yes · a call starts at once and must never surprise anyone.
+- 2026-11-17 · Learning fillers stop at their next sentence end once Nani's answer is ready · saves about 1.2 s on filler turns without cutting a word.
+- 2026-11-17 · Memory answers start in parallel with the sorter and fall back to the sorter's reply after 7 s · "What did he learn today?" went from 18 s to 3–5 s.
+- 2026-11-19 · Usage stop for the refinement run is 70% weekly (start 64% + 6) · REFINE's 15% cap was already passed at the start.
+- 2026-11-19 · The progress report uses hand-made SVG and CSS, no chart package · nivo's calendar adds about 75 kB gzipped and needs an SSR wrapper.
+- 2026-11-19 · `wait_music` is made with sound effects v3 (`loop: true`) first · it is the only ElevenLabs model with a seamless-loop flag.
+- 2026-11-19 · "once at HH:MM" with no date gets today's date stamped by /api/chat · so a one-off never repeats daily (NOW.md issue 4).
+- 2026-11-19 · /stage feeds its wall through an in-page bus (lib/wall-bus.ts) · one page can't hold two channel objects for one topic, and never hears its own broadcasts.
+- 2026-11-19 · R9's self-test harness is written by Sonnet 5.5 (high) and R1 is reviewed after merge · usage: 3 points left of the 6-point budget at Wave 2; the Coordinator runs and reads the full suite.
+- 2026-11-19 · R3 merged without the reviewer · 2 points of budget left; its own measurements cover the timing checks, and the R9 script runs exercise it 4 times.
+- 2026-11-19 · R1 was merged before its review, and the review's fixes went forward into R3 and R4 · so Wave 2 didn't wait about 15 minutes; the one bug that broke the demo was fixed on main.
+- 2026-11-19 · The final turn prompt keeps a short reminder after Aarav's words (the parents' changes first, cheer a roar, two sentences and a question) · the script check passes with it (★1); off-script varies 24–27 of 30 either way.
+- 2026-11-19 · "Last turns" in the turn prompt stays across sessions for the day · the stage keeps one session per page load; each script run resets first.
+- 2026-11-19 · Questions about Aarav go to Memory only, and teaching requests go to Lessons only (sorter rules) · so each bubble reaches exactly the agents it shows (★4).
