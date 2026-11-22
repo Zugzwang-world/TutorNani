@@ -1,0 +1,459 @@
+/* /stage (R1): two halves of a 16:9 screen. Sizes are in vh so 1920×1080 and 1440×900 read the same from 3 m. */
+
+.stg-stage {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  overflow: hidden;
+  background: var(--color-wall);
+  color: var(--color-ink);
+}
+
+/* ---------- left: Nani's world ---------- */
+
+.stg-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--color-wall);
+  color: #fff8ee;
+}
+
+/* The wall fills everything above the dock (it is sized in container units and keeps its own sticker strip). */
+.stg-wall-box {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.stg-dock {
+  position: relative;
+  flex: none;
+  height: clamp(170px, 22vh, 260px);
+  display: flex;
+  align-items: center;
+  gap: 2vh;
+  padding: 1.6vh 2.4vh 1.6vh 1.6vh;
+  border-top: 1px solid rgb(255 248 238 / 0.08);
+  background: linear-gradient(180deg, #13121d 0%, var(--color-wall) 100%);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.stg-face {
+  flex: none;
+  height: 100%;
+  aspect-ratio: 1;
+}
+
+.stg-paw-col {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1vh;
+  width: 19vh;
+}
+
+.stg-paw {
+  width: 13vh;
+  height: 13vh;
+}
+
+.stg-paw-label {
+  font-size: 2.3vh;
+  line-height: 1.15;
+  font-weight: 800;
+  text-align: center;
+  color: rgb(255 248 238 / 0.8);
+}
+.stg-paw-label[data-on="true"] {
+  color: var(--color-marigold);
+}
+
+.stg-talk-col {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4vh;
+}
+
+/* One caption: what Aarav said, then the sentence Nani is saying. Two lines at most, fixed height: nothing moves. */
+.stg-caption {
+  margin: 0;
+  height: calc(2 * 1.22em);
+  font-size: 3.3vh;
+  line-height: 1.22;
+  font-weight: 800;
+  color: #fff8ee;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.stg-caption[data-who="Aarav"] {
+  color: rgb(255 248 238 / 0.72);
+}
+.stg-caption-who {
+  margin-right: 0.45em;
+  font-size: 0.72em;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-marigold);
+}
+.stg-caption[data-who="Aarav"] .stg-caption-who {
+  color: #8fb8ff;
+}
+.stg-caption-idle {
+  font-weight: 700;
+  color: rgb(255 248 238 / 0.42);
+}
+
+.stg-type-form {
+  display: flex;
+  gap: 1vh;
+  min-width: 0;
+}
+.stg-type-input {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 4.8vh;
+  padding: 0 1.8vh;
+  border-radius: 999px;
+  border: 1px solid rgb(255 248 238 / 0.16);
+  background: rgb(255 255 255 / 0.06);
+  color: #fff8ee;
+  font-size: 2vh;
+  outline: none;
+}
+.stg-type-input::placeholder {
+  color: rgb(255 248 238 / 0.45);
+}
+.stg-type-input:focus {
+  border-color: var(--color-marigold);
+  background: rgb(255 255 255 / 0.1);
+}
+.stg-type-send {
+  flex: none;
+  height: 4.8vh;
+  padding: 0 2.2vh;
+  border-radius: 999px;
+  background: var(--color-marigold);
+  color: var(--color-ink);
+  font-size: 2vh;
+  font-weight: 800;
+}
+.stg-type-send:disabled {
+  opacity: 0.4;
+}
+
+.stg-end-call {
+  align-self: flex-start;
+  height: 5.4vh;
+  padding: 0 3vh;
+  border-radius: 999px;
+  background: #d64545;
+  color: #fff;
+  font-size: 2.4vh;
+  font-weight: 900;
+}
+
+/* The presenter's corner handle: the dock's bottom-right corner, quiet. */
+.stg-handle {
+  position: absolute;
+  right: 0.6vh;
+  bottom: 0.4vh;
+  width: 3.6vh;
+  height: 2.6vh;
+  border-radius: 999px;
+  font-size: 2.2vh;
+  line-height: 1;
+  color: rgb(255 248 238 / 0.28);
+}
+.stg-handle:hover,
+.stg-handle:focus-visible {
+  color: rgb(255 248 238 / 0.8);
+  background: rgb(255 255 255 / 0.08);
+}
+
+/* Not awake yet: the left half asks for the first tap (sound and the mic). The chat stays usable. */
+.stg-wake {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3vh;
+  background: rgb(11 11 18 / 0.96);
+  color: #fff8ee;
+}
+.stg-wake-face {
+  width: 26vh;
+  height: 26vh;
+}
+.stg-wake-pill {
+  padding: 2vh 5vh;
+  border-radius: 999px;
+  background: var(--color-marigold);
+  color: var(--color-ink);
+  font-size: 3.4vh;
+  font-weight: 900;
+  box-shadow: 0 1vh 3vh rgb(0 0 0 / 0.35);
+}
+.stg-wake-hint {
+  font-size: 2vh;
+  color: rgb(255 248 238 / 0.6);
+}
+
+/* ---------- right: the parents' world ---------- */
+
+.stg-right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--color-cream);
+}
+
+/* R4's file strip and jobs board (Wave 2). About 130 px at 1080p. */
+.stg-band {
+  position: relative;
+  flex: none;
+  height: clamp(104px, 12vh, 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-paper);
+}
+.stg-band-label {
+  font-size: 1.6vh;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(138 122 106 / 0.5);
+}
+
+.stg-chat {
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* Mumma/Papa switch in the chat header. */
+.stg-who {
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--color-line);
+}
+.stg-who-btn {
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-muted);
+}
+.stg-who-btn[data-on="true"] {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: 0 1px 3px rgb(43 33 24 / 0.16);
+}
+
+/* ---------- presenter drawer ---------- */
+
+.stg-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  width: min(480px, 48vw);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px 20px;
+  overflow-y: auto;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  box-shadow: -12px 0 40px rgb(0 0 0 / 0.28);
+  animation: stg-drawer-in 180ms ease-out both;
+}
+@keyframes stg-drawer-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+.stg-dr-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.stg-dr-head h2 {
+  font-size: 20px;
+  font-weight: 900;
+}
+.stg-dr-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  font-size: 16px;
+  color: var(--color-muted);
+}
+.stg-dr-close:hover {
+  background: var(--color-line);
+}
+.stg-dr-clock {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.stg-dr-clock b {
+  font-size: 40px;
+  font-weight: 900;
+}
+.stg-dr-clock span {
+  font-size: 13px;
+  color: var(--color-muted);
+  text-align: right;
+}
+.stg-dr-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.stg-dr-btn {
+  flex: 1 1 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--color-line);
+  background: var(--color-paper);
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 1px 2px rgb(43 33 24 / 0.06);
+}
+.stg-dr-btn:active {
+  transform: scale(0.97);
+}
+.stg-dr-btn:disabled {
+  opacity: 0.5;
+}
+.stg-dr-btn kbd,
+.stg-dr-hint kbd {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: rgb(43 33 24 / 0.07);
+  color: var(--color-muted);
+}
+.stg-dr-primary {
+  border-color: transparent;
+  background: var(--color-marigold);
+}
+.stg-dr-primary kbd {
+  background: rgb(43 33 24 / 0.12);
+  color: var(--color-ink);
+}
+.stg-dr-danger {
+  color: var(--color-memory);
+}
+.stg-dr-danger[data-armed="true"] {
+  border-color: var(--color-memory);
+  background: var(--color-memory);
+  color: #fff;
+}
+.stg-dr-hint {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+.stg-dr-sub {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.stg-dr-table {
+  overflow-x: auto;
+}
+.stg-dr-table table {
+  width: 100%;
+  font-size: 13px;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+  border-collapse: collapse;
+}
+.stg-dr-table th {
+  padding: 2px 6px 4px 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.stg-dr-table td {
+  padding: 5px 6px 5px 0;
+  border-top: 1px solid var(--color-line);
+  white-space: nowrap;
+}
+.stg-dr-said {
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- toast ---------- */
+
+.stg-toast {
+  position: fixed;
+  top: 2.4vh;
+  left: 25%;
+  z-index: 300;
+  transform: translateX(-50%);
+  max-width: 44vw;
+  padding: 1.2vh 2.6vh;
+  border-radius: 999px;
+  background: #1f9d55;
+  color: #fff;
+  font-size: 2.4vh;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 1vh 3vh rgb(0 0 0 / 0.3);
+  animation: stg-toast-in 200ms ease-out both;
+}
+.stg-toast[data-bad] {
+  background: var(--color-memory);
+}
+@keyframes stg-toast-in {
+  from {
+    transform: translate(-50%, -8px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stg-drawer,
+  .stg-toast {
+    animation: none;
+  }
+}

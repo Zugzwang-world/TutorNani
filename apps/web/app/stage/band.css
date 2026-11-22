@@ -1,0 +1,336 @@
+/* R4.5: the stage's top band (file strip, demo clock, jobs board). The band's box comes from .stg-band (stage.css):
+   a fixed height of about 130 px at 1080p. Everything inside is sized in --u, which fits both the band's height and
+   its width, so 1920×1080 (960 px half) and 1440×900 (720 px half) lay out the same. */
+
+.tb-band {
+  container-type: size;
+  z-index: 30; /* the toast overlays the chat's sticky header (z 20); sheets and overlays (z 50+) still cover the band */
+  justify-content: stretch;
+}
+
+.tb-inner {
+  --u: min(8.333cqh, 1.125cqw);
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 0.6);
+  padding: calc(var(--u) * 0.75) calc(var(--u) * 1.3);
+}
+
+/* ---------- the file strip ---------- */
+
+.tb-strip {
+  flex: none;
+  height: calc(var(--u) * 3.6);
+  display: flex;
+  align-items: stretch;
+  gap: calc(var(--u) * 0.45);
+  min-width: 0;
+}
+
+.tb-chip {
+  --chip: var(--color-routine);
+  --chip-soft: var(--color-routine-soft);
+  position: relative;
+  flex: 0 1 auto;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.42);
+  padding: 0 calc(var(--u) * 0.75);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-size: calc(var(--u) * 1.5);
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    transform 120ms ease-out,
+    background-color 200ms ease-out,
+    border-color 200ms ease-out;
+}
+.tb-chip:active {
+  transform: scale(0.97);
+}
+.tb-chip[data-bot="nani"] {
+  --chip: var(--color-marigold);
+  --chip-soft: var(--color-marigold-soft);
+}
+.tb-chip[data-bot="rules"] {
+  --chip: var(--color-rules);
+  --chip-soft: var(--color-rules-soft);
+}
+.tb-chip[data-bot="lessons"] {
+  --chip: var(--color-lessons);
+  --chip-soft: var(--color-lessons-soft);
+}
+.tb-chip[data-bot="memory"] {
+  --chip: var(--color-memory);
+  --chip-soft: var(--color-memory-soft);
+}
+.tb-chip-emoji {
+  flex: none;
+  font-size: calc(var(--u) * 1.6);
+}
+.tb-chip-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tb-chip-ext {
+  color: var(--color-muted);
+  font-weight: 700;
+}
+.tb-chip-v {
+  flex: none;
+  padding: calc(var(--u) * 0.2) calc(var(--u) * 0.45);
+  border-radius: 999px;
+  background: var(--chip-soft);
+  color: var(--chip);
+  font-size: calc(var(--u) * 1.3);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+.tb-chip[data-pulse] {
+  border-color: var(--chip);
+  background: var(--chip-soft);
+  animation: tb-pulse 1.3s ease-out 3;
+}
+.tb-chip[data-pulse] .tb-chip-v {
+  background: var(--chip);
+  color: #fff;
+  animation: tb-pop 420ms cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+.tb-chip-report {
+  margin-left: auto;
+  padding: 0 calc(var(--u) * 0.85);
+}
+@keyframes tb-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--chip) 55%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 calc(var(--u) * 0.9) color-mix(in srgb, var(--chip) 0%, transparent);
+  }
+}
+@keyframes tb-pop {
+  from {
+    transform: scale(0.6);
+  }
+}
+
+/* ---------- the toast (overlays the chat, never moves the layout) ---------- */
+
+.tb-toast {
+  position: absolute;
+  top: calc(100% + var(--u) * 0.8);
+  left: 50%;
+  max-width: calc(100% - var(--u) * 3);
+  padding: calc(var(--u) * 0.85) calc(var(--u) * 1.6);
+  border-radius: 999px;
+  background: var(--color-ink);
+  color: #fff;
+  font-size: calc(var(--u) * 1.6);
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 calc(var(--u) * 0.6) calc(var(--u) * 2) rgb(43 33 24 / 0.28);
+  pointer-events: none;
+  transform: translateX(-50%);
+  animation:
+    tb-toast-in 220ms ease-out both,
+    tb-toast-out 300ms ease-in 3.85s both;
+}
+@keyframes tb-toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(var(--u) * -0.8));
+  }
+}
+@keyframes tb-toast-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* ---------- the demo clock and the jobs board ---------- */
+
+.tb-board {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  gap: calc(var(--u) * 1);
+}
+
+.tb-clock {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: calc(var(--u) * 1);
+  border-right: 1px solid var(--color-line);
+}
+.tb-clock-time {
+  font-size: calc(var(--u) * 2.7);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.tb-clock-day {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.4);
+  margin-top: calc(var(--u) * 0.35);
+  color: var(--color-muted);
+  font-size: calc(var(--u) * 1.1);
+  font-weight: 800;
+  white-space: nowrap;
+}
+.tb-clock-shift {
+  padding: calc(var(--u) * 0.1) calc(var(--u) * 0.45);
+  border-radius: 999px;
+  background: var(--color-routine);
+  color: #fff;
+  font-size: calc(var(--u) * 1.05);
+  font-weight: 900;
+}
+
+.tb-jobs {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+  gap: calc(var(--u) * 0.6);
+}
+
+.tb-job {
+  --job: var(--color-routine);
+  --job-soft: var(--color-routine-soft);
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: calc(var(--u) * 36);
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 0.6);
+  padding: calc(var(--u) * 0.4) calc(var(--u) * 0.8);
+  border: 1px solid color-mix(in srgb, var(--job) 22%, transparent);
+  border-radius: calc(var(--u) * 1.1);
+  background: var(--job-soft);
+  transition:
+    background-color 250ms ease-out,
+    border-color 250ms ease-out;
+}
+.tb-job[data-state="fired"] {
+  --job: var(--color-rules);
+  --job-soft: var(--color-rules-soft);
+  animation: tb-flash 900ms ease-out both;
+}
+.tb-job[data-state="firing"],
+.tb-job[data-state="held"] {
+  --job: var(--color-marigold);
+  --job-soft: var(--color-marigold-soft);
+}
+.tb-job[data-state="held"] {
+  animation: tb-held 1.4s ease-in-out infinite;
+}
+.tb-job[data-state="done"] {
+  opacity: 0.55;
+}
+.tb-job-icon {
+  flex: none;
+  font-size: calc(var(--u) * 2.3);
+  line-height: 1;
+}
+.tb-job-main {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--u) * 0.3);
+}
+.tb-job-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: calc(var(--u) * 1.45);
+  font-weight: 800;
+  line-height: 1.15;
+}
+/* The countdown (or "✓ fired at 03:16"), then the next due time and who set it. */
+.tb-job-line {
+  display: flex;
+  align-items: baseline;
+  gap: calc(var(--u) * 0.6);
+  min-width: 0;
+}
+.tb-job-big {
+  flex: none;
+  color: var(--job);
+  font-size: calc(var(--u) * 2);
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+.tb-job-done {
+  color: var(--color-muted);
+  font-size: calc(var(--u) * 1.5);
+}
+.tb-job-at {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-muted);
+  font-size: calc(var(--u) * 1.1);
+  font-weight: 800;
+}
+.tb-num {
+  font-variant-numeric: tabular-nums;
+}
+.tb-more,
+.tb-empty {
+  align-self: center;
+  color: var(--color-muted);
+  font-weight: 900;
+  white-space: nowrap;
+}
+.tb-more {
+  font-size: calc(var(--u) * 1.4);
+}
+.tb-empty {
+  font-size: calc(var(--u) * 1.3);
+}
+@keyframes tb-flash {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-rules) 60%, transparent);
+    transform: scale(1.03);
+  }
+  100% {
+    box-shadow: 0 0 0 calc(var(--u) * 0.8) color-mix(in srgb, var(--color-rules) 0%, transparent);
+    transform: scale(1);
+  }
+}
+@keyframes tb-held {
+  50% {
+    border-color: var(--color-marigold);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tb-chip[data-pulse],
+  .tb-chip[data-pulse] .tb-chip-v,
+  .tb-toast,
+  .tb-job[data-state="fired"],
+  .tb-job[data-state="held"] {
+    animation: none;
+  }
+}
