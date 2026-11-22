@@ -1,0 +1,134 @@
+{
+  "steps": ["Parents say it", "I write it in my file", "Nani does it"],
+  "nani": {
+    "oneLiner": "I am Nani, living in Aarav's soft toy. I talk the way your family talks: Hindi first, English next.",
+    "flow": {
+      "say": "Mumma: \"Can Nani use a few more Hindi words?\"",
+      "write": "- I mix a little more Hindi into every sentence.",
+      "do": "\"Wah, aam! English mein kehte hain Mango!\" 🥭"
+    },
+    "listen": [
+      { "icon": "🗣️", "title": "How I talk", "text": "Hindi and English, short and warm" },
+      { "icon": "🖼️", "title": "The wall", "text": "Words, letters, counting and cheers" },
+      { "icon": "💛", "title": "Kind rules", "text": "Praise effort, never scold" },
+      { "icon": "🤖", "title": "Who I am", "text": "An AI Nani, and I say so if asked" }
+    ],
+    "examples": [
+      { "who": "Aarav", "before": "\"Aam!\"", "after": "Wah, aam! English mein kehte hain Mango! Bolo, Mango!" },
+      { "who": "Aarav", "before": "Says a Hindi word", "after": "I cheer, give him the English word and ask him to say it." },
+      { "who": "Aarav", "before": "Sounds sad or scared", "after": "I comfort him first, then suggest telling Mumma or Papa." }
+    ]
+  },
+  "routine": {
+    "oneLiner": "I keep Aarav's routine: reminders, calls and bedtime.",
+    "flow": {
+      "say": "Mumma: \"Remind him to drink water every 2 hours\"",
+      "write": "- every 2 hours from 01:16 | say | Paani peelo, Aarav! | set by Routine",
+      "do": "\"Aarav, paani peeya?\" 💧"
+    },
+    "listen": [
+      { "icon": "⏱️", "title": "A time", "text": "At 7, in 10 minutes, right now" },
+      { "icon": "🔁", "title": "A repeat", "text": "Every 2 hours, every day" },
+      { "icon": "📞", "title": "A call", "text": "Call Mumma at 6" },
+      { "icon": "🛑", "title": "A stop", "text": "Stop the water reminders" }
+    ],
+    "examples": [
+      {
+        "who": "Nani's evening",
+        "before": "Mumma and Papa want to hear how the day went",
+        "after": "- daily at 19:00 | brief | Evening brief for Mumma and Papa | set by Nani"
+      },
+      {
+        "who": "Bedtime",
+        "before": "Aarav should hear good night every evening",
+        "after": "- daily at 20:30 | say | Good night, Aarav! Kal phir khelenge. | set by Nani"
+      },
+      {
+        "who": "Mumma",
+        "before": "\"Remind him to drink water every 2 hours\"",
+        "after": "Done! Nani will remind him right now, and every 2 hours after that 💧"
+      }
+    ]
+  },
+  "rules": {
+    "oneLiner": "I keep your house rules: language, tone, examples and what to avoid.",
+    "flow": {
+      "say": "Papa: \"Can you get him to say thank you more often?\"",
+      "write": "- 16 Nov · Papa: cheer him every time he says thank you",
+      "do": "\"Shabaash, Aarav! Thank you bola!\" 🎉"
+    },
+    "listen": [
+      { "icon": "🗣️", "title": "Language", "text": "Hindi at home, English words" },
+      { "icon": "🎭", "title": "Tone", "text": "Warm, playful, gentle" },
+      { "icon": "🍎", "title": "Examples", "text": "Fruits, animals, festivals" },
+      { "icon": "🚫", "title": "Avoid", "text": "Scary stories at bedtime" }
+    ],
+    "examples": [
+      {
+        "who": "Papa",
+        "before": "\"Can you get him to say thank you more often?\"",
+        "after": "- 16 Nov · Papa: cheer him every time he says thank you"
+      },
+      {
+        "who": "House rules",
+        "before": "Scary animals before bed",
+        "after": "Nani keeps bedtime stories gentle and calm."
+      },
+      {
+        "who": "House rules",
+        "before": "Aarav gets something wrong",
+        "after": "Warm and playful: \"Almost! Ek aur baar?\""
+      }
+    ]
+  },
+  "lessons": {
+    "oneLiner": "I plan what Nani teaches: the letter of the day, the theme and the play-time steps.",
+    "flow": {
+      "say": "Mumma: \"Let's do animals and fruits this week\"",
+      "write": "- Theme: animals and fruits",
+      "do": "\"M for Mango! Aam!\" 🥭"
+    },
+    "listen": [
+      { "icon": "🔤", "title": "A letter", "text": "M is today's letter" },
+      { "icon": "🎨", "title": "A theme", "text": "Animals, fruits, colours" },
+      { "icon": "🔢", "title": "Numbers", "text": "Count to 10, shapes, more and less" },
+      { "icon": "🎵", "title": "Songs", "text": "Rhymes, dancing, festivals" }
+    ],
+    "examples": [
+      { "who": "Today", "before": "Which letter today?", "after": "- Letter: M" },
+      { "who": "Today", "before": "What should the play be about?", "after": "- Theme: animals and fruits" },
+      { "who": "Play Time", "before": "How does a play session go?", "after": "Hello, letter of the day, spell it, count it, share it, a song, back to the family." }
+    ]
+  },
+  "memory": {
+    "oneLiner": "I remember Aarav: what he knows, what he loves and what happened lately.",
+    "flow": {
+      "say": "Mumma: \"He is scared of big dogs these days\"",
+      "write": "- Scared of big dogs. Keep dog stories small and kind.",
+      "do": "Nani plays with cats and rabbits instead 🐱"
+    },
+    "listen": [
+      { "icon": "❤️", "title": "What he loves", "text": "Lions, cars, colouring" },
+      { "icon": "🧠", "title": "What he knows", "text": "Letters A to L, counts to 5" },
+      { "icon": "🎯", "title": "Learning now", "text": "M to Z, counting to 10" },
+      { "icon": "🗓️", "title": "Last few days", "text": "Big moments, in a line each" }
+    ],
+    "examples": [
+      {
+        "who": "14 Nov",
+        "before": "Aarav roars like a lion and sends Mumma his roar",
+        "after": "- 14 Nov: L for Lion. Roared very loudly and sent Mumma his roar."
+      },
+      {
+        "who": "15 Nov",
+        "before": "K for Kangaroo, and a pretend ladoo for Riya",
+        "after": "- 15 Nov: K for Kangaroo. Shared a pretend ladoo with Riya."
+      },
+      {
+        "who": "16 Nov",
+        "before": "\"Thank you, Nani!\" all by himself",
+        "after": "- 16 Nov: Colours: red apple, yellow banana. Said \"Thank you, Nani!\""
+      }
+    ]
+  }
+}
