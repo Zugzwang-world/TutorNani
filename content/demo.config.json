@@ -1,0 +1,204 @@
+{
+  "childName": "Aarav",
+  "childId": "aarav",
+  "age": 5,
+  "grandmaName": "Nani",
+  "parents": [
+    "Mumma",
+    "Papa"
+  ],
+  "homeLanguage": "Hindi",
+  "timezone": "Asia/Kolkata",
+  "letters": [],
+  "places": [],
+  "animals": [],
+  "nani": {
+    "voiceId": "wSMP2ehaozb5I36yi8vg",
+    "voiceName": "Dulari Didi (shared library)",
+    "voiceModel": "eleven_v4_turbo",
+    "premadeModel": "eleven_v4",
+    "languageCode": "hi",
+    "outputFormat": "mp3_44100_64"
+  },
+  "testVoices": [
+    {
+      "id": "xoV6iGVuOGYHLWjXhVC7",
+      "label": "adult female (Muskaan)"
+    },
+    {
+      "id": "bpkHhw4QrZFYIfahwsHh",
+      "label": "adult male (Amit Bhawani)"
+    },
+    {
+      "id": "5krdMTA5HonvWAlY2vSx",
+      "label": "child (Bholu)"
+    }
+  ],
+  "bubbles": [
+    {
+      "id": "water",
+      "parent": "Mumma",
+      "situation": "At work",
+      "line": "Remind him to drink water now, and then every 2 hours",
+      "agents": [
+        "routine"
+      ],
+      "scene": "👩‍💼💧⏰",
+      "step": 6
+    },
+    {
+      "id": "count-both",
+      "parent": "Mumma",
+      "situation": "Before dinner",
+      "line": "When you count, count in Hindi and English both",
+      "agents": [
+        "rules"
+      ],
+      "scene": "🍽️🔢🗣️",
+      "step": 9
+    },
+    {
+      "id": "mangoes",
+      "parent": "Papa",
+      "situation": "At the market",
+      "line": "I'm bringing mangoes for him tonight",
+      "agents": [
+        "lessons",
+        "memory"
+      ],
+      "scene": "🛒🥭👨",
+      "step": 11
+    },
+    {
+      "id": "talk-about",
+      "parent": "Papa",
+      "situation": "On the way home",
+      "line": "Coming home soon. What should I talk to him about?",
+      "agents": [
+        "memory"
+      ],
+      "scene": "👨‍💼🚗🏠",
+      "step": 14
+    },
+    {
+      "id": "call-hi",
+      "parent": "Papa",
+      "situation": "In a meeting",
+      "line": "Call him in 2 minutes, I want to say hi",
+      "agents": [
+        "routine"
+      ],
+      "scene": "💼📞👋"
+    },
+    {
+      "id": "story-time",
+      "parent": "Mumma",
+      "situation": "Bedtime",
+      "line": "Every night at 8:30, story time",
+      "agents": [
+        "routine"
+      ],
+      "scene": "🌙📖🛏️"
+    },
+    {
+      "id": "no-scary",
+      "parent": "Mumma",
+      "situation": "Bedtime",
+      "line": "No scary animals at bedtime",
+      "agents": [
+        "rules"
+      ],
+      "scene": "🛏️🙅🐺"
+    },
+    {
+      "id": "more-hindi",
+      "parent": "Papa",
+      "situation": "Weekend",
+      "line": "Speak a bit more Hindi with him",
+      "agents": [
+        "rules"
+      ],
+      "scene": "☀️🗣️🇮🇳"
+    },
+    {
+      "id": "cars",
+      "parent": "Mumma",
+      "situation": "This week",
+      "line": "He's crazy about cars this week",
+      "agents": [
+        "lessons",
+        "memory"
+      ],
+      "scene": "🚗🏎️🚙"
+    },
+    {
+      "id": "sad-gentle",
+      "parent": "Mumma",
+      "situation": "Tough morning",
+      "line": "He's a bit sad today, be extra gentle",
+      "agents": [
+        "lessons",
+        "memory",
+        "rules"
+      ],
+      "scene": "🌧️🧸🤗"
+    },
+    {
+      "id": "learn-today",
+      "parent": "Papa",
+      "situation": "Evening",
+      "line": "What did he learn today?",
+      "agents": [
+        "memory"
+      ],
+      "scene": "🌆🔤⭐"
+    },
+    {
+      "id": "week",
+      "parent": "Mumma",
+      "situation": "Sunday",
+      "line": "How was his week?",
+      "agents": [
+        "memory"
+      ],
+      "scene": "📅🌈💛"
+    },
+    {
+      "id": "water-check",
+      "parent": "Papa",
+      "situation": "Lunch break",
+      "line": "Did he drink water today?",
+      "agents": [
+        "memory"
+      ],
+      "scene": "🍱💧❓"
+    },
+    {
+      "id": "rainbow",
+      "parent": "Mumma",
+      "situation": "Rainy day",
+      "line": "Teach him the colours of the rainbow",
+      "agents": [
+        "lessons"
+      ],
+      "scene": "🌧️🌈🎨"
+    }
+  ],
+  "brain": {
+    "provider": "kimi",
+    "providers": {
+      "kimi": {
+        "baseUrl": "https://api.moonshot.ai/v1",
+        "model": "kimi-k2.6",
+        "keyEnv": "KIMI_API_KEY",
+        "thinking": "off"
+      },
+      "anthropic": {
+        "model": "claude-haiku-5-5",
+        "keyEnv": "ANTHROPIC_API_KEY",
+        "thinking": "off",
+        "effort": "low"
+      }
+    }
+  }
+}

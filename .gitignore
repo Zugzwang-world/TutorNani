@@ -1,0 +1,12 @@
+.env*
+node_modules
+.next
+.vercel
+.DS_Store
+*.tsbuildinfo
+.claude/worktrees/
+.claude/settings.local.json
+.claude/usage-now.json
+.playwright-mcp/
+scripts/selftest/.cache/
+scripts/selftest/out/

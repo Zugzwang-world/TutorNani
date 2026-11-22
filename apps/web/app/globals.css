@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* Theme (PLAN.md B2, B4). Agent colours: Nani marigold, Routine blue, House rules green, Lessons purple, Memory pink. */
+@theme {
+  --color-cream: #fff8ee;
+  --color-paper: #ffffff;
+  --color-ink: #2b2118;
+  --color-muted: #8a7a6a;
+  --color-line: #f0e4d4;
+
+  --color-marigold: #f29a0e;
+  --color-marigold-soft: #fff0d6;
+  --color-routine: #2f7de1;
+  --color-routine-soft: #e3effd;
+  --color-rules: #1f9d55;
+  --color-rules-soft: #e0f5e9;
+  --color-lessons: #7c4ddb;
+  --color-lessons-soft: #eee6fc;
+  --color-memory: #e0457b;
+  --color-memory-soft: #fde6ee;
+  --color-parent: #f29a0e;
+
+  --color-wall: #0b0b12;
+
+  --font-sans: var(--font-nunito), var(--font-devanagari), var(--font-emoji), ui-rounded, system-ui, sans-serif;
+  --font-emoji: var(--font-emoji), "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+}
+
+html,
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Use on any element that shows emoji large (wall, avatars). */
+.emoji {
+  font-family: var(--font-emoji);
+  line-height: 1;
+}
