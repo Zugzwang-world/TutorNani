@@ -1,0 +1,110 @@
+{
+  "_about": "Source for scripts/audio/generate.mjs (docs/plan/NANI.md C5 to C7). Ids are fixed by docs/plan/CONTRACTS.md. Nani's voice and premade model come from content/demo.config.json. {childName} is filled from the config.",
+  "models": {
+    "stt": "scribe_v3",
+    "sfx": "eleven_text_to_sound_v3",
+    "music": "music_v2_5"
+  },
+  "voice": [
+    { "id": "reaction_ooh", "kind": "reaction", "text": "Ooh!" },
+    { "id": "reaction_achha", "kind": "reaction", "text": "Achha!" },
+    { "id": "reaction_hmm", "kind": "reaction", "text": "Hmm!" },
+    { "id": "reaction_haanji", "kind": "reaction", "text": "Haan ji!" },
+    { "id": "reaction_oho", "kind": "reaction", "text": "Oho!" },
+    { "id": "reaction_achha_achha", "kind": "reaction", "text": "Achha-achha!" },
+
+    { "id": "filler_numbers_1", "kind": "filler", "area": "numbers", "text": "Tab tak teen baar taali bajao! Ek, do, teen!" },
+    { "id": "filler_numbers_2", "kind": "filler", "area": "numbers", "text": "Ungliyon pe gino: one, two, three, four, five!" },
+    { "id": "filler_numbers_3", "kind": "filler", "area": "numbers", "text": "Jaldi se bolo: one, two, three!" },
+    { "id": "filler_animals_1", "kind": "filler", "area": "animals", "text": "Ek baar lion jaisa roar karo!" },
+    { "id": "filler_animals_2", "kind": "filler", "area": "animals", "text": "Billi kaise bolti hai? Meow! Tum bhi bolo!" },
+    { "id": "filler_animals_3", "kind": "filler", "area": "animals", "text": "Gaay kaise bolti hai? Moo! Ek baar aur!" },
+    { "id": "filler_animals_4", "kind": "filler", "area": "animals", "text": "Haathi jaisi soond hilao!" },
+    { "id": "filler_letters_1", "kind": "filler", "area": "letters", "text": "Bolo mere saath: A for Apple!" },
+    { "id": "filler_letters_2", "kind": "filler", "area": "letters", "text": "M ki awaaz karo: mmmmm!" },
+    { "id": "filler_body_1", "kind": "filler", "area": "body", "text": "Apni naak chhuo. Nose! Nose!" },
+    { "id": "filler_body_2", "kind": "filler", "area": "body", "text": "Apne kaan pakdo. Ears! Ears!" },
+    { "id": "filler_colours_1", "kind": "filler", "area": "colours", "text": "Kamre mein kuch laal dhoondho. Red!" },
+    { "id": "filler_shapes_1", "kind": "filler", "area": "shapes", "text": "Hawa mein ek gol circle banao!" },
+    { "id": "filler_manners_1", "kind": "filler", "area": "manners", "text": "Bolo: Thank you, Nani!" },
+    { "id": "filler_feelings_1", "kind": "filler", "area": "feelings", "text": "Ek badi si smile do! Smile!" },
+    { "id": "filler_feelings_2", "kind": "filler", "area": "feelings", "text": "Ek lambi saans lo… aur chhodo. Shabaash!" },
+    { "id": "filler_feelings_3", "kind": "filler", "area": "feelings", "text": "Khud ko ek big hug do!" },
+    { "id": "filler_review_1", "kind": "filler", "area": "review", "text": "Jo abhi seekha, woh ek baar phir bolo!" },
+    { "id": "filler_letters_3", "kind": "filler", "area": "letters", "text": "M se Monkey! Bandar jaisa uchhlo!" },
+    { "id": "filler_letters_4", "kind": "filler", "area": "letters", "text": "M se Moon! Chanda mama ko hello bolo!" },
+    { "id": "filler_letters_5", "kind": "filler", "area": "letters", "text": "Mmm… M se Mango!" },
+    { "id": "filler_letters_6", "kind": "filler", "area": "letters", "text": "M se Mummy! Mummy ko ek flying kiss do!" },
+    { "id": "filler_letters_7", "kind": "filler", "area": "letters", "text": "N se Nose! Naak chhuo!" },
+    { "id": "filler_letters_8", "kind": "filler", "area": "letters", "text": "O for Orange! Bolo: orange!" },
+    { "id": "filler_fruits_1", "kind": "filler", "area": "fruits", "text": "Aam ka rang kya hai? Yellow!" },
+    { "id": "filler_fruits_2", "kind": "filler", "area": "fruits", "text": "Kela lamba aur yellow! Banana!" },
+    { "id": "filler_fruits_3", "kind": "filler", "area": "fruits", "text": "Seb ka rang kya hai? Red!" },
+    { "id": "filler_fruits_4", "kind": "filler", "area": "fruits", "text": "Santra gol hota hai! Circle banao!" },
+    { "id": "filler_numbers_4", "kind": "filler", "area": "numbers", "text": "Aam gino! Ek, do, teen aam!" },
+    { "id": "filler_numbers_5", "kind": "filler", "area": "numbers", "text": "Seepiyan gino: one, two, three!" },
+    { "id": "filler_numbers_6", "kind": "filler", "area": "numbers", "text": "Ek aam, ek aam, kitne? Two!" },
+    { "id": "filler_animals_5", "kind": "filler", "area": "animals", "text": "Bandar jaisa ooh, ooh, aah karo!" },
+    { "id": "filler_wait_chashma", "kind": "filler", "area": "wait", "text": "Nani apna chashma dhoondh rahi hai… mil gaya!" },
+
+    { "id": "not_heard", "kind": "fallback", "text": "Nani ko theek se sunai nahi diya. Paw dabakar phir se bolo?" },
+    { "id": "voice_failed", "kind": "fallback", "text": "Arre, Nani ki awaaz atak gayi! Ek baar phir poochho?" },
+    { "id": "slow_brain", "kind": "fallback", "text": "Arre, Nani ka dhyaan bhatak gaya! Ek baar phir bolo, beta?" },
+    { "id": "offline", "kind": "fallback", "text": "Nani thoda aaram kar rahi hai. Thodi der mein baat karte hain!" },
+
+    { "id": "line_call_mumma", "kind": "line", "text": "Mumma ka call aa raha hai!" },
+    { "id": "line_call_papa", "kind": "line", "text": "Papa ka call!" },
+    { "id": "line_good_night", "kind": "line", "text": "Good night, {childName}! Kal phir khelenge." }
+  ],
+  "sfx": [
+    { "id": "animal_lion", "area": "animals", "seconds": 2.5, "prompt": "A friendly cartoon lion roar for a children's TV show, playful and short, warm, not scary" },
+    { "id": "animal_cow", "area": "animals", "seconds": 2, "prompt": "A gentle cow mooing once, clear and friendly, farm animal" },
+    { "id": "animal_cat", "area": "animals", "seconds": 1.5, "prompt": "A cute kitten meowing twice, sweet and clear" },
+    { "id": "animal_dog", "area": "animals", "seconds": 1.5, "prompt": "A happy puppy barking twice, playful and friendly" },
+    { "id": "animal_elephant", "area": "animals", "seconds": 2, "prompt": "A cheerful cartoon baby elephant trumpeting once, playful, for kids" },
+    { "id": "animal_monkey", "area": "animals", "seconds": 2, "prompt": "A playful cartoon monkey chattering ooh ooh aah aah, funny, for kids" },
+    { "id": "animal_duck", "area": "animals", "seconds": 1.5, "prompt": "A cute duck quacking three times, quack quack quack" },
+    { "id": "animal_sheep", "area": "animals", "seconds": 1.5, "prompt": "A gentle sheep bleating baa once, soft and friendly" },
+    { "id": "animal_horse", "area": "animals", "seconds": 2, "prompt": "A friendly horse neighing once, short and clear" },
+    { "id": "animal_rooster", "area": "animals", "seconds": 2.5, "prompt": "A rooster crowing cock-a-doodle-doo once, bright morning, clear" },
+    { "id": "sfx_ticktock", "seconds": 2, "prompt": "Soft wooden clock ticking, gentle steady tick-tock, calm, for a kids' app" },
+    { "id": "sfx_tada", "seconds": 1.5, "prompt": "Cheerful short ta-da fanfare jingle for a correct answer in a children's game, bright and happy" },
+    { "id": "sfx_pop", "seconds": 1, "prompt": "A single soft cartoon bubble pop, short and cute" },
+    { "id": "sfx_whoosh", "seconds": 1, "prompt": "A quick soft whoosh of something flying across the screen, light cartoon swish" },
+    { "id": "sfx_cheer", "seconds": 2.5, "prompt": "A small group of happy young children cheering yay and clapping, short and joyful" },
+    { "id": "sfx_oops", "seconds": 1, "prompt": "A soft gentle funny oops sound for a wrong answer in a kids' game, short descending cartoon boing, kind, not harsh" }
+  ],
+  "music": [
+    {
+      "id": "wait_music",
+      "_about": "R3: plays only when Nani is late (no first sentence 2.5 s after the send tap). One seamless cycle, no trims or fades. lufs: about 12 dB under Nani's live voice (eleven_v4_turbo measured at -19.4 LUFS).",
+      "seconds": 10,
+      "lufs": -31,
+      "promptInfluence": 0.6,
+      "prompt": "Soft, warm, slow instrumental music loop for a five-year-old: a gentle marimba melody with light, soft tabla, cosy and calm like a lullaby, steady slow tempo, instrumental only"
+    }
+  ],
+  "song": {
+    "title": "Ek Do Teen, Count With Me",
+    "lengthMs": 35000,
+    "style": "A happy, bouncy children's counting song with a warm Indian flavour: tabla, dholak, sitar plucks and hand claps, bright and simple, about 110 BPM. Sung clearly by one warm, kind female voice, like a loving grandmother singing to a five-year-old. Every word is sung clearly.",
+    "styles": ["children's song", "happy and bouncy", "Indian folk pop", "tabla and dholak", "sitar", "hand claps", "warm female vocal, clear diction"],
+    "negativeStyles": ["sad", "dark", "male vocal"],
+    "verse": [
+      "One little lion goes roar, roar, roar! (Ek sher!)",
+      "Two little cows go moo, moo, moo! (Do gaay!)",
+      "Three little cats go meow, meow, meow! (Teen billi!)",
+      "Four little ducks go quack, quack, quack! (Chaar batakh!)",
+      "Five little monkeys go ooh-ooh-aah! (Paanch bandar!)"
+    ],
+    "chorus": [
+      "Ek, do, teen, chaar, paanch,",
+      "One, two, three, four, five!",
+      "Count with Nani, clap with me,",
+      "Learning is so much fun, you see!"
+    ],
+    "verseMs": 21000,
+    "chorusMs": 14000,
+    "snippetText": "Ek, do, teen, chaar, paanch, One, two, three, four, five!"
+  }
+}

@@ -1,0 +1,483 @@
+[
+  {
+    "id": "animal_cat",
+    "file": "/audio/animal_cat.mp3",
+    "kind": "sfx",
+    "area": "animals",
+    "duration": 0.86
+  },
+  {
+    "id": "animal_cow",
+    "file": "/audio/animal_cow.mp3",
+    "kind": "sfx",
+    "area": "animals",
+    "duration": 1.98
+  },
+  {
+    "id": "animal_dog",
+    "file": "/audio/animal_dog.mp3",
+    "kind": "sfx",
+    "area": "animals",
+    "duration": 1.39
+  },
+  {
+    "id": "animal_duck",
+    "file": "/audio/animal_duck.mp3",
+    "kind": "sfx",
+    "area": "animals",
+    "duration": 1.48
+  },
+  {
+    "id": "animal_elephant",
+    "file": "/audio/animal_elephant.mp3",
+    "kind": "sfx",
+    "area": "animals",
+    "duration": 2
+  },
+  {
+    "id": "animal_horse",
+    "file": "/audio/animal_horse.mp3",
+    "kind": "sfx",
+    "area": "animals",
+    "duration": 1.91
+  },
+  {
+    "id": "animal_lion",
+    "file": "/audio/animal_lion.mp3",
+    "kind": "sfx",
+    "area": "animals",
+    "duration": 2.06
+  },
+  {
+    "id": "animal_monkey",
+    "file": "/audio/animal_monkey.mp3",
+    "kind": "sfx",
+    "area": "animals",
+    "duration": 1.98
+  },
+  {
+    "id": "animal_rooster",
+    "file": "/audio/animal_rooster.mp3",
+    "kind": "sfx",
+    "area": "animals",
+    "duration": 2.48
+  },
+  {
+    "id": "animal_sheep",
+    "file": "/audio/animal_sheep.mp3",
+    "kind": "sfx",
+    "area": "animals",
+    "duration": 1.47
+  },
+  {
+    "id": "filler_animals_1",
+    "file": "/audio/filler_animals_1.mp3",
+    "kind": "filler",
+    "area": "animals",
+    "text": "Ek baar lion jaisa roar karo!",
+    "duration": 2.88
+  },
+  {
+    "id": "filler_animals_2",
+    "file": "/audio/filler_animals_2.mp3",
+    "kind": "filler",
+    "area": "animals",
+    "text": "Billi kaise bolti hai? Meow! Tum bhi bolo!",
+    "duration": 3.98
+  },
+  {
+    "id": "filler_animals_3",
+    "file": "/audio/filler_animals_3.mp3",
+    "kind": "filler",
+    "area": "animals",
+    "text": "Gaay kaise bolti hai? Moo! Ek baar aur!",
+    "duration": 4.08
+  },
+  {
+    "id": "filler_animals_4",
+    "file": "/audio/filler_animals_4.mp3",
+    "kind": "filler",
+    "area": "animals",
+    "text": "Haathi jaisi soond hilao!",
+    "duration": 2.17
+  },
+  {
+    "id": "filler_animals_5",
+    "file": "/audio/filler_animals_5.mp3",
+    "kind": "filler",
+    "area": "animals",
+    "text": "Bandar jaisa ooh, ooh, aah karo!",
+    "duration": 3.42
+  },
+  {
+    "id": "filler_body_1",
+    "file": "/audio/filler_body_1.mp3",
+    "kind": "filler",
+    "area": "body",
+    "text": "Apni naak chhuo. Nose! Nose!",
+    "duration": 3.87
+  },
+  {
+    "id": "filler_body_2",
+    "file": "/audio/filler_body_2.mp3",
+    "kind": "filler",
+    "area": "body",
+    "text": "Apne kaan pakdo. Ears! Ears!",
+    "duration": 3.71
+  },
+  {
+    "id": "filler_colours_1",
+    "file": "/audio/filler_colours_1.mp3",
+    "kind": "filler",
+    "area": "colours",
+    "text": "Kamre mein kuch laal dhoondho. Red!",
+    "duration": 3.32
+  },
+  {
+    "id": "filler_feelings_1",
+    "file": "/audio/filler_feelings_1.mp3",
+    "kind": "filler",
+    "area": "feelings",
+    "text": "Ek badi si smile do! Smile!",
+    "duration": 3.01
+  },
+  {
+    "id": "filler_feelings_2",
+    "file": "/audio/filler_feelings_2.mp3",
+    "kind": "filler",
+    "area": "feelings",
+    "text": "Ek lambi saans lo… aur chhodo. Shabaash!",
+    "duration": 4.78
+  },
+  {
+    "id": "filler_feelings_3",
+    "file": "/audio/filler_feelings_3.mp3",
+    "kind": "filler",
+    "area": "feelings",
+    "text": "Khud ko ek big hug do!",
+    "duration": 2.4
+  },
+  {
+    "id": "filler_fruits_1",
+    "file": "/audio/filler_fruits_1.mp3",
+    "kind": "filler",
+    "area": "fruits",
+    "text": "Aam ka rang kya hai? Yellow!",
+    "duration": 2.93
+  },
+  {
+    "id": "filler_fruits_2",
+    "file": "/audio/filler_fruits_2.mp3",
+    "kind": "filler",
+    "area": "fruits",
+    "text": "Kela lamba aur yellow! Banana!",
+    "duration": 3.84
+  },
+  {
+    "id": "filler_fruits_3",
+    "file": "/audio/filler_fruits_3.mp3",
+    "kind": "filler",
+    "area": "fruits",
+    "text": "Seb ka rang kya hai? Red!",
+    "duration": 2.91
+  },
+  {
+    "id": "filler_fruits_4",
+    "file": "/audio/filler_fruits_4.mp3",
+    "kind": "filler",
+    "area": "fruits",
+    "text": "Santra gol hota hai! Circle banao!",
+    "duration": 3.16
+  },
+  {
+    "id": "filler_letters_1",
+    "file": "/audio/filler_letters_1.mp3",
+    "kind": "filler",
+    "area": "letters",
+    "text": "Bolo mere saath: A for Apple!",
+    "duration": 3.12
+  },
+  {
+    "id": "filler_letters_2",
+    "file": "/audio/filler_letters_2.mp3",
+    "kind": "filler",
+    "area": "letters",
+    "text": "M ki awaaz karo: mmmmm!",
+    "duration": 3.34
+  },
+  {
+    "id": "filler_letters_3",
+    "file": "/audio/filler_letters_3.mp3",
+    "kind": "filler",
+    "area": "letters",
+    "text": "M se Monkey! Bandar jaisa uchhlo!",
+    "duration": 3.66
+  },
+  {
+    "id": "filler_letters_4",
+    "file": "/audio/filler_letters_4.mp3",
+    "kind": "filler",
+    "area": "letters",
+    "text": "M se Moon! Chanda mama ko hello bolo!",
+    "duration": 3.72
+  },
+  {
+    "id": "filler_letters_5",
+    "file": "/audio/filler_letters_5.mp3",
+    "kind": "filler",
+    "area": "letters",
+    "text": "Mmm… M se Mango!",
+    "duration": 3.08
+  },
+  {
+    "id": "filler_letters_6",
+    "file": "/audio/filler_letters_6.mp3",
+    "kind": "filler",
+    "area": "letters",
+    "text": "M se Mummy! Mummy ko ek flying kiss do!",
+    "duration": 3.9
+  },
+  {
+    "id": "filler_letters_7",
+    "file": "/audio/filler_letters_7.mp3",
+    "kind": "filler",
+    "area": "letters",
+    "text": "N se Nose! Naak chhuo!",
+    "duration": 2.91
+  },
+  {
+    "id": "filler_letters_8",
+    "file": "/audio/filler_letters_8.mp3",
+    "kind": "filler",
+    "area": "letters",
+    "text": "O for Orange! Bolo: orange!",
+    "duration": 3.65
+  },
+  {
+    "id": "filler_manners_1",
+    "file": "/audio/filler_manners_1.mp3",
+    "kind": "filler",
+    "area": "manners",
+    "text": "Bolo: Thank you, Nani!",
+    "duration": 2.29
+  },
+  {
+    "id": "filler_numbers_1",
+    "file": "/audio/filler_numbers_1.mp3",
+    "kind": "filler",
+    "area": "numbers",
+    "text": "Tab tak teen baar taali bajao! Ek, do, teen!",
+    "duration": 4.67
+  },
+  {
+    "id": "filler_numbers_2",
+    "file": "/audio/filler_numbers_2.mp3",
+    "kind": "filler",
+    "area": "numbers",
+    "text": "Ungliyon pe gino: one, two, three, four, five!",
+    "duration": 5.1
+  },
+  {
+    "id": "filler_numbers_3",
+    "file": "/audio/filler_numbers_3.mp3",
+    "kind": "filler",
+    "area": "numbers",
+    "text": "Jaldi se bolo: one, two, three!",
+    "duration": 3.44
+  },
+  {
+    "id": "filler_numbers_4",
+    "file": "/audio/filler_numbers_4.mp3",
+    "kind": "filler",
+    "area": "numbers",
+    "text": "Aam gino! Ek, do, teen aam!",
+    "duration": 3.99
+  },
+  {
+    "id": "filler_numbers_5",
+    "file": "/audio/filler_numbers_5.mp3",
+    "kind": "filler",
+    "area": "numbers",
+    "text": "Seepiyan gino: one, two, three!",
+    "duration": 3.91
+  },
+  {
+    "id": "filler_numbers_6",
+    "file": "/audio/filler_numbers_6.mp3",
+    "kind": "filler",
+    "area": "numbers",
+    "text": "Ek aam, ek aam, kitne? Two!",
+    "duration": 3.96
+  },
+  {
+    "id": "filler_review_1",
+    "file": "/audio/filler_review_1.mp3",
+    "kind": "filler",
+    "area": "review",
+    "text": "Jo abhi seekha, woh ek baar phir bolo!",
+    "duration": 3.16
+  },
+  {
+    "id": "filler_shapes_1",
+    "file": "/audio/filler_shapes_1.mp3",
+    "kind": "filler",
+    "area": "shapes",
+    "text": "Hawa mein ek gol circle banao!",
+    "duration": 2.82
+  },
+  {
+    "id": "filler_wait_chashma",
+    "file": "/audio/filler_wait_chashma.mp3",
+    "kind": "filler",
+    "area": "wait",
+    "text": "Nani apna chashma dhoondh rahi hai… mil gaya!",
+    "duration": 3.68
+  },
+  {
+    "id": "line_call_mumma",
+    "file": "/audio/line_call_mumma.mp3",
+    "kind": "line",
+    "text": "Mumma ka call aa raha hai!",
+    "duration": 1.88
+  },
+  {
+    "id": "line_call_papa",
+    "file": "/audio/line_call_papa.mp3",
+    "kind": "line",
+    "text": "Papa ka call!",
+    "duration": 1.25
+  },
+  {
+    "id": "line_good_night",
+    "file": "/audio/line_good_night.mp3",
+    "kind": "line",
+    "text": "Good night, Aarav! Kal phir khelenge.",
+    "duration": 2.78
+  },
+  {
+    "id": "not_heard",
+    "file": "/audio/not_heard.mp3",
+    "kind": "fallback",
+    "text": "Nani ko theek se sunai nahi diya. Paw dabakar phir se bolo?",
+    "duration": 4.47
+  },
+  {
+    "id": "offline",
+    "file": "/audio/offline.mp3",
+    "kind": "fallback",
+    "text": "Nani thoda aaram kar rahi hai. Thodi der mein baat karte hain!",
+    "duration": 4.03
+  },
+  {
+    "id": "reaction_achha",
+    "file": "/audio/reaction_achha.mp3",
+    "kind": "reaction",
+    "text": "Achha!",
+    "duration": 0.92
+  },
+  {
+    "id": "reaction_achha_achha",
+    "file": "/audio/reaction_achha_achha.mp3",
+    "kind": "reaction",
+    "text": "Achha-achha!",
+    "duration": 1.48
+  },
+  {
+    "id": "reaction_haanji",
+    "file": "/audio/reaction_haanji.mp3",
+    "kind": "reaction",
+    "text": "Haan ji!",
+    "duration": 0.92
+  },
+  {
+    "id": "reaction_hmm",
+    "file": "/audio/reaction_hmm.mp3",
+    "kind": "reaction",
+    "text": "Hmm!",
+    "duration": 0.82
+  },
+  {
+    "id": "reaction_oho",
+    "file": "/audio/reaction_oho.mp3",
+    "kind": "reaction",
+    "text": "Oho!",
+    "duration": 0.97
+  },
+  {
+    "id": "reaction_ooh",
+    "file": "/audio/reaction_ooh.mp3",
+    "kind": "reaction",
+    "text": "Ooh!",
+    "duration": 0.95
+  },
+  {
+    "id": "sfx_cheer",
+    "file": "/audio/sfx_cheer.mp3",
+    "kind": "sfx",
+    "duration": 2.48
+  },
+  {
+    "id": "sfx_oops",
+    "file": "/audio/sfx_oops.mp3",
+    "kind": "sfx",
+    "duration": 0.9
+  },
+  {
+    "id": "sfx_pop",
+    "file": "/audio/sfx_pop.mp3",
+    "kind": "sfx",
+    "duration": 0.19
+  },
+  {
+    "id": "sfx_tada",
+    "file": "/audio/sfx_tada.mp3",
+    "kind": "sfx",
+    "duration": 1.35
+  },
+  {
+    "id": "sfx_ticktock",
+    "file": "/audio/sfx_ticktock.mp3",
+    "kind": "sfx",
+    "duration": 1.74
+  },
+  {
+    "id": "sfx_whoosh",
+    "file": "/audio/sfx_whoosh.mp3",
+    "kind": "sfx",
+    "duration": 0.78
+  },
+  {
+    "id": "slow_brain",
+    "file": "/audio/slow_brain.mp3",
+    "kind": "fallback",
+    "text": "Arre, Nani ka dhyaan bhatak gaya! Ek baar phir bolo, beta?",
+    "duration": 4.74
+  },
+  {
+    "id": "song",
+    "file": "/audio/song.mp3",
+    "kind": "song",
+    "text": "Ek Do Teen, Count With Me",
+    "duration": 35.03
+  },
+  {
+    "id": "song_snippet",
+    "file": "/audio/song_snippet.mp3",
+    "kind": "snippet",
+    "text": "Ek, do, teen, chaar, paanch, One, two, three, four, five!",
+    "duration": 7.37
+  },
+  {
+    "id": "voice_failed",
+    "file": "/audio/voice_failed.mp3",
+    "kind": "fallback",
+    "text": "Arre, Nani ki awaaz atak gayi! Ek baar phir poochho?",
+    "duration": 4.2
+  },
+  {
+    "id": "wait_music",
+    "file": "/audio/wait_music.mp3",
+    "kind": "music",
+    "duration": 10
+  }
+]
