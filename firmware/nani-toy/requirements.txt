@@ -1,0 +1,10 @@
+# Laptop side (brain + tools). Python 3.12 tested.
+numpy
+scipy
+requests
+pyserial          # tools: USB serial
+sounddevice       # tools: play audio on the laptop
+faster-whisper    # brain --offline: speech to text
+playwright        # brain: mirror the website's speech (uses installed Microsoft Edge)
+# Also needed on PATH: ffmpeg (decodes the website's voice audio)
+# Optional for --offline: Ollama (https://ollama.com) with the qwen3 model
