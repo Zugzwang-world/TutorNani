@@ -1,5 +1,9 @@
 # Nani toy — run it on your hardware
 
+> **Status: experimental. Not used in the demo**, which runs Nani in the browser on the same toy contract.
+> This is our own small ESP32-S3 firmware with a push switch, plus the laptop bridge (`brain/nani_brain.py`, started by `start-nani.sh` or `start-nani.bat`).
+> The bridge's `--site` still defaults to tutor-grandma.vercel.app, the old stack.
+
 All commands below run from this folder (`firmware/nani-toy/`).
 
 Code for the Nani plush toy (ESP32-S3). The toy listens, sends speech over Wi-Fi to a laptop, and plays
