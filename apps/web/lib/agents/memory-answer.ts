@@ -102,6 +102,7 @@ ${brain.content.trim()}`;
       { role: "user", content: user },
     ],
     maxTokens: talk ? 300 : 200,
+    label: "memory-answer",
     signal: AbortSignal.timeout(7_000), // past this the sorter's own reply is used (for "talk about", the report's lines)
   });
   // Unwrap only a fully quoted answer: a closing quote after "Ask him, "…?"" belongs to the answer.

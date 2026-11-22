@@ -128,7 +128,9 @@ export interface TurnTimings {
   brainFirst?: number; // ms from request start to first brain token
   voiceFirst?: number; // ms from request start to first audio ready
   total?: number; // ms, whole request
-  [key: string]: number | undefined;
+  brainProvider?: string; // "claude" or "kimi": who served the first brain token
+  brainAttempt?: number; // 1 = first request; 2+ = a retry (with Claude primary, a Kimi fallback)
+  [key: string]: number | string | undefined;
 }
 
 export interface Turn {
@@ -210,7 +212,7 @@ export type TurnEvent =
   | { t: "heard"; text: string }
   | { t: "say"; i: number; text: string; cues: Cue[]; audio: string } // audio: base64 mp3
   | { t: "fallback"; id: FallbackId }
-  | { t: "done"; ms: { stt: number; brainFirst: number; voiceFirst: number; total: number } };
+  | { t: "done"; ms: { stt: number; brainFirst: number; voiceFirst: number; total: number; brainProvider?: string; brainAttempt?: number } };
 
 export type FallbackId = "not_heard" | "voice_failed" | "slow_brain" | "offline";
 

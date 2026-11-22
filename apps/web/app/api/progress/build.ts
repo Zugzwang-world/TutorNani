@@ -385,6 +385,7 @@ JSON only.`;
       { role: "user", content: user },
     ],
     maxTokens: 420,
+    label: "progress",
     signal: AbortSignal.timeout(BRAIN_TIMEOUT_MS),
   });
   const r = LinesSchema.parse(raw);

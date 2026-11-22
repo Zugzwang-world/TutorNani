@@ -147,6 +147,7 @@ ${NANI}'s own note (a hint, may be wrong): ${hint}`;
         { role: "user", content: user },
       ],
       maxTokens: 120,
+      label: "turn-notes",
       signal: AbortSignal.timeout(JUDGE_TIMEOUT_MS),
     });
     log.judgeMs = Date.now() - t;

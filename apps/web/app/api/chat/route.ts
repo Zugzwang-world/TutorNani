@@ -50,7 +50,7 @@ export async function POST(req: Request) {
   };
 
   const results: ActionResult[] = [];
-  const ms = { context: 0, firstAction: 0, firstReply: 0, brain: 0, total: 0, attempts: 0 };
+  const ms = { context: 0, firstAction: 0, firstReply: 0, brain: 0, total: 0, attempts: 0, brainProvider: "", brainAttempt: 0 };
   let lastPost = 0;
   let sorted = false;
 
@@ -151,7 +151,12 @@ export async function POST(req: Request) {
       ms.attempts = attempt;
       const held: { a: SorterAction; w: Promise<WriteResult | null> }[] = []; // Memory waits for Lessons (B5)
       try {
-        for await (const ev of sortStream(input)) {
+        const onServed = (s: { provider: string; attempt: number }) => {
+          ms.brainProvider = s.provider;
+          ms.brainAttempt = s.attempt;
+        };
+        // Try 2 runs on Kimi when Claude is primary (an unusable Claude reply is not sent back to Claude).
+        for await (const ev of sortStream(input, { tryNo: attempt, onServed })) {
           if (ev.type === "bots") {
             planned = ev.bots.filter((b) => !posted.includes(b));
             working(planned);
