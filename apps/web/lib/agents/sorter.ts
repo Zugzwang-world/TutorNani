@@ -2,7 +2,7 @@
 // The reply is streamed: each action is handed over as soon as its JSON object closes, so the first agent can
 // answer while the brain is still writing the next one.
 import { z } from "zod";
-import { brainStreamRetry } from "../brain";
+import { brainStreamRetry, type BrainServed } from "../brain";
 import { clockParts } from "../clock";
 import { supabaseAdmin } from "../supabase/server";
 import { BOT_KEYS, type BotKey, type Turn } from "../types";
@@ -167,11 +167,13 @@ class ActionScanner {
  * One streamed brain call. Yields the planned bots (when the model lists them) and each valid action as it closes.
  * Throws if the reply holds no usable action, so the caller can retry.
  */
-export async function* sortStream(input: SorterInput): AsyncGenerator<SorterEvent> {
+export async function* sortStream(input: SorterInput, onServed?: (s: BrainServed) => void): AsyncGenerator<SorterEvent> {
   const scanner = new ActionScanner();
   let sentBots = false;
   let count = 0;
   const stream = brainStreamRetry({
+    label: "sorter",
+    onServed,
     retryAfterMs: 4000,
     messages: [
       { role: "system", content: systemPrompt(input.now.dayLabel) },

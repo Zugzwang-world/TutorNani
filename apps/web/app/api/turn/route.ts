@@ -20,7 +20,7 @@ import {
   type Reported,
 } from "@/lib/agents/changes";
 import { postTurnOutcomes, type TurnOutcomeInput } from "@/lib/agents/turn-notes";
-import { brainStreamRetry } from "@/lib/brain";
+import { brainStreamRetry, type BrainServed } from "@/lib/brain";
 import { clockParts, demoNow } from "@/lib/clock";
 import { CHILD_ID, config } from "@/lib/config";
 import { stt, tts } from "@/lib/eleven";
@@ -161,13 +161,16 @@ async function runTurn(
   const ctxP = loadContext(CHILD_ID, filesP);
   ctxP.catch(() => {}); // handled below; avoid an unhandled rejection on the early exits
 
+  // Which brain served the first token (provider, attempt): next to the hop timings, so a Kimi fallback shows.
+  let served: BrainServed | null = null;
+  const brainTag = () => (served ? { brainProvider: served.provider, brainAttempt: served.attempt } : {});
   const finish = (extra: Record<string, unknown> = {}) => {
     timings.total = since();
     emit({
       t: "done",
-      ms: { stt: timings.stt ?? -1, brainFirst: timings.brainFirst ?? -1, voiceFirst: timings.voiceFirst ?? -1, total: timings.total },
+      ms: { stt: timings.stt ?? -1, brainFirst: timings.brainFirst ?? -1, voiceFirst: timings.voiceFirst ?? -1, total: timings.total, ...brainTag() },
     });
-    console.log(`[turn] ${JSON.stringify({ ...timings, ...extra })}`);
+    console.log(`[turn] ${JSON.stringify({ ...timings, ...brainTag(), ...extra })}`);
   };
 
   // ---- 1. Hear ----
@@ -289,7 +292,8 @@ async function runTurn(
       }, BRAIN_IDLE_MS);
     };
     try {
-      for await (const d of brainStreamRetry({ messages, maxTokens: BRAIN_MAX_TOKENS, signal: brainAc.signal, retryAfterMs: BRAIN_RETRY_MS, attempts: 3 })) {
+      const onServed = (s: BrainServed) => (served = s);
+      for await (const d of brainStreamRetry({ messages, maxTokens: BRAIN_MAX_TOKENS, signal: brainAc.signal, retryAfterMs: BRAIN_RETRY_MS, attempts: 3, label: "turn", onServed })) {
         if (timings.brainFirst === undefined) {
           timings.brainFirst = since();
           clearTimeout(timer);
@@ -369,7 +373,7 @@ async function runTurn(
   }
   await producer;
   if (ac.signal.aborted) {
-    console.log(`[turn] aborted by client at ${since()} ms after ${sent.length} sentences ${JSON.stringify({ ...timings, heard: childText })}`);
+    console.log(`[turn] aborted by client at ${since()} ms after ${sent.length} sentences ${JSON.stringify({ ...timings, ...brainTag(), heard: childText })}`);
     return null;
   }
 
@@ -401,7 +405,7 @@ async function runTurn(
         nani_text: spoken,
         cues,
         file_versions: fileVersions,
-        timings,
+        timings: { ...timings, ...brainTag() },
         meta: {
           reply,
           notes,

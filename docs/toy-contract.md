@@ -25,7 +25,7 @@ Response: `application/x-ndjson`, streamed, one JSON object per line, in this or
    - At the start of each sentence, send its `cues` to the wall (section 3).
    - `audio` can be `""` for a cue-only sentence.
 3. `{"t":"fallback","id":"not_heard"|"voice_failed"|"slow_brain"|"offline"}`: play that pre-made line (`/audio/<id>.mp3`).
-4. `{"t":"done","ms":{"stt":…,"brainFirst":…,"voiceFirst":…,"total":…}}`: always last; `-1` marks a step that did not run.
+4. `{"t":"done","ms":{"stt":…,"brainFirst":…,"voiceFirst":…,"total":…,"brainProvider":"claude","brainAttempt":1}}`: always last; `-1` marks a step that did not run. `brainProvider` ("claude" or "kimi") and `brainAttempt` say which brain request gave the first token; both are missing when no token came.
 
 Timing (production, 17 Nov): the first `say` arrives 1.2 to 2.7 s after the request. Bridge the gap on the toy itself:
 - the instant a press ends, play a reaction (`/audio/reaction_*.mp3`)

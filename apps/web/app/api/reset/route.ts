@@ -27,7 +27,7 @@ async function timed(name: string, f: (signal: AbortSignal) => Promise<unknown>,
  */
 async function warmUp(): Promise<Record<string, number | string>> {
   const r = await Promise.all([
-    timed("brainMs", (signal) => brainComplete({ messages: [{ role: "user", content: "Say ok." }], maxTokens: 1, signal })),
+    timed("brainMs", (signal) => brainComplete({ messages: [{ role: "user", content: "Say ok." }], maxTokens: 1, signal, label: "warm-up" })),
     timed("voiceMs", (signal) => tts("Haan.", { signal })),
     timed("dbMs", async () => {
       const { error } = await supabaseAdmin().from("agent_files").select("id").eq("child_id", CHILD_ID).limit(1);

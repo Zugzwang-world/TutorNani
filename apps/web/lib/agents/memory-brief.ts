@@ -81,6 +81,7 @@ Write the brief now. JSON only.`;
           { role: "user", content: user },
         ],
         maxTokens: 600,
+        label: "memory-brief",
         signal: AbortSignal.timeout(25_000),
       });
       const r = BriefSchema.safeParse(raw);
