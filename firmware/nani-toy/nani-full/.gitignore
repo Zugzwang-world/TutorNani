@@ -1,0 +1,2 @@
+# Wi-Fi password lives here (copy secrets.example.h to secrets.h); never commit it
+secrets.h
