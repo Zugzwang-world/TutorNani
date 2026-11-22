@@ -155,7 +155,8 @@ export async function POST(req: Request) {
           ms.brainProvider = s.provider;
           ms.brainAttempt = s.attempt;
         };
-        for await (const ev of sortStream(input, onServed)) {
+        // Try 2 runs on Kimi when Claude is primary (an unusable Claude reply is not sent back to Claude).
+        for await (const ev of sortStream(input, { tryNo: attempt, onServed })) {
           if (ev.type === "bots") {
             planned = ev.bots.filter((b) => !posted.includes(b));
             working(planned);

@@ -165,15 +165,21 @@ class ActionScanner {
 
 /**
  * One streamed brain call. Yields the planned bots (when the model lists them) and each valid action as it closes.
- * Throws if the reply holds no usable action, so the caller can retry.
+ * Throws if the reply holds no usable action, so the caller can retry. `tryNo` is the caller's try (1, 2): with Claude
+ * primary, try 2 runs on Kimi (brainStreamRetry `firstAttempt`), so an unusable Claude reply never gets a second
+ * Claude go.
  */
-export async function* sortStream(input: SorterInput, onServed?: (s: BrainServed) => void): AsyncGenerator<SorterEvent> {
+export async function* sortStream(
+  input: SorterInput,
+  opts: { tryNo?: number; onServed?: (s: BrainServed) => void } = {},
+): AsyncGenerator<SorterEvent> {
   const scanner = new ActionScanner();
   let sentBots = false;
   let count = 0;
   const stream = brainStreamRetry({
     label: "sorter",
-    onServed,
+    onServed: opts.onServed,
+    firstAttempt: opts.tryNo ?? 1,
     retryAfterMs: 4000,
     messages: [
       { role: "system", content: systemPrompt(input.now.dayLabel) },

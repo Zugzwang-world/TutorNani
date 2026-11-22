@@ -208,9 +208,11 @@ export function brainStream(o: BrainOptions): AsyncGenerator<string> {
  * primary, attempt 1 is Claude and later attempts are Kimi; once a token arrives the provider never changes.
  * Kimi k2.6 stalls ~10% of requests for 7–10 s; a fresh request usually answers in ~1 s (probe 17 Nov: 2 stalls in 20,
  * retry 1.9 s). `onServed` gets the provider and attempt that produced the first token.
+ * `firstAttempt` (default 1) numbers the first request: a caller retrying after an unusable reply passes 2, so with
+ * Claude primary every request of that retry runs on Kimi. The number of requests is still `attempts`.
  */
 export async function* brainStreamRetry(
-  o: BrainOptions & { retryAfterMs: number; attempts?: number; onServed?: (s: BrainServed) => void },
+  o: BrainOptions & { retryAfterMs: number; attempts?: number; firstAttempt?: number; onServed?: (s: BrainServed) => void },
 ): AsyncGenerator<string> {
   type Leg = { ac: AbortController; it: AsyncIterator<string>; provider: BrainProvider; n: number };
   const outer = o.signal;
@@ -227,13 +229,17 @@ export async function* brainStreamRetry(
     return { ac, it: streamOn(provider, { ...o, signal: ac.signal })[Symbol.asyncIterator](), provider, n };
   };
 
-  const attempts = Math.max(1, o.attempts ?? 2);
-  let leg = start(1);
+  const first = Math.max(1, o.firstAttempt ?? 1);
+  const last = first + Math.max(1, o.attempts ?? 2) - 1;
+  if (legProvider(primary, first) !== legProvider(primary, 1)) {
+    console.warn(`[brain] ${label} fallback ${tag(legProvider(primary, 1))} -> ${tag(legProvider(primary, first))} (attempt ${first}): the caller is retrying`);
+  }
+  let leg = start(first);
   let res: IteratorResult<string> | null = null;
-  for (let n = 1; n <= attempts && !res; n++) {
+  for (let n = first; n <= last && !res; n++) {
     const p = leg.it.next();
     p.catch(() => {});
-    if (n === attempts) {
+    if (n === last) {
       res = await p; // last attempt: wait for it (the caller's own timeout still applies)
       break;
     }
