@@ -1,0 +1,385 @@
+{
+  "version": 1,
+  "rail": {
+    "watch": "▶ Watch · recorded from a live run",
+    "turn": "● Your turn · live",
+    "next": "Next ▸",
+    "replay": "Replay ↺",
+    "skip": "Skip tour",
+    "stuck": "Tap ▸ to continue"
+  },
+  "sayThis": {
+    "title": "Say this",
+    "orTap": "or tap to send",
+    "mic": "Allow the mic, or just tap the line."
+  },
+  "phoneGate": {
+    "title": "Best on a laptop",
+    "body": "Open this link on a laptop or desktop for the full tour.",
+    "copy": "Copy"
+  },
+  "opening": [
+    {
+      "id": "why",
+      "kicker": "Why we built this",
+      "title": "My grandmother taught for 50 years.",
+      "body": "Marathi and mathematics, to generations of children. Tutor Grandma puts a teacher like her beside every child.",
+      "art": "grandma-slate",
+      "dwellMs": 4500
+    },
+    {
+      "id": "problem",
+      "kicker": "The problem",
+      "title": "Ages 5 to 8 learn by listening.",
+      "body": "It's when a child moves from the home language to English. A phone is the wrong teacher at that age, and good play school is out of reach for most families.",
+      "art": "three-icons",
+      "icons": [
+        { "emoji": "👂", "label": "the listening years" },
+        { "emoji": "📵", "label": "no phone" },
+        { "emoji": "🏫", "label": "costly play school" }
+      ],
+      "dwellMs": 4500
+    },
+    {
+      "id": "gap",
+      "kicker": "The gap",
+      "title": "Parents can't guide their child's AI.",
+      "body": "Today it's settings, toggles and presets. A child changes every day. A preset doesn't.",
+      "art": "toggles-to-chat",
+      "dwellMs": 4500
+    },
+    {
+      "id": "belief",
+      "kicker": "Our belief",
+      "title": "AI already teaches IQ. We build EQ.",
+      "body": "Every lesson becomes a reason for the child to run to Mumma and Papa.",
+      "art": "child-heart-parents",
+      "dwellMs": 4500
+    },
+    {
+      "id": "guide",
+      "kicker": "Guide, not control",
+      "title": "Parents guide. They don't control.",
+      "body": "No settings. Mumma and Papa just talk, in plain words, in a group chat. Nani listens.",
+      "art": "group-chat",
+      "button": "Meet Nani →"
+    }
+  ],
+  "anatomy": [
+    {
+      "id": "voice",
+      "emoji": "🎙",
+      "label": "The voice agent",
+      "target": "nani-voice",
+      "card": "Nani, the voice agent. A child just talks. She listens, thinks and answers like a grandma, in Hindi and English.",
+      "mini": ["voice", "hears", "thinks", "speaks"],
+      "dwellMs": 6000
+    },
+    {
+      "id": "wall",
+      "emoji": "🖼",
+      "label": "The screen",
+      "target": "wall",
+      "card": "The wall. Words become pictures, spelling boards and cheers, with no phone in the child's hand.",
+      "mini": ["Nani's words", "cue", "card on the wall"],
+      "dwellMs": 6000
+    },
+    {
+      "id": "heart",
+      "emoji": "👨‍👩‍👦",
+      "label": "The heart: AI agents and the parents' group chat",
+      "target": "stage-right",
+      "sub": ["chat", "chat-avatars", "file-strip", "jobs-board"],
+      "card": "The guidance system. Mumma and Papa chat with Nani's team: ⏰ Routine, 🏠 House rules, 📚 Lessons, 📔 Memory. Each agent owns one file, and every message can change how Nani teaches, live.",
+      "mini": ["parent message", "sorter", "agent", "new file version", "Nani's next turn"],
+      "dwellMs": 8000
+    }
+  ],
+  "story": {
+    "title": "One day with Aarav",
+    "helpsDwellMs": 3500
+  },
+  "chapters": [
+    {
+      "id": "ch1",
+      "emoji": "🌅",
+      "time": "Morning",
+      "clock": "08:30",
+      "title": "She remembers him",
+      "steps": [
+        {
+          "mode": "watch",
+          "beat": "ch1-watch",
+          "kind": "talk",
+          "speaker": "Aarav",
+          "line": "Hello Nani!",
+          "target": "nani-voice",
+          "note": "She greets him by name, says one line about yesterday and starts today's letter, M."
+        },
+        {
+          "mode": "turn",
+          "kind": "line",
+          "speaker": "Aarav",
+          "line": "Nani, raat ko Papa aayenge!",
+          "meaning": "Nani, Papa is coming tonight!",
+          "expect": "Raat ko aasmaan mein aur kaun aata hai?",
+          "expectMeaning": "Who else comes to the sky at night?",
+          "target": "line-box",
+          "waitFor": { "event": "turnDone" },
+          "voice": true
+        }
+      ],
+      "helps": {
+        "text": "Nothing is pre-recorded. Whatever Aarav says becomes the lesson.",
+        "hood": "Speech-to-text (ElevenLabs Scribe) → Claude Haiku 5.5, thinking off → ElevenLabs v4 Turbo voice. brain.md gives her yesterday."
+      }
+    },
+    {
+      "id": "ch2",
+      "emoji": "☀️",
+      "time": "Morning",
+      "clock": "09:30",
+      "title": "The game inside anything",
+      "steps": [
+        {
+          "mode": "watch",
+          "beat": "ch2-watch",
+          "kind": "talk",
+          "speaker": "Aarav",
+          "line": "Chand!",
+          "meaning": "The moon!",
+          "target": "wall",
+          "note": "Chand ko English mein Moon kehte hain. M for Moon! The Moon card, then the _OON board with three tiles."
+        },
+        {
+          "mode": "turn",
+          "kind": "line",
+          "speaker": "Aarav",
+          "line": "M!",
+          "target": "wall",
+          "expect": "The tile flies in and the wall cheers.",
+          "waitFor": { "event": "cue", "cue": "tile" }
+        }
+      ],
+      "helps": {
+        "text": "Hindi in, English out. Chand becomes Moon: the bridge from the home language to English, built from his own words.",
+        "hood": "Today's bridge words go to speech-to-text as keyterms. Markers in Nani's reply drive every card and board."
+      }
+    },
+    {
+      "id": "ch3",
+      "emoji": "🕛",
+      "time": "Noon",
+      "clock": "12:00",
+      "title": "Mumma guides from work",
+      "steps": [
+        {
+          "mode": "watch",
+          "beat": "ch3-watch-a",
+          "kind": "chat",
+          "speaker": "Mumma",
+          "bubble": "water",
+          "line": "Remind him to drink water now, and then every 2 hours",
+          "target": "bubble-water",
+          "note": "⏰ Routine replies, the job appears on the jobs board with its countdown, and Nani reminds Aarav at once."
+        },
+        {
+          "mode": "watch",
+          "beat": "ch3-watch-b",
+          "kind": "talk",
+          "speaker": "Aarav",
+          "line": "Pee liya abhi!",
+          "meaning": "I just drank it!",
+          "target": "chat",
+          "note": "Routine posts 💧 to Mumma."
+        },
+        {
+          "mode": "turn",
+          "kind": "bubble",
+          "speaker": "Mumma",
+          "bubble": "count-both",
+          "line": "When you count, count in Hindi and English both",
+          "target": "bubble-count-both",
+          "waitFor": { "event": "chat", "sender": "rules" }
+        },
+        {
+          "mode": "auto",
+          "kind": "line",
+          "speaker": "Aarav",
+          "line": "Nani, ginti karein!",
+          "meaning": "Nani, let's count!",
+          "expect": "Ek, one! Do, two! Teen, three!",
+          "target": "wall",
+          "waitFor": { "event": "turnDone" }
+        },
+        {
+          "mode": "auto",
+          "kind": "profile",
+          "agent": "rules",
+          "target": "file-parent",
+          "dwellMs": 2000,
+          "optional": true
+        }
+      ],
+      "helps": {
+        "text": "No settings page. Mumma just said it, and seconds later Nani changed how she teaches.",
+        "hood": "A sorter routes each message to one agent. Routine writes heartbeat jobs on the real clock. House rules writes a new version of its file, and every version is kept."
+      }
+    },
+    {
+      "id": "ch4",
+      "emoji": "🌤",
+      "time": "Afternoon",
+      "clock": "15:00",
+      "title": "Papa's mangoes",
+      "steps": [
+        {
+          "mode": "watch",
+          "beat": "ch4-watch",
+          "kind": "chat",
+          "speaker": "Papa",
+          "bubble": "mangoes",
+          "line": "I'm bringing mangoes for him tonight",
+          "target": "bubble-mangoes",
+          "note": "📚 Lessons and 📔 Memory reply, and the planner file chip pulses: today's plan changed."
+        },
+        {
+          "mode": "turn",
+          "kind": "line",
+          "speaker": "Aarav",
+          "line": "Nani, ab kya khelenge?",
+          "meaning": "Nani, what shall we play now?",
+          "expect": "M se Mango",
+          "expectMeaning": "M for Mango",
+          "target": "line-box",
+          "waitFor": { "event": "turnDone" }
+        }
+      ],
+      "helps": {
+        "key": true,
+        "text": "Out of every M word, Nani chose Mango, because Papa is bringing mangoes tonight. When Papa walks in, Aarav already knows the word. The lesson ends at the family table.",
+        "hood": "Lessons rewrites planner.md. The new plan takes over at Nani's next turn."
+      }
+    },
+    {
+      "id": "ch5",
+      "emoji": "🌇",
+      "time": "Evening",
+      "clock": "17:30",
+      "title": "Roar for Mumma",
+      "steps": [
+        {
+          "mode": "watch",
+          "beat": "ch5-watch-a",
+          "kind": "talk",
+          "speaker": "Aarav",
+          "line": "Lion kaise roar karta hai?",
+          "meaning": "How does a lion roar?",
+          "target": "wall",
+          "note": "The lion appears on the wall and Nani asks for his roar."
+        },
+        {
+          "mode": "turn",
+          "kind": "line",
+          "speaker": "Aarav",
+          "line": "Roarrr! 🦁",
+          "prompt": "Roar like a lion!",
+          "voiceHint": "Tap 🎙 and roar",
+          "target": "nani-voice",
+          "waitFor": { "event": "turnDone" },
+          "voice": true
+        },
+        {
+          "mode": "watch",
+          "beat": "ch5-watch-b",
+          "kind": "talk",
+          "speaker": "Aarav",
+          "line": "Mumma ko roar sunana hai!",
+          "meaning": "I want Mumma to hear my roar!",
+          "target": "nani-voice",
+          "note": "Nani offers to call Mumma."
+        },
+        {
+          "mode": "watch",
+          "beat": "ch5-watch-c",
+          "kind": "call",
+          "speaker": "Aarav",
+          "line": "Haan!",
+          "meaning": "Yes!",
+          "target": "chat",
+          "note": "A call bubble in the chat, Mumma joins, hears the roar and replies."
+        }
+      ],
+      "helps": {
+        "text": "His excitement went to Mumma, not to a screen. Aarav learns that when he's excited, he shares it with his parents. That's EQ.",
+        "hood": "Nani's call marker fires only after a clear yes from the child."
+      }
+    },
+    {
+      "id": "ch6",
+      "emoji": "🌙",
+      "time": "Night",
+      "clock": "19:30",
+      "title": "What should I talk to him about?",
+      "steps": [
+        {
+          "mode": "watch",
+          "beat": "ch6-watch",
+          "kind": "chat",
+          "speaker": "Papa",
+          "bubble": "talk-about",
+          "line": "Coming home soon. What should I talk to him about?",
+          "target": "bubble-talk-about",
+          "note": "📔 Memory answers with today's real moments (Moon, the roar, the mango, the water) and three bedtime questions, plus a 📈 progress card."
+        },
+        {
+          "mode": "turn",
+          "kind": "report",
+          "target": "progress-card",
+          "prompt": "Open the 📈 card",
+          "views": [
+            { "view": "today", "prompt": "Today" },
+            { "view": "week", "prompt": "This week" },
+            { "view": "month", "prompt": "This month" }
+          ],
+          "note": "Earlier weeks: sample history · Today: from this run.",
+          "waitFor": { "event": "report" }
+        }
+      ],
+      "helps": {
+        "text": "Memory knows the whole day, so Papa walks in with three questions instead of 'How was your day?'. And the report shows Aarav growing, week by week.",
+        "hood": "Memory reads today's turns and brain.md. Progress lives in Supabase (progress_days). The report is hand-made SVG."
+      }
+    }
+  ],
+  "finale": {
+    "title": "How it helped today",
+    "items": [
+      { "emoji": "🌅", "text": "His own words became English (Chand → Moon)" },
+      { "emoji": "🕛", "text": "Mumma guided from work in plain words" },
+      { "emoji": "🌤", "text": "Papa's mangoes became the lesson" },
+      { "emoji": "🌇", "text": "He shared his roar with Mumma" },
+      { "emoji": "🌙", "text": "Papa knew what to talk about" }
+    ],
+    "tagline": "Nani teaches the words. The family gets closer.",
+    "dwellMs": 7000
+  },
+  "tech": {
+    "title": "Under the hood",
+    "lines": [
+      { "id": "voice", "text": "Child ↔ Nani: Scribe STT → Claude Haiku 5.5 (thinking off, low effort, Kimi k2.6 as the backup on each call) → Eleven v4 Turbo." },
+      { "id": "wall", "text": "Markers → the wall." },
+      { "id": "agents", "text": "Parents' chat → sorter → Routine, House rules, Lessons and Memory → the agent files (persona, brain, planner, heartbeat, parent), versioned in Supabase → Nani's next turn." },
+      { "id": "infra", "text": "Supabase Realtime, Next.js 16 on Vercel (bom1)." },
+      { "id": "measured", "text": "Measured: median 2.45 s to first audio; stage script 15 of 15." },
+      { "id": "voiceStandIn", "text": "Nani's voice here is a library stand-in (\"Dulari Didi\", eleven_v4_turbo). In the product, the family's own grandma's voice is cloned." },
+      { "id": "product", "text": "In the product, Nani lives in a plush toy and the wall on a projector. Here both run in the browser, on the same toy contract." }
+    ],
+    "dwellMs": 9000
+  },
+  "explore": {
+    "title": "Explore freely",
+    "restart": "↺ Restart tour",
+    "hint": "Tap Nani and ask anything, or tap any bubble."
+  }
+}
