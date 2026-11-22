@@ -1,0 +1,587 @@
+/* Progress report (REFINE R7). Everything prefixed rp-. Warm off-white and marigold, from the app's theme. */
+
+.rp-root {
+  --rp-paper: var(--color-cream, #fff8ee);
+  --rp-sheet: #fffdf8;
+  --rp-ink: var(--color-ink, #2b2118);
+  --rp-bark: #6b5a48; /* quiet text: readable on cream */
+  --rp-line: var(--color-line, #f0e4d4);
+  --rp-marigold: var(--color-marigold, #f29a0e);
+  --rp-petal: #ffd27a;
+  --rp-soft: var(--color-marigold-soft, #fff0d6);
+  --rp-saffron: #b25b00; /* marigold dark enough for text */
+  --rp-leaf: #4d7c3a;
+  --rp-sky: #e6eff7;
+  --rp-rain: #5f84ad;
+  --rp-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --rp-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  color: var(--rp-ink);
+  font-family: var(--font-sans);
+}
+
+.rp-display {
+  font-family: var(--font-baloo), var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- the overlay ---------- */
+@keyframes rp-panel-in {
+  from {
+    transform: translateY(28px) scale(0.985);
+    opacity: 0;
+  }
+}
+@keyframes rp-panel-out {
+  to {
+    transform: translateY(48px);
+    opacity: 0;
+  }
+}
+.rp-panel {
+  background: var(--rp-paper);
+  animation: rp-panel-in 380ms var(--rp-drawer) backwards;
+}
+.rp-panel[data-closing="true"] {
+  animation: rp-panel-out 220ms var(--rp-drawer) forwards;
+}
+
+/* Readable from 3 m on the stage: scale everything up on big screens. */
+@media (min-width: 1400px) {
+  .rp-zoom {
+    zoom: 1.2;
+  }
+}
+@media (min-width: 1760px) {
+  .rp-zoom {
+    zoom: 1.45;
+  }
+}
+
+.rp-head {
+  background: color-mix(in srgb, var(--rp-paper) 98%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid color-mix(in srgb, var(--rp-line) 80%, transparent);
+}
+
+.rp-close {
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 160ms var(--rp-ease),
+    background-color 160ms ease;
+}
+.rp-close:active {
+  transform: scale(0.94);
+}
+
+/* ---------- the period switch ---------- */
+.rp-switch {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 4px;
+  border-radius: 9999px;
+  background: #f6ead8;
+  box-shadow: inset 0 1px 2px rgba(43, 33, 24, 0.08);
+}
+.rp-switch-thumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc((100% - 8px) / 4);
+  border-radius: 9999px;
+  background: var(--rp-marigold);
+  box-shadow:
+    0 1px 2px rgba(178, 91, 0, 0.35),
+    0 4px 12px -4px rgba(242, 154, 14, 0.6);
+  transform: translateX(calc(var(--i, 0) * 100%));
+  transition: transform 380ms var(--rp-drawer);
+}
+.rp-switch button {
+  position: relative;
+  z-index: 1;
+  padding: 7px 4px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.1;
+  color: var(--rp-bark);
+  white-space: nowrap;
+  transition: color 240ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.rp-switch button[aria-selected="true"] {
+  color: #2b1600;
+}
+.rp-switch button:focus-visible,
+.rp-focus:focus-visible {
+  outline: 3px solid var(--rp-saffron);
+  outline-offset: 2px;
+}
+
+/* ---------- layout ---------- */
+.rp-grid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "lines" "garden" "learn" "days" "feel" "tricky" "routine" "best";
+}
+@media (min-width: 1000px) {
+  .rp-grid {
+    column-gap: 56px;
+    row-gap: 48px;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr; /* the garden row takes the garland's extra height, not the three lines */
+    grid-template-areas:
+      "lines learn"
+      "garden learn"
+      "days feel"
+      "tricky routine"
+      "best best";
+  }
+}
+.rp-area-lines { grid-area: lines; }
+.rp-area-garden { grid-area: garden; }
+.rp-area-learn { grid-area: learn; }
+.rp-area-days { grid-area: days; }
+.rp-area-feel { grid-area: feel; }
+.rp-area-tricky { grid-area: tricky; }
+.rp-area-routine { grid-area: routine; }
+.rp-area-best { grid-area: best; }
+
+.rp-h2 {
+  font-family: var(--font-baloo), var(--font-sans);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--rp-ink);
+}
+.rp-sub {
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: var(--rp-bark);
+}
+
+/* text that changes with the period fades in */
+@keyframes rp-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.rp-fade {
+  animation: rp-fade 360ms var(--rp-ease) backwards;
+}
+
+/* ---------- 1. in three lines ---------- */
+.rp-lines li {
+  font-family: var(--font-baloo), var(--font-sans);
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+.rp-lines li::before {
+  content: "";
+  flex: none;
+  width: 12px;
+  height: 12px;
+  margin-top: 0.42em;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 50% 50%, #ffc861 0 35%, var(--rp-marigold) 36% 100%);
+  box-shadow: 0 0 0 3px var(--rp-soft);
+}
+.rp-lines[data-pending="true"] li {
+  opacity: 0.55;
+}
+@keyframes rp-writing {
+  50% {
+    opacity: 0.35;
+  }
+}
+.rp-writing {
+  animation: rp-writing 1.4s ease-in-out infinite;
+}
+
+.rp-starter {
+  position: relative;
+  background: var(--rp-sheet);
+  border: 1.5px solid #f6dcae;
+  border-radius: 18px 18px 18px 6px;
+  font-weight: 700;
+  font-size: 16.5px;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+/* ---------- 2. the word garden ---------- */
+.rp-garden {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  row-gap: 18px;
+}
+.rp-plant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 84px;
+  padding-top: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+.rp-bloom {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 9999px;
+  font-size: 28px;
+  background: #fbf3e6;
+  box-shadow: 0 0 0 1.5px #efdfc6;
+  transition:
+    transform 260ms var(--rp-ease),
+    box-shadow 200ms ease,
+    background-color 200ms ease;
+}
+.rp-plant[data-new="true"] .rp-bloom {
+  background: radial-gradient(circle at 50% 45%, #fff6e0 0 45%, #ffe1a1 100%);
+  box-shadow:
+    0 0 0 2.5px var(--rp-marigold),
+    0 6px 14px -6px rgba(242, 154, 14, 0.7);
+}
+.rp-plant[aria-pressed="true"] .rp-bloom {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow:
+    0 0 0 3px var(--rp-saffron),
+    0 10px 18px -8px rgba(178, 91, 0, 0.6);
+}
+.rp-plant:focus-visible {
+  outline: none;
+}
+.rp-plant:focus-visible .rp-bloom {
+  outline: 3px solid var(--rp-saffron);
+  outline-offset: 3px;
+}
+.rp-stem {
+  position: relative;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--rp-leaf);
+}
+.rp-stem::after {
+  /* one leaf, on alternating sides */
+  content: "";
+  position: absolute;
+  top: 35%;
+  width: 13px;
+  height: 7px;
+  border-radius: 0 100% 0 100%;
+  background: #6f9f4f;
+  left: 2px;
+  transform: rotate(-24deg);
+  transform-origin: left center;
+}
+.rp-plant[data-side="l"] .rp-stem::after {
+  left: auto;
+  right: 2px;
+  border-radius: 100% 0 100% 0;
+  transform: rotate(24deg);
+  transform-origin: right center;
+}
+.rp-ground {
+  width: 62px;
+  height: 7px;
+  border-radius: 9999px 9999px 4px 4px;
+  background: #e8d3b4;
+}
+.rp-tag {
+  margin-top: 6px;
+  max-width: 84px;
+  text-align: center;
+  line-height: 1.1;
+}
+@keyframes rp-sprout {
+  from {
+    transform: translateY(10px) scale(0.6);
+    opacity: 0;
+  }
+}
+.rp-sprout {
+  animation: rp-sprout 460ms var(--rp-ease) backwards;
+  animation-delay: calc(var(--k, 0) * 22ms);
+}
+.rp-note {
+  background: var(--rp-sheet);
+  border: 1.5px solid var(--rp-line);
+  border-radius: 20px;
+}
+
+/* ---------- 3. learning: the garland, the petals, the diyas ---------- */
+.rp-ring {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin-inline: auto;
+}
+.rp-ring-centre {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+.rp-ring-letter {
+  font-family: var(--font-baloo), var(--font-sans);
+  font-weight: 800;
+  font-size: 26cqw;
+  line-height: 0.9;
+  color: var(--rp-saffron);
+}
+.rp-ring-for {
+  font-family: var(--font-baloo), var(--font-sans);
+  font-weight: 600;
+  font-size: 6.2cqw;
+  line-height: 1.1;
+}
+.rp-ring-known {
+  margin-top: 0.4cqw;
+  font-size: 4.3cqw;
+  color: var(--rp-bark);
+}
+.rp-bead {
+  transition:
+    opacity 300ms ease,
+    transform 380ms var(--rp-ease);
+}
+@keyframes rp-light {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}
+.rp-bead-in {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rp-light 520ms var(--rp-ease) backwards;
+  animation-delay: calc(var(--k, 0) * 38ms + 120ms);
+}
+@keyframes rp-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.1;
+  }
+}
+.rp-glow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rp-glow 2.4s ease-in-out infinite;
+}
+.rp-fresh-ring {
+  transition: opacity 300ms ease;
+}
+
+.rp-petal {
+  transform-box: view-box;
+  transition: transform 620ms var(--rp-drawer);
+}
+
+@keyframes rp-flicker {
+  0%,
+  100% {
+    transform: scaleY(1) skewX(0deg);
+  }
+  40% {
+    transform: scaleY(1.08) skewX(-3deg);
+  }
+  70% {
+    transform: scaleY(0.95) skewX(2deg);
+  }
+}
+.rp-flame {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition:
+    opacity 400ms ease,
+    transform 400ms var(--rp-ease);
+}
+.rp-flame[data-lit="true"] {
+  animation: rp-flicker 2.6s ease-in-out infinite;
+  animation-delay: calc(var(--k, 0) * -0.37s);
+}
+
+/* ---------- 4. days ---------- */
+.rp-calvars {
+  --cell: 22px;
+  --gap: 4px;
+}
+@media (min-width: 420px) {
+  .rp-calvars {
+    --cell: 27px;
+    --gap: 5px;
+  }
+}
+@media (min-width: 1000px) {
+  .rp-calvars {
+    --cell: 40px;
+    --gap: 7px;
+  }
+}
+.rp-cal {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, var(--cell));
+  grid-auto-columns: var(--cell);
+  gap: var(--gap);
+}
+.rp-cell {
+  border-radius: 7px;
+  background: #f3e8d8;
+  transition:
+    opacity 360ms ease,
+    transform 200ms var(--rp-ease),
+    box-shadow 200ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.rp-cell[data-out="true"] {
+  opacity: 0.28;
+}
+.rp-cell[data-lvl="1"] { background: #ffe0a6; }
+.rp-cell[data-lvl="2"] { background: #ffc356; }
+.rp-cell[data-lvl="3"] { background: #f5a114; }
+.rp-cell[data-lvl="4"] { background: #d97f00; }
+.rp-cell[data-blank="true"] {
+  background: transparent;
+  pointer-events: none;
+}
+.rp-cell[aria-pressed="true"] {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 2.5px var(--rp-ink);
+}
+.rp-cell[data-live="true"] {
+  box-shadow: 0 0 0 2.5px var(--rp-saffron);
+}
+.rp-cell[data-live="true"][aria-pressed="true"] {
+  box-shadow:
+    0 0 0 2.5px var(--rp-saffron),
+    0 0 0 5px var(--rp-ink);
+}
+@keyframes rp-live {
+  0% {
+    box-shadow: 0 0 0 0 rgba(242, 154, 14, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(242, 154, 14, 0);
+  }
+}
+.rp-live-dot {
+  animation: rp-live 1.8s ease-out infinite;
+}
+
+/* ---------- 5. feelings ---------- */
+.rp-sky {
+  position: relative;
+  transition: height 360ms var(--rp-drawer);
+  border-radius: 22px;
+  background:
+    radial-gradient(120% 90% at 10% 0%, #fff4dc 0%, transparent 60%),
+    linear-gradient(180deg, #eaf2f9 0%, #f6efe4 100%);
+  box-shadow: inset 0 0 0 1.5px #e5ddd0;
+  overflow: hidden;
+}
+.rp-moment {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-left: -23px;
+  border-radius: 9999px;
+  font-size: 28px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 8px -3px rgba(43, 33, 24, 0.25);
+  transition:
+    left 520ms var(--rp-drawer),
+    bottom 520ms var(--rp-drawer),
+    transform 200ms var(--rp-ease),
+    box-shadow 200ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.rp-moment[aria-pressed="true"] {
+  transform: scale(1.14);
+  box-shadow:
+    0 0 0 3px var(--rp-ink),
+    0 6px 14px -4px rgba(43, 33, 24, 0.35);
+  z-index: 2;
+}
+
+/* ---------- 6, 7, 8 ---------- */
+.rp-tricky {
+  background: var(--rp-sheet);
+  border: 2px dashed #efc98a;
+  border-radius: 20px;
+}
+.rp-icons .emoji {
+  font-size: 22px;
+}
+.rp-best {
+  position: relative;
+  background: var(--rp-sheet);
+  border-radius: 24px;
+  box-shadow:
+    0 0 0 1.5px var(--rp-line),
+    0 12px 24px -18px rgba(120, 72, 10, 0.45);
+}
+.rp-best-mark {
+  position: absolute;
+  top: -6px;
+  left: 18px;
+  font-family: var(--font-baloo), var(--font-sans);
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--rp-petal);
+  pointer-events: none;
+}
+
+@media (min-width: 1000px) {
+  .rp-lines li {
+    font-size: 27px;
+  }
+  .rp-h2 {
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-panel,
+  .rp-fade,
+  .rp-sprout,
+  .rp-bead-in {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+  .rp-panel[data-closing="true"] {
+    animation-duration: 1ms !important;
+  }
+  .rp-glow,
+  .rp-flame[data-lit="true"],
+  .rp-live-dot,
+  .rp-writing {
+    animation: none !important;
+  }
+  .rp-switch-thumb,
+  .rp-petal,
+  .rp-moment,
+  .rp-cell,
+  .rp-bead {
+    transition-duration: 1ms !important;
+  }
+}

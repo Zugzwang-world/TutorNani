@@ -1,0 +1,510 @@
+/* Guidance chat motion and small helpers. Prefixed tg- so nothing leaks. */
+
+@keyframes tg-bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.tg-enter {
+  animation: tg-bubble-in 300ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+.tg-origin-left {
+  transform-origin: bottom left;
+}
+.tg-origin-right {
+  transform-origin: bottom right;
+}
+
+/* typing dots */
+@keyframes tg-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+.tg-dots > span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: tg-dot 1.1s infinite ease-in-out;
+}
+.tg-dots > span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.tg-dots > span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* "writing..." dot on a header avatar */
+@keyframes tg-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.55;
+  }
+}
+.tg-writing {
+  animation: tg-pulse 1.1s infinite ease-in-out;
+}
+
+/* Height + fade collapse, both directions, no JS */
+.tg-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 240ms cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 180ms ease;
+}
+.tg-collapse[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.tg-collapse > * {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* bottom sheet */
+@keyframes tg-sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes tg-sheet-out {
+  from {
+    transform: translateY(var(--tg-drag, 0px));
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+@keyframes tg-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes tg-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+/* backwards (not both) so the inline drag transform wins once the sheet is in */
+.tg-sheet {
+  animation: tg-sheet-in 340ms cubic-bezier(0.32, 0.72, 0, 1) backwards;
+}
+.tg-sheet[data-closing="true"] {
+  animation: tg-sheet-out 220ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+.tg-backdrop {
+  animation: tg-fade-in 240ms ease backwards;
+}
+.tg-backdrop[data-closing="true"] {
+  animation: tg-fade-out 220ms ease forwards;
+}
+
+/* "writing it down..." shimmer for a voice note being transcribed */
+@keyframes tg-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+.tg-shimmer {
+  background: linear-gradient(90deg, #8a7a6a 30%, #d8c8b4 50%, #8a7a6a 70%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: tg-shimmer 1.6s linear infinite;
+}
+
+/* recording dot */
+@keyframes tg-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+.tg-rec-dot {
+  animation: tg-blink 1s steps(2, start) infinite;
+}
+
+/* mic ring while recording */
+@keyframes tg-ring {
+  from {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  to {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+.tg-mic-ring {
+  animation: tg-ring 1.2s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+}
+
+.tg-press {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.tg-press:active {
+  transform: scale(0.97);
+}
+
+/* ---------- typing rhythm ---------- */
+
+/* A new row opens its own height (the chat glides up). Defined before .tg-collapse so a collapse still wins. */
+@keyframes tg-grow {
+  from {
+    grid-template-rows: 0fr;
+  }
+  to {
+    grid-template-rows: 1fr;
+  }
+}
+.tg-grow {
+  display: grid;
+  grid-template-rows: 1fr;
+  animation: tg-grow 320ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+}
+.tg-grow > * {
+  min-height: 0;
+}
+.tg-collapse[data-open="false"] {
+  grid-template-rows: 0fr;
+}
+
+/* The typing bubble turns into the reply: avatar and name stay, the bubble settles in from the typing bubble's corner. */
+@keyframes tg-morph-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+.tg-morph-in {
+  transform-origin: top left;
+  animation: tg-morph-in 300ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+}
+.tg-morph-late {
+  animation-delay: 140ms;
+}
+
+/* A transcript arriving under a voice note */
+@keyframes tg-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+    filter: blur(2px);
+  }
+}
+.tg-reveal {
+  animation: tg-reveal 320ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+}
+
+/* "New messages" pill */
+.tg-pill {
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0;
+  transform: translateY(10px) scale(0.94);
+  filter: blur(2px);
+  transition:
+    opacity 200ms ease,
+    transform 260ms cubic-bezier(0.23, 1, 0.32, 1),
+    filter 200ms ease;
+}
+.tg-pill[data-on="true"] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+.tg-pill[data-on="true"]:active {
+  transform: scale(0.97);
+  transition-duration: 120ms;
+}
+.tg-pill[data-on="false"] {
+  pointer-events: none;
+}
+
+/* ---------- header: who is writing ---------- */
+
+.tg-head-avatar {
+  transition: transform 260ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.tg-head-avatar[data-on="true"] {
+  transform: translateY(-2px);
+}
+.tg-head-avatar > span:first-child {
+  transition: box-shadow 260ms ease;
+}
+.tg-head-avatar[data-lead="true"] > span:first-child {
+  box-shadow:
+    0 0 0 2px var(--color-cream),
+    0 0 0 3.5px currentColor;
+}
+.tg-head-typing {
+  opacity: 0;
+  transform: scale(0.5);
+  transform-origin: center;
+  transition:
+    opacity 160ms ease,
+    transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.tg-head-avatar[data-on="true"] .tg-head-typing {
+  opacity: 1;
+  transform: none;
+}
+@keyframes tg-mini {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+}
+.tg-head-typing > span {
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+}
+.tg-head-avatar[data-on="true"] .tg-head-typing > span {
+  animation: tg-mini 1.2s infinite ease-in-out;
+}
+.tg-head-typing > span:nth-child(2) {
+  animation-delay: 0.15s !important;
+}
+.tg-head-typing > span:nth-child(3) {
+  animation-delay: 0.3s !important;
+}
+
+@keyframes tg-breathe {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.97);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+.tg-breathe {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.tg-breathe[data-on="true"] {
+  animation: tg-breathe 2.4s ease-in-out infinite;
+}
+
+.tg-sub {
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 200ms ease,
+    transform 260ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.tg-sub[data-on="true"] {
+  opacity: 1;
+  transform: none;
+}
+.tg-sub[data-on="false"] {
+  transform: translateY(-5px);
+}
+
+/* ---------- what changed: lines highlight in, removed lines get struck through ---------- */
+
+@keyframes tg-line-new {
+  from {
+    background-color: rgb(255 240 214 / 0);
+  }
+}
+@keyframes tg-line-gone {
+  from {
+    background-color: rgb(253 236 234 / 0);
+  }
+}
+@keyframes tg-bar {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes tg-badge {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+@keyframes tg-strike {
+  from {
+    background-size: 0% 2px;
+  }
+}
+.tg-line {
+  --tg-at: calc(var(--tg-base, 0ms) + var(--i, 0) * 80ms);
+}
+.tg-line[data-new="true"] {
+  animation: tg-line-new 600ms ease-out var(--tg-at) backwards;
+}
+.tg-line[data-removed="true"] {
+  animation: tg-line-gone 600ms ease-out var(--tg-at) backwards;
+}
+.tg-line[data-new="true"]::before,
+.tg-line[data-removed="true"]::before {
+  animation: tg-bar 420ms cubic-bezier(0.23, 1, 0.32, 1) var(--tg-at) backwards;
+}
+.tg-line .tg-badge {
+  animation: tg-badge 320ms cubic-bezier(0.34, 1.4, 0.64, 1) calc(var(--tg-at) + 220ms) backwards;
+}
+.tg-strike {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 60%;
+  background-size: 100% 2px;
+  animation: tg-strike 520ms cubic-bezier(0.65, 0, 0.35, 1) calc(var(--tg-at) + 120ms) backwards;
+}
+
+/* ---------- voice notes ---------- */
+
+.tg-level {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 22px;
+}
+.tg-level > span {
+  display: block;
+  width: 3px;
+  height: 100%;
+  border-radius: 9999px;
+  background: currentColor;
+  transform: scaleY(0.14);
+  transition: transform 90ms linear;
+}
+.tg-mic-halo {
+  transform: scale(calc(1 + var(--lvl, 0) * 0.4));
+  transition: transform 90ms linear;
+}
+@keyframes tg-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+}
+.tg-nudge {
+  animation: tg-nudge 1.4s ease-in-out infinite;
+}
+@keyframes tg-panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+}
+.tg-panel-in {
+  animation: tg-panel-in 220ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+}
+.tg-icon-swap {
+  animation: tg-badge 200ms cubic-bezier(0.23, 1, 0.32, 1) backwards;
+}
+
+.tg-mic {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tg-noscrollbar {
+  scrollbar-width: none;
+}
+.tg-noscrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.tg-safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.tg-safe-bottom {
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Short, not none: closing the sheet waits for animationend. */
+  .tg-enter,
+  .tg-sheet,
+  .tg-sheet[data-closing="true"],
+  .tg-backdrop,
+  .tg-backdrop[data-closing="true"],
+  .tg-grow,
+  .tg-morph-in,
+  .tg-reveal,
+  .tg-panel-in,
+  .tg-icon-swap,
+  .tg-line,
+  .tg-line::before,
+  .tg-line .tg-badge,
+  .tg-strike {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+  .tg-dots > span,
+  .tg-writing,
+  .tg-mic-ring,
+  .tg-shimmer,
+  .tg-nudge,
+  .tg-breathe[data-on="true"],
+  .tg-head-avatar[data-on="true"] .tg-head-typing > span {
+    animation: none !important;
+  }
+  .tg-breathe[data-on="true"] {
+    opacity: 0.5;
+  }
+  .tg-collapse,
+  .tg-pill,
+  .tg-sub,
+  .tg-head-avatar,
+  .tg-head-typing,
+  .tg-level > span,
+  .tg-mic-halo {
+    transition-duration: 1ms !important;
+  }
+  .tg-head-avatar[data-on="true"] {
+    transform: none;
+  }
+}

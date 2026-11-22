@@ -1,0 +1,403 @@
+/* Idea bubbles (REFINE R2). Everything sizes to GuidanceChat's own width (it is a size container), not the window:
+   under 700px the chat is one column with the "Try saying" chips; from 700px two rails of bubbles flank it. */
+
+.tg-gc {
+  container-type: inline-size;
+  position: relative;
+}
+
+.tg-wrap {
+  display: flex;
+  flex: 1 1 0;
+  min-height: 0;
+  justify-content: center;
+  --tg-bub-h: 200px; /* the tier's bubble height, read by bubble-stage.tsx to decide how many fit */
+  --tg-rail-gap: 12px;
+}
+.tg-col {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+.tg-rail {
+  display: none;
+}
+
+/* ---------- the bubble ---------- */
+
+.tg-slot {
+  width: 100%;
+  animation: tg-bub-in 560ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+.tg-slot[data-side="left"] {
+  --from: -34px;
+}
+.tg-slot[data-side="right"] {
+  --from: 34px;
+}
+@keyframes tg-bub-in {
+  from {
+    opacity: 0;
+    transform: translate(var(--from), 14px) scale(0.88)
+      rotate(calc(var(--from) * 0.15deg));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.tg-float {
+  animation: tg-bub-float var(--dur, 6s) ease-in-out var(--delay, 0s) infinite;
+}
+@keyframes tg-bub-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.5deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(0.5deg);
+  }
+}
+
+.tg-bub {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 0 12px;
+  border: 2px solid color-mix(in srgb, var(--bt) 32%, white);
+  border-radius: 22px;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(43, 33, 24, 0.1);
+  transition:
+    transform 220ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.tg-bub:hover,
+.tg-bub:focus-visible {
+  transform: translateY(-6px) scale(1.04);
+  border-color: color-mix(in srgb, var(--bt) 60%, white);
+  box-shadow: 0 14px 30px rgba(43, 33, 24, 0.18);
+  animation: tg-bub-wobble 620ms ease-in-out;
+}
+.tg-bub:focus-visible {
+  outline: 3px solid var(--bt);
+  outline-offset: 2px;
+}
+.tg-bub:active {
+  transform: translateY(-2px) scale(0.98);
+  animation: none;
+}
+@keyframes tg-bub-wobble {
+  0%,
+  100% {
+    transform: translateY(-6px) scale(1.04) rotate(0deg);
+  }
+  22% {
+    transform: translateY(-6px) scale(1.04) rotate(-2.4deg);
+  }
+  48% {
+    transform: translateY(-6px) scale(1.04) rotate(2deg);
+  }
+  74% {
+    transform: translateY(-6px) scale(1.04) rotate(-1deg);
+  }
+}
+.tg-bub[data-sent="true"] {
+  visibility: hidden;
+}
+
+/* the next bubble in the stage script */
+.tg-bub[data-next="true"] {
+  border-color: var(--color-marigold);
+  animation: tg-bub-glow 2.4s ease-in-out infinite;
+}
+.tg-bub[data-next="true"]:hover,
+.tg-bub[data-next="true"]:focus-visible {
+  animation:
+    tg-bub-wobble 620ms ease-in-out,
+    tg-bub-glow 2.4s ease-in-out infinite;
+}
+@keyframes tg-bub-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px rgba(242, 154, 14, 0.28),
+      0 0 14px 2px rgba(242, 154, 14, 0.3),
+      0 6px 18px rgba(43, 33, 24, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 5px rgba(242, 154, 14, 0.4),
+      0 0 30px 8px rgba(242, 154, 14, 0.5),
+      0 6px 18px rgba(43, 33, 24, 0.1);
+  }
+}
+
+/* the scene: emoji composition on a soft gradient in the first agent's colour */
+.tg-scene {
+  position: relative;
+  display: block;
+  height: var(--sh);
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    var(--bs) 10%,
+    color-mix(in srgb, var(--bt) 30%, var(--bs)) 100%
+  );
+}
+.tg-scene-dot {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.55);
+}
+.tg-scene-dot-a {
+  top: -30%;
+  left: -8%;
+  width: 55%;
+  aspect-ratio: 1;
+}
+.tg-scene-dot-b {
+  right: -10%;
+  bottom: -45%;
+  width: 62%;
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.4);
+}
+.tg-scene-emoji {
+  position: absolute;
+  filter: drop-shadow(0 3px 4px rgba(43, 33, 24, 0.18));
+}
+.tg-scene-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* the parent, as a sticker on the scene's lower edge */
+.tg-who {
+  position: absolute;
+  top: calc(var(--sh) - 15px);
+  left: 10px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 11px 3px 3px;
+  border-radius: 9999px;
+  background: var(--color-paper);
+  box-shadow: 0 2px 8px rgba(43, 33, 24, 0.16);
+}
+.tg-who-name {
+  font-size: var(--tg-who);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.tg-sit {
+  padding: 0 12px;
+  margin-top: 24px;
+  font-size: var(--tg-sit);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+.tg-say {
+  display: -webkit-box;
+  padding: 5px 12px 0;
+  overflow: hidden;
+  font-size: var(--tg-say);
+  font-weight: 600;
+  line-height: 1.33;
+  color: rgba(43, 33, 24, 0.82);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--tg-clamp);
+  line-clamp: var(--tg-clamp);
+}
+.tg-reach {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 9px 12px 0;
+  margin-top: auto;
+}
+.tg-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 9px 2px 2px;
+  border: 1px solid var(--color-line);
+  border-radius: 9999px;
+  background: var(--color-cream);
+}
+.tg-chip-file {
+  font-size: var(--tg-file);
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ---------- tiers (by the chat's width) ---------- */
+
+/* about 700 to 920px: the stage's half at 1440x900. Compact rails: scene, situation, the line clamped to 3 lines. */
+@container (min-width: 700px) {
+  .tg-gc .tg-chips {
+    display: none;
+  }
+  .tg-wrap {
+    gap: 10px;
+    padding-inline: 6px;
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      #ffefd2 0%,
+      var(--color-cream) 70%
+    );
+  }
+  .tg-col {
+    flex: 0 1 420px;
+    width: auto;
+    border-inline: 1px solid var(--color-line);
+    background: var(--color-cream);
+    box-shadow: 0 0 36px rgba(43, 33, 24, 0.07);
+  }
+  .tg-rail {
+    display: flex;
+    flex: 0 0 150px;
+    min-height: 0;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: var(--tg-rail-gap);
+    padding-block: 12px;
+  }
+  .tg-gc .tg-wrap,
+  .tg-gc .tg-ghost {
+    --sh: 56px;
+    --tg-emoji: 30px;
+    --tg-who: 12px;
+    --tg-sit: 17px;
+    --tg-say: 13px;
+    --tg-clamp: 3;
+    --tg-file: 11px;
+  }
+  .tg-gc .tg-wrap {
+    --tg-bub-h: 232px;
+  }
+  .tg-chip-file {
+    display: none;
+  }
+  .tg-chip:only-child .tg-chip-file {
+    display: inline;
+  }
+  .tg-bub {
+    border-radius: 18px;
+  }
+}
+
+/* about 920px: the stage's half at 1920x1080. A 420px column and a rail of about 230px on each side. */
+@container (min-width: 920px) {
+  .tg-rail {
+    flex-basis: 230px;
+  }
+  .tg-gc .tg-wrap,
+  .tg-gc .tg-ghost {
+    --sh: 78px;
+    --tg-emoji: 44px;
+    --tg-who: 14px;
+    --tg-sit: 22px;
+    --tg-say: 16px;
+    --tg-clamp: 3;
+    --tg-file: 12px;
+  }
+  .tg-gc .tg-wrap {
+    --tg-bub-h: 268px;
+  }
+  .tg-chip-file {
+    display: inline;
+  }
+  .tg-bub {
+    border-radius: 22px;
+  }
+}
+
+/* a laptop, 1200px and up */
+@container (min-width: 1200px) {
+  .tg-col {
+    flex-basis: 460px;
+  }
+  .tg-rail {
+    flex-basis: 270px;
+  }
+  .tg-gc .tg-wrap,
+  .tg-gc .tg-ghost {
+    --sh: 92px;
+    --tg-emoji: 52px;
+    --tg-who: 15px;
+    --tg-sit: 25px;
+    --tg-say: 18px;
+    --tg-clamp: 3;
+    --tg-file: 13px;
+  }
+  .tg-gc .tg-wrap {
+    --tg-bub-h: 268px;
+  }
+}
+
+/* a big monitor, 1600px and up */
+@container (min-width: 1600px) {
+  .tg-col {
+    flex-basis: 520px;
+  }
+  .tg-rail {
+    flex-basis: 330px;
+  }
+  .tg-gc .tg-wrap,
+  .tg-gc .tg-ghost {
+    --sh: 110px;
+    --tg-emoji: 62px;
+    --tg-who: 17px;
+    --tg-sit: 30px;
+    --tg-say: 21px;
+    --tg-clamp: 3;
+    --tg-file: 15px;
+  }
+  .tg-gc .tg-wrap {
+    --tg-bub-h: 298px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tg-float {
+    animation: none;
+  }
+  .tg-slot {
+    animation-duration: 1ms;
+    animation-delay: 0ms;
+  }
+  .tg-bub:hover,
+  .tg-bub:focus-visible {
+    animation: none;
+  }
+  .tg-bub[data-next="true"],
+  .tg-bub[data-next="true"]:hover,
+  .tg-bub[data-next="true"]:focus-visible {
+    animation: none;
+    box-shadow:
+      0 0 0 4px rgba(242, 154, 14, 0.34),
+      0 0 24px 6px rgba(242, 154, 14, 0.4),
+      0 6px 18px rgba(43, 33, 24, 0.1);
+  }
+}

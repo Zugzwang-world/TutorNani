@@ -1,0 +1,2104 @@
+{
+  "childId": "aarav",
+  "days": [
+    {
+      "day": "2026-09-24",
+      "data": {
+        "words": [
+          {
+            "en": "Apple",
+            "hi": "seb",
+            "emoji": "🍎",
+            "area": "language",
+            "quote": "Seb! Apple!",
+            "firstSaid": "2026-09-24T17:13:00+05:30"
+          },
+          {
+            "en": "Ant",
+            "hi": "cheenti",
+            "emoji": "🐜",
+            "area": "language",
+            "firstSaid": "2026-09-24T17:19:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "A"
+          ]
+        },
+        "counting": {
+          "upTo": 3
+        },
+        "areas": {
+          "language": 3,
+          "numbers": 2,
+          "feelings": 2,
+          "culture": 0
+        },
+        "moods": [
+          {
+            "time": "17:12",
+            "feeling": "excited",
+            "what": "Met Nani for the first time and told her his name"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 1
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [
+          {
+            "text": "First hello: told Nani his name and that he loves lions",
+            "quote": "Main Aarav hoon! Mujhe sher pasand hai!"
+          }
+        ],
+        "starters": [
+          "What did you tell Nani about lions?",
+          "What does A stand for?",
+          "How many apples did you count?"
+        ],
+        "summary": [
+          "First day with Nani: he told her his name and that he loves lions.",
+          "Met A for Apple 🍎 and Ant 🐜.",
+          "Counted three apples with her."
+        ]
+      }
+    },
+    {
+      "day": "2026-09-25",
+      "data": {
+        "words": [
+          {
+            "en": "Aeroplane",
+            "hi": "hawai jahaz",
+            "emoji": "✈️",
+            "area": "language",
+            "quote": "Hawai jahaz! Zoom!",
+            "firstSaid": "2026-09-25T18:08:00+05:30"
+          },
+          {
+            "en": "Cat",
+            "hi": "billi",
+            "emoji": "🐱",
+            "area": "language",
+            "quote": "Billi meow karti hai",
+            "firstSaid": "2026-09-25T18:17:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "A"
+          ]
+        },
+        "counting": {
+          "upTo": 3
+        },
+        "areas": {
+          "language": 5,
+          "numbers": 2,
+          "feelings": 1,
+          "culture": 0
+        },
+        "moods": [
+          {
+            "time": "18:20",
+            "feeling": "happy",
+            "what": "Flew a pretend aeroplane round the room"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say hawai jahaz in English?",
+          "Can you find something at home that starts with A?",
+          "What made you smile with Nani today?"
+        ],
+        "summary": [
+          "Said Aeroplane and Cat in English.",
+          "Practised A for Aeroplane on the wall.",
+          "Flew a pretend aeroplane round the room."
+        ]
+      }
+    },
+    {
+      "day": "2026-09-26",
+      "data": {
+        "words": [
+          {
+            "en": "Cow",
+            "hi": "gaay",
+            "emoji": "🐄",
+            "area": "language",
+            "quote": "Gaay moo karti hai!",
+            "firstSaid": "2026-09-26T10:43:00+05:30"
+          },
+          {
+            "en": "Dog",
+            "hi": "kutta",
+            "emoji": "🐶",
+            "area": "language",
+            "quote": "Bhow bhow!",
+            "firstSaid": "2026-09-26T10:48:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "A"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 3
+        },
+        "areas": {
+          "language": 6,
+          "numbers": 2,
+          "feelings": 2,
+          "culture": 1
+        },
+        "moods": [
+          {
+            "time": "10:45",
+            "feeling": "happy",
+            "what": "Mooed like a cow and barked like a dog"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 3,
+            "done": 2
+          },
+          "calls": 1,
+          "stories": 1
+        },
+        "highlights": [
+          {
+            "text": "A is his: said A for Apple, Ant and Aeroplane in one go",
+            "quote": "A for Apple, Ant, Aeroplane!"
+          }
+        ],
+        "starters": [
+          "How do you say gaay in English?",
+          "Can you find something at home that starts with A?",
+          "What made you smile with Nani today?"
+        ],
+        "summary": [
+          "Said Cow and Dog in English.",
+          "A is his now: A for Apple.",
+          "A is his: said A for Apple, Ant and Aeroplane in one go."
+        ]
+      }
+    },
+    {
+      "day": "2026-09-28",
+      "data": {
+        "words": [
+          {
+            "en": "Ball",
+            "hi": "gend",
+            "emoji": "⚽",
+            "area": "language",
+            "quote": "Gend! Ball!",
+            "firstSaid": "2026-09-28T17:33:00+05:30"
+          },
+          {
+            "en": "Banana",
+            "hi": "kela",
+            "emoji": "🍌",
+            "area": "language",
+            "quote": "Kela!",
+            "firstSaid": "2026-09-28T17:41:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "B"
+          ]
+        },
+        "counting": {
+          "upTo": 3
+        },
+        "areas": {
+          "language": 4,
+          "numbers": 2,
+          "feelings": 0,
+          "culture": 0
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 1
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say gend in English?",
+          "Can you find something at home that starts with B?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "New words: Ball ⚽ and Banana 🍌.",
+          "Practised B for Ball on the wall.",
+          "Counted to 3 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-09-29",
+      "data": {
+        "words": [
+          {
+            "en": "Butterfly",
+            "hi": "titli",
+            "emoji": "🦋",
+            "area": "language",
+            "quote": "Titli udd gayi",
+            "firstSaid": "2026-09-29T17:48:00+05:30"
+          },
+          {
+            "en": "Blue",
+            "hi": "neela",
+            "emoji": "🔵",
+            "area": "numbers",
+            "quote": "Aasmaan neela hai",
+            "firstSaid": "2026-09-29T17:55:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "B"
+          ]
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 3,
+          "numbers": 2,
+          "feelings": 1,
+          "culture": 1
+        },
+        "moods": [
+          {
+            "time": "17:50",
+            "feeling": "calm",
+            "what": "Talked about the blue sky and butterflies"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say titli in English?",
+          "Can you find something at home that starts with B?",
+          "What was the best bit of today?"
+        ],
+        "summary": [
+          "New words: Butterfly 🦋 and Blue 🔵.",
+          "Practised B for Butterfly on the wall.",
+          "Talked about the blue sky and butterflies."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-01",
+      "data": {
+        "words": [
+          {
+            "en": "Car",
+            "hi": "gaadi",
+            "emoji": "🚗",
+            "area": "language",
+            "quote": "Gaadi vroom vroom!",
+            "firstSaid": "2026-10-01T17:23:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "B"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 5,
+          "numbers": 1,
+          "feelings": 1,
+          "culture": 0
+        },
+        "moods": [
+          {
+            "time": "17:25",
+            "feeling": "excited",
+            "what": "Found out Car is a C word and wanted more car words"
+          }
+        ],
+        "tricky": [
+          {
+            "what": "B and D sound alike to him (ball, doll)",
+            "tip": "Hold your lips shut and pop them open: b-b-ball. Ask him to copy you."
+          }
+        ],
+        "routine": {
+          "water": {
+            "asked": 3,
+            "done": 2
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say gaadi in English?",
+          "Can you find something at home that starts with B?",
+          "What was the best bit of today?"
+        ],
+        "summary": [
+          "Said Car in English.",
+          "B is his now: B for Ball.",
+          "Found out Car is a C word and wanted more car words."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-02",
+      "data": {
+        "words": [
+          {
+            "en": "Circle",
+            "hi": "gol",
+            "emoji": "⭕",
+            "area": "numbers",
+            "quote": "Gol gol roti!",
+            "firstSaid": "2026-10-02T11:03:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "C"
+          ]
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 3,
+          "feelings": 1,
+          "culture": 1
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 3,
+            "done": 3
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [
+          {
+            "text": "Holiday morning: found circles all over the kitchen",
+            "quote": "Roti gol hai! Plate bhi gol!"
+          }
+        ],
+        "starters": [
+          "How do you say gol in English?",
+          "Can you find something at home that starts with C?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "Said Circle in English.",
+          "Practised C for Circle on the wall.",
+          "Holiday morning: found circles all over the kitchen."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-03",
+      "data": {
+        "words": [
+          {
+            "en": "Duck",
+            "hi": "batakh",
+            "emoji": "🦆",
+            "area": "language",
+            "quote": "Batakh quack quack",
+            "firstSaid": "2026-10-03T10:18:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "C"
+          ]
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 3,
+          "numbers": 1,
+          "feelings": 0,
+          "culture": 1
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 1
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say batakh in English?",
+          "Can you find something at home that starts with C?",
+          "Will you teach me a new word?"
+        ],
+        "summary": [
+          "New words: Duck 🦆.",
+          "Practised C for Cat on the wall.",
+          "Counted to 4 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-05",
+      "data": {
+        "words": [
+          {
+            "en": "Drum",
+            "hi": "dhol",
+            "emoji": "🥁",
+            "area": "culture",
+            "quote": "Dhol bajao!",
+            "firstSaid": "2026-10-05T17:43:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "C"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 4,
+          "numbers": 1,
+          "feelings": 1,
+          "culture": 2
+        },
+        "moods": [
+          {
+            "time": "17:45",
+            "feeling": "excited",
+            "what": "Drummed on the table for the dhol song"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say dhol in English?",
+          "Can you find something at home that starts with C?",
+          "What was the best bit of today?"
+        ],
+        "summary": [
+          "New words: Drum 🥁.",
+          "C is his now: C for Cat.",
+          "Drummed on the table for the dhol song."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-07",
+      "data": {
+        "words": [
+          {
+            "en": "Elephant",
+            "hi": "haathi",
+            "emoji": "🐘",
+            "area": "language",
+            "quote": "Haathi bahut bada hai",
+            "firstSaid": "2026-10-07T18:03:00+05:30"
+          },
+          {
+            "en": "Big",
+            "hi": "bada",
+            "emoji": "🐘",
+            "area": "numbers",
+            "firstSaid": "2026-10-07T18:07:00+05:30"
+          },
+          {
+            "en": "Small",
+            "hi": "chhota",
+            "emoji": "🐭",
+            "area": "numbers",
+            "firstSaid": "2026-10-07T18:17:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "D"
+          ]
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 3,
+          "numbers": 4,
+          "feelings": 0,
+          "culture": 0
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 3,
+            "done": 2
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say haathi in English?",
+          "Can you find something at home that starts with D?",
+          "Will you teach me a new word?"
+        ],
+        "summary": [
+          "New words: Elephant 🐘, Big 🐘 and Small 🐭.",
+          "Practised D for Dog on the wall.",
+          "Counted to 4 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-08",
+      "data": {
+        "words": [
+          {
+            "en": "Egg",
+            "hi": "anda",
+            "emoji": "🥚",
+            "area": "language",
+            "quote": "Anda gol hai",
+            "firstSaid": "2026-10-08T17:38:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "D"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 4,
+          "numbers": 2,
+          "feelings": 1,
+          "culture": 1
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 1
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [
+          {
+            "text": "Barked for D for Dog and made Nani laugh",
+            "quote": "D for Dog! Bhow bhow!"
+          }
+        ],
+        "starters": [
+          "How do you say anda in English?",
+          "Can you find something at home that starts with D?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "Said Egg in English.",
+          "D is his now: D for Dog.",
+          "Barked for D for Dog and made Nani laugh."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-10",
+      "data": {
+        "words": [
+          {
+            "en": "Fish",
+            "hi": "machhli",
+            "emoji": "🐟",
+            "area": "language",
+            "quote": "Machhli paani mein",
+            "firstSaid": "2026-10-10T10:33:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "E"
+          ]
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 4,
+          "numbers": 2,
+          "feelings": 0,
+          "culture": 1
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say machhli in English?",
+          "Can you find something at home that starts with E?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "New words: Fish 🐟.",
+          "Practised E for Elephant on the wall.",
+          "Sang the counting song together 🎵"
+        ]
+      }
+    },
+    {
+      "day": "2026-10-11",
+      "data": {
+        "words": [
+          {
+            "en": "Happy",
+            "hi": "khush",
+            "emoji": "😊",
+            "area": "feelings",
+            "quote": "Main khush hoon!",
+            "firstSaid": "2026-10-11T11:13:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "E"
+          ]
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 1,
+          "numbers": 2,
+          "feelings": 1,
+          "culture": 1
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 1
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say khush in English?",
+          "Can you find something at home that starts with E?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "Said Happy in English.",
+          "Practised E for Elephant on the wall.",
+          "Counted to 4 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-12",
+      "data": {
+        "words": [
+          {
+            "en": "Sad",
+            "hi": "udaas",
+            "emoji": "😢",
+            "area": "feelings",
+            "quote": "Main udaas hoon",
+            "firstSaid": "2026-10-12T17:53:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "E"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 1,
+          "feelings": 2,
+          "culture": 0
+        },
+        "moods": [
+          {
+            "time": "17:55",
+            "feeling": "sad",
+            "what": "Riya couldn't come over to play",
+            "helped": "Nani asked what he'd like to draw for Riya. He drew her a red flower."
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say udaas in English?",
+          "Can you find something at home that starts with E?",
+          "What was the best bit of today?"
+        ],
+        "summary": [
+          "A sad start: Riya couldn't come to play.",
+          "Drew a red flower for her, and felt better.",
+          "E for Egg and Elephant is his now."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-14",
+      "data": {
+        "words": [
+          {
+            "en": "Flower",
+            "hi": "phool",
+            "emoji": "🌸",
+            "area": "language",
+            "quote": "Phool Riya ke liye",
+            "firstSaid": "2026-10-14T17:28:00+05:30"
+          },
+          {
+            "en": "Frog",
+            "hi": "medhak",
+            "emoji": "🐸",
+            "area": "language",
+            "quote": "Medhak jump!",
+            "firstSaid": "2026-10-14T17:34:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "F"
+          ]
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 5,
+          "numbers": 1,
+          "feelings": 0,
+          "culture": 0
+        },
+        "moods": [],
+        "tricky": [
+          {
+            "what": "E and F look alike to him",
+            "tip": "Draw both in the air together: E has one more line at the bottom."
+          }
+        ],
+        "routine": {
+          "water": {
+            "asked": 3,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say phool in English?",
+          "Can you find something at home that starts with F?",
+          "Will you teach me a new word?"
+        ],
+        "summary": [
+          "Said Flower and Frog in English.",
+          "Practised F for Flower on the wall.",
+          "Counted to 4 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-16",
+      "data": {
+        "words": [
+          {
+            "en": "Five",
+            "hi": "paanch",
+            "emoji": "🖐️",
+            "area": "numbers",
+            "quote": "Paanch! Five!",
+            "firstSaid": "2026-10-16T18:13:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "F"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 3,
+          "feelings": 1,
+          "culture": 0
+        },
+        "moods": [
+          {
+            "time": "18:15",
+            "feeling": "excited",
+            "what": "Showed five fingers and shouted 'Five!'"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say paanch in English?",
+          "Can you find something at home that starts with F?",
+          "What was the best bit of today?"
+        ],
+        "summary": [
+          "New words: Five 🖐️.",
+          "F is his now: F for Five.",
+          "Showed five fingers and shouted 'Five!'."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-17",
+      "data": {
+        "words": [
+          {
+            "en": "Goat",
+            "hi": "bakri",
+            "emoji": "🐐",
+            "area": "language",
+            "quote": "Bakri mehh",
+            "firstSaid": "2026-10-17T10:53:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "G"
+          ]
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 1,
+          "feelings": 0,
+          "culture": 1
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 1
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say bakri in English?",
+          "Can you find something at home that starts with G?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "New words: Goat 🐐.",
+          "Practised G for Goat on the wall.",
+          "Sang the counting song together 🎵"
+        ]
+      }
+    },
+    {
+      "day": "2026-10-19",
+      "data": {
+        "words": [
+          {
+            "en": "Grapes",
+            "hi": "angoor",
+            "emoji": "🍇",
+            "area": "language",
+            "quote": "Angoor khatte hain!",
+            "firstSaid": "2026-10-19T17:33:00+05:30"
+          },
+          {
+            "en": "Green",
+            "hi": "hara",
+            "emoji": "🟢",
+            "area": "numbers",
+            "quote": "Hara angoor",
+            "firstSaid": "2026-10-19T17:38:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "G"
+          ]
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 4,
+          "numbers": 2,
+          "feelings": 1,
+          "culture": 1
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [
+          {
+            "text": "Counted five grapes all on his own",
+            "quote": "Ek, do, teen, char, paanch! Five!"
+          }
+        ],
+        "starters": [
+          "How do you say angoor in English?",
+          "Can you find something at home that starts with G?",
+          "Will you teach me a new word?"
+        ],
+        "summary": [
+          "New words: Grapes 🍇 and Green 🟢.",
+          "Practised G for Grapes on the wall.",
+          "Counted five grapes all on his own."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-20",
+      "data": {
+        "words": [
+          {
+            "en": "Star",
+            "hi": "taara",
+            "emoji": "⭐",
+            "area": "culture",
+            "quote": "Taara chamak raha hai",
+            "firstSaid": "2026-10-20T11:23:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "G"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 1,
+          "feelings": 1,
+          "culture": 2
+        },
+        "moods": [
+          {
+            "time": "11:30",
+            "feeling": "calm",
+            "what": "Sang 'Twinkle twinkle' slowly with Nani"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 3,
+            "done": 2
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say taara in English?",
+          "Can you find something at home that starts with G?",
+          "What was the best bit of today?"
+        ],
+        "summary": [
+          "Said Star in English.",
+          "G is his now: G for Goat.",
+          "Sang 'Twinkle twinkle' slowly with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-22",
+      "data": {
+        "words": [
+          {
+            "en": "Hat",
+            "hi": "topi",
+            "emoji": "👒",
+            "area": "language",
+            "quote": "Topi! Hat!",
+            "firstSaid": "2026-10-22T17:43:00+05:30"
+          },
+          {
+            "en": "Hen",
+            "hi": "murgi",
+            "emoji": "🐔",
+            "area": "language",
+            "quote": "Murgi",
+            "firstSaid": "2026-10-22T17:49:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "H"
+          ]
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 3,
+          "numbers": 2,
+          "feelings": 0,
+          "culture": 1
+        },
+        "moods": [],
+        "tricky": [
+          {
+            "what": "H goes quiet for him: says 'at' for Hat",
+            "tip": "Hold his palm near your mouth and say 'h-h-hat': let him feel the H."
+          }
+        ],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 1
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say topi in English?",
+          "Can you find something at home that starts with H?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "New words: Hat 👒 and Hen 🐔.",
+          "Practised H for Hat on the wall.",
+          "Counted to 5 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-24",
+      "data": {
+        "words": [
+          {
+            "en": "House",
+            "hi": "ghar",
+            "emoji": "🏠",
+            "area": "language",
+            "quote": "Mera ghar!",
+            "firstSaid": "2026-10-24T10:38:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "H"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 3,
+          "numbers": 1,
+          "feelings": 0,
+          "culture": 0
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say ghar in English?",
+          "Can you find something at home that starts with H?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "New words: House 🏠.",
+          "H is his now: H for House.",
+          "Counted to 5 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-25",
+      "data": {
+        "words": [
+          {
+            "en": "Ice cream",
+            "hi": "ice cream",
+            "emoji": "🍦",
+            "area": "language",
+            "quote": "Ice cream thanda hai!",
+            "firstSaid": "2026-10-25T11:03:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "I"
+          ]
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 4,
+          "numbers": 1,
+          "feelings": 1,
+          "culture": 2
+        },
+        "moods": [
+          {
+            "time": "11:05",
+            "feeling": "excited",
+            "what": "Pretended to eat a huge ice cream"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say ice cream in English?",
+          "Can you find something at home that starts with I?",
+          "What made you smile with Nani today?"
+        ],
+        "summary": [
+          "New words: Ice cream 🍦.",
+          "Practised I for Ice cream on the wall.",
+          "Pretended to eat a huge ice cream."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-27",
+      "data": {
+        "words": [
+          {
+            "en": "Please",
+            "hi": "kripya",
+            "emoji": "🙏",
+            "area": "feelings",
+            "quote": "Please, Nani, ek aur!",
+            "firstSaid": "2026-10-27T17:33:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "I"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 4,
+          "numbers": 1,
+          "feelings": 2,
+          "culture": 0
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 3,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [
+          {
+            "text": "Said 'please' to ask for one more game",
+            "quote": "Please, Nani, ek aur!"
+          }
+        ],
+        "starters": [
+          "How do you say kripya in English?",
+          "Can you find something at home that starts with I?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "New words: Please 🙏.",
+          "I is his now: I for Ice cream.",
+          "Said 'please' to ask for one more game."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-29",
+      "data": {
+        "words": [
+          {
+            "en": "Juice",
+            "hi": "ras",
+            "emoji": "🧃",
+            "area": "language",
+            "quote": "Mango juice!",
+            "firstSaid": "2026-10-29T17:58:00+05:30"
+          },
+          {
+            "en": "Triangle",
+            "hi": "tikona",
+            "emoji": "🔺",
+            "area": "numbers",
+            "quote": "Tikona, jaise samosa",
+            "firstSaid": "2026-10-29T18:07:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "J"
+          ]
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 4,
+          "numbers": 2,
+          "feelings": 0,
+          "culture": 0
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 1
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say ras in English?",
+          "Can you find something at home that starts with J?",
+          "Will you teach me a new word?"
+        ],
+        "summary": [
+          "Said Juice and Triangle in English.",
+          "Practised J for Juice on the wall.",
+          "Counted to 5 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-10-31",
+      "data": {
+        "words": [
+          {
+            "en": "Jeep",
+            "hi": "jeep",
+            "emoji": "🚙",
+            "area": "language",
+            "quote": "Jeep jungle mein!",
+            "firstSaid": "2026-10-31T10:23:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "J"
+          ]
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 3,
+          "numbers": 1,
+          "feelings": 0,
+          "culture": 1
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say jeep in English?",
+          "Can you find something at home that starts with J?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "Said Jeep in English.",
+          "Practised J for Jeep on the wall.",
+          "Counted to 5 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-11-01",
+      "data": {
+        "words": [
+          {
+            "en": "Lamp",
+            "hi": "diya",
+            "emoji": "🪔",
+            "area": "culture",
+            "quote": "Diya jalao!",
+            "firstSaid": "2026-11-01T11:18:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "J"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 1,
+          "feelings": 1,
+          "culture": 2
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [
+          {
+            "text": "Got ready for Diwali: counted diyas for the window",
+            "quote": "Ek diya, do diya, teen diya!"
+          }
+        ],
+        "starters": [
+          "How do you say diya in English?",
+          "Can you find something at home that starts with J?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "New words: Lamp 🪔.",
+          "J is his now: J for Juice.",
+          "Got ready for Diwali: counted diyas for the window."
+        ]
+      }
+    },
+    {
+      "day": "2026-11-02",
+      "data": {
+        "words": [
+          {
+            "en": "Rangoli",
+            "hi": "rangoli",
+            "emoji": "🌼",
+            "area": "culture",
+            "quote": "Rangoli mein laal aur peela",
+            "firstSaid": "2026-11-02T17:48:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": []
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 2,
+          "feelings": 0,
+          "culture": 2
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 1
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say rangoli in English?",
+          "Can you count to 5 for me?",
+          "Will you teach me a new word?"
+        ],
+        "summary": [
+          "Said Rangoli in English.",
+          "Counted to 5 with Nani.",
+          "Drank his water when Nani reminded him 💧"
+        ]
+      }
+    },
+    {
+      "day": "2026-11-05",
+      "data": {
+        "words": [],
+        "letters": {
+          "learnt": [],
+          "working": []
+        },
+        "counting": {
+          "upTo": 3
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 1,
+          "feelings": 1,
+          "culture": 1
+        },
+        "moods": [
+          {
+            "time": "18:35",
+            "feeling": "tired",
+            "what": "Had a cold and didn't want to play letters",
+            "helped": "Nani hummed 'Machli jal ki rani hai' softly, and he hummed along."
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 3,
+            "done": 3
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [],
+        "starters": [
+          "Can you hum the fish song for me?",
+          "Is your nose feeling better today?",
+          "What song should Nani sing when you're tired?"
+        ],
+        "summary": [
+          "A quiet, sniffly evening: he had a cold.",
+          "No letters today, just a soft song with Nani.",
+          "He hummed 'Machli jal ki rani hai' along with her."
+        ]
+      }
+    },
+    {
+      "day": "2026-11-06",
+      "data": {
+        "words": [
+          {
+            "en": "Sweet",
+            "hi": "mithai",
+            "emoji": "🍬",
+            "area": "culture",
+            "quote": "Mithai! Ladoo!",
+            "firstSaid": "2026-11-06T17:23:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": []
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 1,
+          "numbers": 2,
+          "feelings": 0,
+          "culture": 2
+        },
+        "moods": [],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say mithai in English?",
+          "Can you count to 4 for me?",
+          "Which word was your favourite?"
+        ],
+        "summary": [
+          "Said Sweet in English.",
+          "Counted to 4 with Nani.",
+          "Drank his water when Nani reminded him 💧"
+        ]
+      }
+    },
+    {
+      "day": "2026-11-07",
+      "data": {
+        "words": [],
+        "letters": {
+          "learnt": [],
+          "working": []
+        },
+        "counting": {
+          "upTo": 4
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 2,
+          "feelings": 1,
+          "culture": 0
+        },
+        "moods": [
+          {
+            "time": "19:15",
+            "feeling": "scared",
+            "what": "Loud crackers outside made him jump",
+            "helped": "Nani counted the diyas with him in a soft voice, then he went to sit with Mumma."
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 1
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "What did you play with Nani?",
+          "Can you count to 4 for me?",
+          "What made you smile with Nani today?"
+        ],
+        "summary": [
+          "A short play with Nani.",
+          "Counted to 4 with Nani.",
+          "Loud crackers outside made him jump."
+        ]
+      }
+    },
+    {
+      "day": "2026-11-08",
+      "data": {
+        "words": [
+          {
+            "en": "Share",
+            "hi": "baantna",
+            "emoji": "🤝",
+            "area": "feelings",
+            "quote": "Sabko mithai do!",
+            "firstSaid": "2026-11-08T10:33:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": []
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 1,
+          "numbers": 1,
+          "feelings": 3,
+          "culture": 1
+        },
+        "moods": [
+          {
+            "time": "10:35",
+            "feeling": "excited",
+            "what": "Wished Nani 'Happy Diwali!' first thing in the morning"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 1,
+            "done": 1
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [
+          {
+            "text": "Happy Diwali! Counted five diyas and wanted to share sweets with everyone",
+            "quote": "Happy Diwali, Nani!"
+          }
+        ],
+        "starters": [
+          "How many diyas did we light?",
+          "Who did you share your sweets with?",
+          "What colours were in our rangoli?"
+        ],
+        "summary": [
+          "Diwali morning: he wished Nani first thing.",
+          "Counted five diyas 🪔 all by himself.",
+          "Wanted everyone to get a sweet."
+        ]
+      }
+    },
+    {
+      "day": "2026-11-11",
+      "data": {
+        "words": [
+          {
+            "en": "Kite",
+            "hi": "patang",
+            "emoji": "🪁",
+            "area": "language",
+            "quote": "Patang upar!",
+            "firstSaid": "2026-11-11T17:38:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "K"
+          ]
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 2,
+          "feelings": 0,
+          "culture": 0
+        },
+        "moods": [],
+        "tricky": [
+          {
+            "what": "Taking turns: wants to go first every time",
+            "tip": "Play one quick game tonight where you go first, and cheer when he waits."
+          }
+        ],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 0
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say patang in English?",
+          "Can you find something at home that starts with K?",
+          "Will you teach me a new word?"
+        ],
+        "summary": [
+          "New words: Kite 🪁.",
+          "Practised K for Kite on the wall.",
+          "Counted to 5 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-11-12",
+      "data": {
+        "words": [
+          {
+            "en": "Key",
+            "hi": "chaabi",
+            "emoji": "🔑",
+            "area": "language",
+            "quote": "Chaabi! Key!",
+            "firstSaid": "2026-11-12T18:03:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": [
+            "K"
+          ]
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 4,
+          "numbers": 2,
+          "feelings": 0,
+          "culture": 0
+        },
+        "moods": [],
+        "tricky": [
+          {
+            "what": "Counting past 5: six and seven get swapped",
+            "tip": "Count the stairs together tonight, slowly, one step for each number up to seven."
+          }
+        ],
+        "routine": {
+          "water": {
+            "asked": 3,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [],
+        "starters": [
+          "How do you say chaabi in English?",
+          "Can you find something at home that starts with K?",
+          "Will you teach me a new word?"
+        ],
+        "summary": [
+          "New words: Key 🔑.",
+          "Practised K for Key on the wall.",
+          "Counted to 5 with Nani."
+        ]
+      }
+    },
+    {
+      "day": "2026-11-14",
+      "data": {
+        "words": [
+          {
+            "en": "Lion",
+            "hi": "sher",
+            "emoji": "🦁",
+            "area": "language",
+            "quote": "Sher! ROAAAR!",
+            "firstSaid": "2026-11-14T17:18:00+05:30"
+          },
+          {
+            "en": "Leaf",
+            "hi": "patta",
+            "emoji": "🍃",
+            "area": "language",
+            "quote": "Patta hara hai",
+            "firstSaid": "2026-11-14T17:23:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "L"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 4,
+          "numbers": 2,
+          "feelings": 2,
+          "culture": 0
+        },
+        "moods": [
+          {
+            "time": "17:20",
+            "feeling": "excited",
+            "what": "Roared like a lion for L for Lion"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [
+          {
+            "text": "Children's Day: roared very loudly for L for Lion and sent Mumma his roar",
+            "quote": "ROAAAR! Mumma, suno!"
+          }
+        ],
+        "starters": [
+          "Can you roar like you did for Mumma?",
+          "What starts with L?",
+          "What colour is a leaf?"
+        ],
+        "summary": [
+          "L for Lion 🦁: L is his now.",
+          "Roared very loudly and sent Mumma his roar.",
+          "Said 'patta' is Leaf, and it's green."
+        ]
+      }
+    },
+    {
+      "day": "2026-11-15",
+      "data": {
+        "words": [
+          {
+            "en": "Kangaroo",
+            "hi": "kangaroo",
+            "emoji": "🦘",
+            "area": "language",
+            "quote": "Kangaroo jump jump!",
+            "firstSaid": "2026-11-15T10:48:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [
+            "K"
+          ],
+          "working": []
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 5,
+          "numbers": 1,
+          "feelings": 3,
+          "culture": 2
+        },
+        "moods": [
+          {
+            "time": "10:50",
+            "feeling": "happy",
+            "what": "Jumped like a kangaroo around the room"
+          },
+          {
+            "time": "11:05",
+            "feeling": "happy",
+            "what": "Shared a pretend ladoo with Riya"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 2,
+            "done": 2
+          },
+          "calls": 0,
+          "stories": 1
+        },
+        "highlights": [
+          {
+            "text": "Shared a pretend ladoo with Riya",
+            "quote": "Riya, ek ladoo tumhare liye!"
+          }
+        ],
+        "starters": [
+          "How does a kangaroo move?",
+          "Where do kangaroos live?",
+          "What did you share with Riya?"
+        ],
+        "summary": [
+          "K for Kangaroo 🦘: K is his now.",
+          "Learned kangaroos live in Australia and jump.",
+          "Shared a pretend ladoo with Riya."
+        ]
+      }
+    },
+    {
+      "day": "2026-11-16",
+      "data": {
+        "words": [
+          {
+            "en": "Red",
+            "hi": "laal",
+            "emoji": "🔴",
+            "area": "numbers",
+            "quote": "Seb laal hai!",
+            "firstSaid": "2026-11-16T17:43:00+05:30"
+          },
+          {
+            "en": "Yellow",
+            "hi": "peela",
+            "emoji": "🟡",
+            "area": "numbers",
+            "quote": "Kela peela hai!",
+            "firstSaid": "2026-11-16T17:50:00+05:30"
+          },
+          {
+            "en": "Thank you",
+            "hi": "shukriya",
+            "emoji": "🙏",
+            "area": "feelings",
+            "quote": "Thank you, Nani!",
+            "firstSaid": "2026-11-16T17:53:00+05:30"
+          }
+        ],
+        "letters": {
+          "learnt": [],
+          "working": []
+        },
+        "counting": {
+          "upTo": 5
+        },
+        "areas": {
+          "language": 2,
+          "numbers": 3,
+          "feelings": 3,
+          "culture": 0
+        },
+        "moods": [
+          {
+            "time": "17:45",
+            "feeling": "happy",
+            "what": "Said 'Thank you, Nani!' all by himself"
+          }
+        ],
+        "tricky": [],
+        "routine": {
+          "water": {
+            "asked": 3,
+            "done": 2
+          },
+          "calls": 1,
+          "stories": 0
+        },
+        "highlights": [
+          {
+            "text": "Said 'Thank you, Nani!' all by himself",
+            "quote": "Thank you, Nani!"
+          }
+        ],
+        "starters": [
+          "What colour is a banana?",
+          "What colour is an apple?",
+          "Who did you say thank you to today?"
+        ],
+        "summary": [
+          "Colours day: red apple 🍎, yellow banana 🍌.",
+          "Said \"Thank you, Nani!\" all by himself.",
+          "Nani cheered him, just as Papa asked."
+        ]
+      }
+    }
+  ]
+}
