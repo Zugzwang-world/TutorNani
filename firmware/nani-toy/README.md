@@ -21,9 +21,15 @@ Nani's answers from the Tutor Grandma website.
 
 ## 2. Put in your Wi-Fi
 
+Windows:
 ```powershell
 copy nani-full\secrets.example.h nani-full\secrets.h
 notepad nani-full\secrets.h
+```
+macOS (Terminal):
+```bash
+cp nani-full/secrets.example.h nani-full/secrets.h
+open -e nani-full/secrets.h
 ```
 Set `WIFI_SSID` and `WIFI_PASS`. **2.4 GHz network only** (the ESP32 can't see "..._5G" networks).
 `secrets.h` is git-ignored, so your password never goes to GitHub.
@@ -37,21 +43,31 @@ Open `nani-full/nani-full.ino`, then **Tools**:
 | Board | ESP32S3 Dev Module |
 | USB CDC On Boot | **Enabled** |
 | PSRAM | **OPI PSRAM** |
-| Port | your board's COM port |
+| Port | your board's port: `COMx` on Windows, `/dev/cu.usbmodem…` on macOS |
 
 Upload. Serial Monitor at **115200** should show `Mic: OK  Amp: OK`, `Wi-Fi: connected`, and
 `Nani is ASLEEP`.
 
-## 4. Run the laptop bridge (Windows, same Wi-Fi as the toy)
+## 4. Run the laptop bridge (same Wi-Fi as the toy)
 
-Once:
+**Windows**, once:
 ```powershell
 pip install -r requirements.txt
 ```
-Needs Python 3.10+, **ffmpeg** on PATH, and Microsoft Edge installed.
+Needs Python 3.10+, **ffmpeg** on PATH, and Microsoft Edge or Google Chrome.
+Every time: double-click **`start-nani.bat`**.
 
-Every time: double-click **`start-nani.bat`**. It finds the toy on the Wi-Fi by itself.
-Wait for `Connected. Talk to Nani!`, then **press the toy's switch** and talk.
+**macOS**, once (Terminal, in this folder):
+```bash
+brew install ffmpeg            # needs Homebrew: https://brew.sh
+python3 -m pip install -r requirements.txt
+chmod +x start-nani.sh
+```
+Needs Python 3.10+ and Google Chrome (or run `python3 -m playwright install chromium` once instead).
+Every time: `./start-nani.sh`. If macOS asks to allow incoming network connections for Python, click **Allow**.
+
+The bridge finds the toy on the Wi-Fi by itself. Wait for `Connected. Talk to Nani!`, then **press the
+toy's switch** and talk.
 
 | Eyes | Meaning |
 |---|---|
@@ -71,5 +87,7 @@ Serial Monitor keys: `+` / `-` volume, `g` greeting, `w` wake/sleep, `d` mic lev
 | Upload can't connect | hold BOOT, tap RESET, release BOOT, upload again |
 | Upload says port busy | close the Serial Monitor |
 | Bridge says `not found yet` | toy and laptop must be on the same Wi-Fi |
-| Toy says "Wait beta, I am waking up!" | start `start-nani.bat` |
+| Toy says "Wait beta, I am waking up!" | start the bridge (`start-nani.bat` / `./start-nani.sh`) |
+| Mac: `permission denied: ./start-nani.sh` | run `chmod +x start-nani.sh` once |
+| Mac: `Website mirror stopped: no browser found` | install Google Chrome, or `python3 -m playwright install chromium` |
 | Crackle when loud | press `-` in the Serial Monitor; check the capacitor |

@@ -270,10 +270,20 @@ def stage_mirror(site: str, out_q, stop, show: bool):
     from playwright.sync_api import sync_playwright
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch(channel="msedge", headless=not show, args=[
-                "--mute-audio",                                   # don't play on the laptop
-                "--autoplay-policy=no-user-gesture-required",
-                "--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"])
+            args = ["--mute-audio",                               # don't play on the laptop
+                    "--autoplay-policy=no-user-gesture-required",
+                    "--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"]
+            browser = None
+            # Use an installed browser if possible: Edge (Windows), then Chrome (Mac/any), then
+            # Playwright's own Chromium (needs a one-time `python -m playwright install chromium`).
+            for channel in ("msedge", "chrome", None):
+                try:
+                    browser = p.chromium.launch(channel=channel, headless=not show, args=args)
+                    break
+                except Exception:
+                    continue
+            if browser is None:
+                raise RuntimeError("no browser found: install Chrome, or run `python -m playwright install chromium`")
             ctx = browser.new_context(permissions=["microphone"])
             ctx.expose_binding("__naniToToy", lambda _src, payload: out_q.put(payload))
             ctx.add_init_script(HOOK_JS)
@@ -430,7 +440,10 @@ def main():
                     if not said:
                         answer = "Sorry beta, Nani cannot reach her brain right now. Try again?"
                         send_msg(sock, b"ANS1", answer.encode())
-                        send_msg(sock, b"RPL1", speak(answer).tobytes())
+                        try:
+                            send_msg(sock, b"RPL1", speak(answer).tobytes())
+                        except (OSError, subprocess.CalledProcessError) as e:   # no TTS on this computer
+                            print(f"(could not voice the apology: {e})")
                     send_msg(sock, b"END1", b"")
                     print(f"       (answer complete in {time.time() - t0:.1f} s)\n")
                     continue

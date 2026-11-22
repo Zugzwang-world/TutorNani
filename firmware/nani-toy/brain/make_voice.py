@@ -8,6 +8,7 @@ Also saves a preview .wav in Wispr\\recordings so you can hear it on the laptop 
 """
 import argparse
 import subprocess
+import sys
 import tempfile
 import wave
 from pathlib import Path
@@ -57,7 +58,40 @@ def speech_rms_db(pcm: np.ndarray) -> float:
     return 20 * np.log10(np.sqrt((r ** 2).mean()) / 32768)
 
 
+MAC_VOICES = {"Zira": "Samantha", "David": "Daniel"}   # closest built-in macOS voices
+
+
 def synthesize(text: str, voice: str, rate: int, wav_path: Path):
+    """Text -> 16 kHz mono 16-bit WAV. Windows: Zira via System.Speech. macOS: `say`. Linux: espeak-ng."""
+    if sys.platform == "darwin":
+        _synthesize_mac(text, voice, rate, wav_path)
+    elif sys.platform.startswith("win"):
+        _synthesize_windows(text, voice, rate, wav_path)
+    else:
+        _synthesize_other(text, rate, wav_path)
+
+
+def _to_wav16k(src: Path, wav_path: Path):
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(src), "-ac", "1", "-ar", str(RATE),
+                    "-sample_fmt", "s16", str(wav_path)], check=True)
+
+
+def _synthesize_mac(text: str, voice: str, rate: int, wav_path: Path):
+    aiff = wav_path.with_suffix(".aiff")
+    wpm = str(175 + 15 * rate)                        # Windows rate -10..10 -> words per minute
+    cmd = ["say", "-v", MAC_VOICES.get(voice, voice), "-r", wpm, "-o", str(aiff), text]
+    if subprocess.run(cmd, capture_output=True).returncode != 0:      # voice not installed: default voice
+        subprocess.run(["say", "-r", wpm, "-o", str(aiff), text], check=True)
+    _to_wav16k(aiff, wav_path)
+
+
+def _synthesize_other(text: str, rate: int, wav_path: Path):
+    raw = wav_path.with_suffix(".raw.wav")
+    subprocess.run(["espeak-ng", "-s", str(175 + 15 * rate), "-w", str(raw), text], check=True)
+    _to_wav16k(raw, wav_path)
+
+
+def _synthesize_windows(text: str, voice: str, rate: int, wav_path: Path):
     safe = text.replace("'", "''")
     ps = (
         "Add-Type -AssemblyName System.Speech;"
