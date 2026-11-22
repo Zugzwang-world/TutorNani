@@ -1,5 +1,6 @@
 {
   "name": "tutor-nani",
+  "description": "Tutor Grandma: an AI grandma who teaches Indian kids aged 5 to 8 English through their home language, guided by parents in a group chat of AI agents.",
   "private": true,
   "packageManager": "pnpm@10.33.2",
   "scripts": {
