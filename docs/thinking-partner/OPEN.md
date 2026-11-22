@@ -16,6 +16,12 @@
 - 2026-11-19 · Please listen to `wait_music` (/audio/wait_music.mp3) and the new `slow_brain` line on a real speaker.
 
 ## From the Tutor Nani move (22 Nov)
-- 2026-11-22 · The brain calls that don't stream (turn notes, memory answers, the evening brief, progress) have no Claude stall limit of their own. A stalled Claude call there uses the caller's whole timeout and then the old fallback; it never reaches Kimi. Spoken turns and the sorter are covered. Add a cap?
+- 2026-11-22 · The brain calls that don't stream (turn notes, memory answers, the evening brief, progress) have no Claude stall limit of their own. A stalled Claude call there uses the caller's whole timeout and then the old fallback; it never reaches Kimi. Spoken turns and the sorter are covered.
+  - **A cap was tried once and dropped** under the founder's one-attempt rule. Its local commits 46836ed and 2e22bdc were never pushed and are discarded.
+  - With Claude stalled on purpose, it worked: every call moved to Kimi at 2 to 3 s and Kimi answered inside the caller's budget.
+  - But the normal 15-step run (15 of 15) fell back three times:
+    - The reset warm-up ping (max_tokens 1) sometimes came back as an "empty reply" once it streamed, which counted as a failure. That was caused by the change.
+    - Two live turns also fell back after 2.3 s, on code the change doesn't touch, during a slow local run (speech-to-text 1.5 s, an earlier network blip). Production showed 0 fallbacks in 20 turns earlier today.
+  - If it's tried again: exempt the warm-up ping, or count a max_tokens stop as success.
 - 2026-11-22 · The old Tutor Grandma stack (repo, Vercel and Supabase) stays live as the fallback. When should it be retired?
 - 2026-11-22 · The hardware brief must switch the toy and the laptop bridge to https://tutor-nani.vercel.app (docs/toy-contract.md:8 still names the old URL).
