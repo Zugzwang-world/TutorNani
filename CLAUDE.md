@@ -6,7 +6,13 @@ Buildathon prototype. Priorities, in order: low latency, high impact, demo relia
 
 ## Stack so far
 - Voice: ElevenLabs. Scribe v3 for hearing (audio events tagged, so a roar counts as a sound), Eleven v4 Turbo for live speech, Eleven v4 for pre-made lines, sound effects v3 and music v2.5 for the sounds and the song. Nani's voice is a library stand-in ("Dulari Didi") until grandma's clone arrives. Model ids and the voice live in content/demo.config.json.
-- Live brain: kimi-k2.6, thinking off, no temperature sent (the API fixes it), through the switch in content/demo.config.json (`brain.provider`) until the buildathon (22 November). Then Claude Haiku 5.5 (claude-haiku-5-5), thinking off, low effort; that path is written in lib/brain.ts but untested end to end. Code reads provider and model from the switch, never hard-coded. Kimi stalls on some requests: cancel and retry one at a time, never parallel requests. Grandma fillers cover every wait.
+- Live brain: Claude Haiku 5.5 (claude-haiku-5-5), called through @anthropic-ai/sdk with streaming, thinking disabled, effort low, no temperature (Haiku 5.5 rejects it) and maxRetries 0.
+  - The switch is the env var BRAIN_PROVIDER, set to claude in Vercel for Production and Preview. It overrides `brain.provider` in content/demo.config.json, which stays "kimi" as the default.
+  - Kimi (kimi-k2.6, thinking off, no temperature) is the backup for each call. A Claude call that errors, refuses, comes back empty or sends no first token within the caller's retry window runs on Kimi instead. lib/brain.ts tags every call with brainProvider and brainAttempt.
+  - To roll back, set BRAIN_PROVIDER=kimi in Vercel and redeploy; env changes apply only to new deployments.
+  - Code reads provider and model from the switch, never hard-coded.
+  - Kimi stalls on some requests: cancel and retry one at a time, never parallel requests.
+  - Grandma fillers cover every wait.
 - Indian languages: ElevenLabs covers them for now. Sarvam is deferred to the buildathon day: do not build it. Nani writes Hindi in Roman letters.
 - Web: Next.js 16 on Vercel, functions in bom1 (Mumbai). `/` parents' group chat, `/toy` toy stand-in, `/home-base` projector wall, `/presenter` hidden controls. Shared code in apps/web/lib; contracts in docs/plan/CONTRACTS.md.
 - Supabase, kept light: four tables (agent_files, messages, turns, demo_state), one public bucket `audio`, and Realtime (postgres_changes plus the broadcast channels toy:, wall: and chat:). RLS is off for the prototype.
@@ -60,4 +66,4 @@ Keep HANDOFF.md current: state, open branches, running URLs, next actions in ord
 Keys live in .env.local (gitignored) and in Vercel env vars. Never commit them. The repo is public, and a pushed key gets blocked by GitHub or switched off by its provider, which breaks the demo.
 
 ## Credits
-/preflight checks that the Kimi, ElevenLabs and Supabase keys work and reports the Kimi balance and the ElevenLabs characters left. Anthropic is checked only when `brain.provider` is "anthropic". Run it at the start of every step brief. Before any demo, also run `python3 -I scripts/selftest/selftest.py all`, then reset with `curl -X POST https://tutor-nani.vercel.app/api/reset`.
+/preflight checks that the Kimi, ElevenLabs and Supabase keys work and reports the Kimi balance and the ElevenLabs characters left. It also checks Anthropic whenever Claude is the brain: `brain.provider` is "anthropic", or BRAIN_PROVIDER says claude, as it does now. Run it at the start of every step brief. Before any demo, also run `python3 -I scripts/selftest/selftest.py all`, then reset with `curl -X POST https://tutor-nani.vercel.app/api/reset`.
